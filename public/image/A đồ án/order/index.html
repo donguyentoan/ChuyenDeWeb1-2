@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gio hang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        main {
+            padding: 4% 0;
+        }
+
+        main .row-cart {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+        }
+
+        main .row-cart .cart {
+            text-align: left;
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        main .row-cart .cart .step-cart {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        main .row-cart .cart .step {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+        }
+
+        .row-cart .cart .step>div {
+            color: #6C6C7D;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        .row-cart .cart .step>div>div>b {
+            color: #333;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .cart .step .active {
+            background-color: rgba(51, 51, 51, 1);
+            padding: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .cart .step img {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 1px solid rgba(147, 147, 162, 1);
+        }
+
+        .cart>h3 {
+            padding: 5% 0;
+            color: #3C3C46;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 24px;
+        }
+
+        .cart .name-cart {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr 1fr 2fr 1fr;
+            gap: 5px;
+            padding-bottom: 15px;
+            border-bottom: rgba(240, 240, 242, 1) solid 1px;
+        }
+
+        .cart .value-cart {
+            display: grid;
+            grid-template-columns: 1fr 4fr 2fr 2fr 2fr 1fr;
+            /* Thay đổi số cột thành 6 và sử dụng repeat() */
+            gap: 20px;
+            align-items: center;
+            height: 120px;
+            text-align: left;
+        }
+
+        .cart .name-cart>div {
+            white-space: nowrap;
+            text-align: left;
+            color: #3C3C46;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+        }
+
+        .cart .items {
+            margin: 20px 0;
+            padding-bottom: 20px;
+            border-bottom: rgba(240, 240, 242, 1) solid 1px;
+            border-top: rgba(240, 240, 242, 1) solid 1px;
+            ;
+        }
+
+
+        .cart .value-cart img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .cart .name-cart .img-name {
+            width: 80px;
+            height: 80px;
+            background-color: inherit;
+        }
+
+        .btn-soluong {
+            color: #3C3C46;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 22px;
+            text-transform: uppercase;
+            background-color: #fff;
+            border-radius: 0;
+            display: inline-block;
+            text-decoration: none;
+            margin: 0 40px;
+        }
+
+
+        .btn-wrapper {
+            display: grid;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 7% 0;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+
+        .btn-soluong input {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-soluong button {
+            background-color: inherit;
+            color: #333;
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-orther a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-soluong .number {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-soluong .number input:focus {
+            outline: none;
+        }
+
+        .value-cart .name-product {
+            width: auto;
+            height: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .value-cart .price {
+            color: #3C3C46;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 22px;
+            width: auto;
+            height: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .value-cart .delete {
+            text-align: right;
+        }
+
+        .value-cart .delete>img {
+            width: 24px;
+            height: 23px;
+            background-color: rgba(240, 240, 242, 1);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row-cart">
+            <div class="cart">
+                <h1 class="font-bold text-2xl">Giỏ Hàng</h1>
+                <div class="items">
+                    <div class="value-cart">
+                        <img src="https://thepizzacompany.vn/images/thumbs/000/0003102_seafood-peach_360.png" alt="">
+                        <div class="name-product">Flossy Solution For Acnes Skin</div>
+                        <div class="price">350,000₫</div>
+                        <div class="btn-soluong">
+                            <div class="btn-wrapper">
+                                <div>
+                                    <button type="button">-</button>
+                                </div>
+                                <div class="number">
+                                    <input type="text" value="1">
+                                </div>
+                                <div>
+                                    <button type="button">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price">350,000₫</div>
+                        <div class="delete">
+                            <img src="./trash-solid.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

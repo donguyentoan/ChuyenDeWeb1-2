@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slide</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: monospace;
+        }
+
+        .slider {
+            width: 1300px;
+            max-width: 100vw;
+            height: 700px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            display: flex;
+            width: max-content;
+            transition: 1s;
+        }
+
+        .list img {
+            width: 1300px;
+            max-width: 100vw;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 1s ease-in-out;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 45%;
+            left: 5%;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .buttons button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-weight: bold;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            color: #fff;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dots li {
+            list-style: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 20px;
+            transition: 1s;
+        }
+
+        .dots li.active {
+            background-color: #fff;
+            width: 30px;
+        }
+
+        .list .item:not(.active) img {
+            filter: blur(3px);
+        }
+        @media screen and (max-width: 768px) 
+        {
+            .slider {
+                height: 400px;
+            } 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="list">
+            <div class="item active">
+                <img src="./Screenshot (110).png" alt="">
+            </div>
+            <div class="item">
+                <img src="./Screenshot (125).png" alt="">
+            </div>
+            <div class="item">
+                <img src="./Screenshot (142).png" alt="">
+            </div>
+            <div class="item">
+                <img src="./Screenshot (81).png" alt="">
+            </div>
+            <div class="item">
+                <img src="./Screenshot (75).png" alt="">
+            </div>
+        </div>
+        <!-- button prev and next -->
+        <div class="buttons">
+            <button id="prev"> < </button>
+            <button id="next"> > </button>
+        </div>
+        <!-- dot -->
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+    let list = document.querySelector('.slider .list');
+    let items = document.querySelectorAll('.slider .list .item');
+    let dots = document.querySelectorAll('.slider .dots li');
+    let prev = document.getElementById('prev');
+    let next = document.getElementById('next');
+
+    let active = 0;
+    let lengthItems = items.length -1;
+
+    next.onclick = function(){
+        if(active + 1 > lengthItems){
+            active = 0;
+        }else{
+            active = active + 1;
+        }
+        reloadSlider();
+    }
+    
+    prev.onclick = function(){
+        if(active - 1 < 0){
+            active = lengthItems;
+        }else{
+            active = active - 1;
+        }
+        reloadSlider();
+    }
+
+    let refreshSlider = setInterval(() => {next.click()}, 3000);
+
+    function reloadSlider(){
+        let checkLeft = items[active].offsetLeft;
+        list.style.left = -checkLeft + 'px';
+
+        let lastActiveDot = document.querySelector('.slider .dots li.active');
+        lastActiveDot.classList.remove('active');
+        dots[active].classList.add('active');
+        
+        // Thêm class 'active' cho item được active và xóa class 'active' ở các item còn lại
+        items.forEach((item, index) => {
+            if (index === active) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+        
+        clearInterval(refreshSlider);
+        refreshSlider = setInterval(() => {next.click()}, 3000);
+    }
+    dots.forEach((li,key) => {
+        li.addEventListener('click',function(){
+            active = key;
+            reloadSlider();
+        })
+    })
+</script>
+
+</html>

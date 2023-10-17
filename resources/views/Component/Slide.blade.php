@@ -1,16 +1,16 @@
 <div class="slider">
         <div class="list" style="left: -1280px;">
             <div class="item">
-                <img src="/image/0003003_giao-hang-nhanh.jpeg" alt="">
+                <img src="/image/banner1.jpg" alt="">
             </div>
             <div class="item active">
-                <img src="/image/0003808_UNBOX_1200x480.jpeg" alt="">
+                <img src="/image/banner2.jpg" alt="">
             </div>
             <div class="item">
-                <img src="/image/0003003_giao-hang-nhanh.jpeg" alt="">
+                <img src="/image/banner3.jpeg" alt="">
             </div>
             <div class="item">
-                <img src="/image/0003003_giao-hang-nhanh.jpeg" alt="">
+                <img src="/image/banner4.webp" alt="">
             </div>
         </div>
         <!-- button prev and next -->

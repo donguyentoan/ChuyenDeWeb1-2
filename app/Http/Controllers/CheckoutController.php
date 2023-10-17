@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 
+use App\Models\Orders;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\Models\DeliveryInformations;
 use Illuminate\Support\Facades\Session;
 
@@ -100,18 +103,18 @@ class CheckoutController extends Controller
                 if(!empty($timeDate))
                 {
                     $date_order = $futureDateTime;
-                    $sql = "INSERT INTO DeliveryInformations (name, phone, provides, district, wards, apartmentNumber, streetNames, details, date_order)
+                    $sql = "INSERT INTO delivery_informations (name, phone, provides, district, wards, apartmentNumber, streetNames, details, date_order)
                 VALUES ('$name', '$phone', '$province', '$district', '$ward', '$apartmentNumber', '$streetNames', '$details', '$date_order')";
                 }
                 else
                 {
                     $date_order = $datetime;
-                    $sql = "INSERT INTO DeliveryInformations (name, phone, provides, district, wards, apartmentNumber, streetNames, details, date_order)
+                    $sql = "INSERT INTO delivery_informations (name, phone, provides, district, wards, apartmentNumber, streetNames, details, date_order)
                 VALUES ('$name', '$phone', '$province', '$district', '$ward', '$apartmentNumber', '$streetNames', '$details', '$date_order')";
                 }
               
-                    // Thực thi câu lệnh SQL INSERT
-                    // DB::insert($sql);
+                  
+                    DB::insert($sql);
                     
                     
                     return view('ReceivingInformation.receivingInformation');
@@ -127,6 +130,8 @@ class CheckoutController extends Controller
 
         $payment_method = $request->input('payment_method');
         $payment_total = $request->input('totalOrder');
+        $miniCartData = $request->input('miniCartData');
+
         if(empty($payment_method))
         {
             Session::flash('error', 'Đã xảy ra lỗi. Vui lòng chọn phương thức thanh toán');
@@ -137,13 +142,61 @@ class CheckoutController extends Controller
             if($payment_method == "vnpay")
             {
 
+
                
+                
                 return view('payment.payment' , ["total" => $payment_total]);
     
                 
             }
             else{
-                return view('OrderSuccess/orderSuccess');
+
+                 $miniCart = json_decode(urldecode(request('miniCartData')), true);
+
+                //  dd($miniCart);
+                $order = new Orders();
+                $newDeliveryInfo =  DeliveryInformations::all();
+                
+                foreach($newDeliveryInfo as $value)
+                {
+                    $order->customer_id = $value['id'];
+                    $order->deliveryInformation_date = $value['date_order'];
+
+                }
+
+                foreach($miniCart as $item)
+                {
+
+                    $order->total_amount = ($item['quantity'] * $item['price']);
+                   
+                }
+                $order->status = 0;
+
+                $order->payment_method = 2;
+                $order->save();
+                foreach($miniCart as $item)
+                {
+                    $orderdetail = new OrderDetails(); 
+
+                    $id = $item['id'];
+                    $quantity = $item['quantity'];
+                    $price = $item['price'];
+
+                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
+                    VALUES ('$order->id'  , $id , $quantity ,$price )";
+                     DB::insert($sql);
+
+                    
+                }
+
+               
+
+
+
+                
+                return view('OrderSuccess.orderSuccess');
+
+
             }
 
         }

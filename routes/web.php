@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\CheckoutController;
@@ -20,9 +21,11 @@ use App\Http\Controllers\LocationController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
-Route::get('/productList', function () {
-    return view('Product.ProductList');
-});
+Route::get('/dashboard', [AdminController::class , 'index'] );
+Route::get('/productList', [AdminController::class , 'showProductList'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+
+
 Route::get('/auth/login', function () {
     return view('Login.login');
 });
@@ -63,7 +66,7 @@ Route::get('/checkout/orderForm' , [CheckoutController::class , 'index']);
 
 Route::get('/checkout/orderinfo' , [CheckoutController::class , 'infoOrder']);
 Route::get('/checkout/orderinfos' , [CheckoutController::class , 'saveinfoOrder']);
-Route::get('/checkout/receivingIformation' , [CheckoutController::class , 'receivingIformation']);
+Route::post('/checkout/receivingIformation' , [CheckoutController::class , 'receivingIformation']);
 
 
 Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
@@ -76,6 +79,9 @@ Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
 
 
 Route::get('/OrderDetail', [OrderController::class, 'index']);
+
+
+
 
 
 

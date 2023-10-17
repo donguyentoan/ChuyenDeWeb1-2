@@ -10,4 +10,10 @@ class OrderController extends Controller
     {
         return view('OrderDetails.orderDetails');
     }
+
+
+    public function saveOrder()
+    {
+        $miniCartData = $request->input('miniCart');
+    }
 }

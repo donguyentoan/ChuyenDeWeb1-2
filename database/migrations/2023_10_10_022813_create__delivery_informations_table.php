@@ -13,7 +13,7 @@ class CreateDeliveryInformationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('DeliveryInformations', function (Blueprint $table) {
+        Schema::create('delivery_informations', function (Blueprint $table) {
             $table->id();
             $table->String('name'); 
             $table->String('phone');

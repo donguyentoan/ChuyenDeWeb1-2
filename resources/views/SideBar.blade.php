@@ -222,11 +222,11 @@
                    <p class="ml-3">Pizza</p> 
                   </a>
                   <a
-                    href="#"
+                    href="/orderCustomer"
                     role="menuitem"
                     class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700"
                   >
-                    Topping
+                    Order customers
                   </a>
                   <a
                     href="#"

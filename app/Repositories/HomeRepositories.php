@@ -9,7 +9,7 @@ class HomeRepositories
 
     public function getAllProducts()
     {
-        $products = Products::all();
+        $products = Products::paginate(3);
      
         return  $products ;
     }

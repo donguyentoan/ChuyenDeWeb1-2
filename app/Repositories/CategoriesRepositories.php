@@ -10,7 +10,6 @@ class  CategoriesRepositories
 
     public function getAllCategories()
     {
-       
         $categories = Categories::all();
         return   $categories;
     }

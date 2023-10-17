@@ -26,7 +26,7 @@ class HomeController extends Controller
         $categories = $this->CategoriesRepositories->getAllCategories();
         
 
-        return view('Home' ,[ "categories" => $categories  ]);
+        return view('Home' ,[ "categories" => $categories]);
 
     }
    

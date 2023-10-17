@@ -20,7 +20,7 @@
 
   <div class="container p-2 mx-auto md:w-10/12 w-full font-medium border-b-2 border-indigo-500">
     <div class="md:flex  justify-center ">
-    <form method="get" action="/checkout/orderinfos" class="flex">
+    <form method="get" action="/checkout/orderinfos" class="md:flex">
               <div class="ad1  md:w-1/2 w-full md:p-14  md:ps-8">
                 <div class="text-xl border-b-2 pb-3 border-gray-500  	">Đặt giao hàng</div>
                 <div class="text-2xl pt-10 pb-5 hover:text-[#006a31]">Thông tin nhận hàng</div>

@@ -1,14 +1,14 @@
-<header class="text-gray-600 body-font">
+<header class="text-gray-600 body-font w-screen">
     <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
-        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <img class="w-14 h-14" src="/image/pizzaa.png" alt="">
+        <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img class="w-14 h-14" src="/image/gt-removebg-preview.png" alt="">
             <span class="ml-3 text-lg font-mono">Pizza Store</span>
         </a>
        
-        <div class="flex justify-center items-center pl-8">
-            <div class="space-y-10 ">
+        <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
+            <div class="space-y-10  ">
                 <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl shadow-lg ">
-                    <div class="flex bg-gray-100 flex items-center px-2 h-[35px] w-72 space-x-4 rounded-lg">
+                    <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,23 +18,13 @@
                             placeholder="Article name or keyword..." />
                     </div>
                     <div
-                        class="flex items-center py-3 px-4 rounded-lg text-gray-500 font-medium text-sm cursor-pointer">
-                        <span>All categorie</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </div>
-                    <div
-                    
                         class="bg-red-600 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
                         <span class="text-sm">Search</span>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <nav class="md:ml-auto flex pt-4 flex-wrap items-center text-base justify-center">
             <div class="right-wrap">
                 <div class="account flex items-center">
                     <div href="/customer/info" class="icon pr-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +43,7 @@
             </div>
         </nav>
     </div>
-    <nav class="w-11/12 mx-auto h-8 mb-3 bg-red-500 rounded-xl md:ml-auto flex items-center text-white flex-row flex text-base ">
+    <nav class="md:w-11/12 overflow-x-auto w-full mx-auto py-2 mb-3 bg-[#00603c] md:rounded-xl md:ml-auto flex items-center text-white flex-row flex md:text-base text-sm ">
         <a class="mr-5 ml-5 hover:text-gray-900">Pizza</a>
         <a class="mr-5 hover:text-gray-900">Salad</a>
         <a class="mr-5 hover:text-gray-900">Thức Uống</a>

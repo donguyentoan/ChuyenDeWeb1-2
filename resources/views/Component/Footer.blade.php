@@ -1,7 +1,7 @@
 <footer class="text-gray-600 body-font bg-[#006a31] w-full">
     <div class="container  py-8 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
       <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-        <img src="/image/pizzaa.png" alt="" width="200px">
+        <img  src="/image/gt-removebg-preview.png" width="200px">
       </div>
       <div class="flex-grow flex flex-wrap md:mt-0 mt-10 md:text-left text-center">
         <div class="lg:w-1/3 md:w-1/2 w-full px-4">

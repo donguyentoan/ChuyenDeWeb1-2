@@ -142,9 +142,44 @@ class CheckoutController extends Controller
             if($payment_method == "vnpay")
             {
 
+                $miniCart = json_decode(urldecode(request('miniCartData')), true);
 
-               
+                //  dd($miniCart);
+                $order = new Orders();
+                $newDeliveryInfo =  DeliveryInformations::all();
                 
+                foreach($newDeliveryInfo as $value)
+                {
+                    $order->customer_id = $value['id'];
+                    $order->deliveryInformation_date = $value['date_order'];
+
+                }
+
+                foreach($miniCart as $item)
+                {
+
+                    $order->total_amount = ($item['quantity'] * $item['price']);
+                   
+                }
+                $order->status = 0;
+
+                $order->payment_method = 1;
+                $order->save();
+                foreach($miniCart as $item)
+                {
+                    $orderdetail = new OrderDetails(); 
+
+                    $id = $item['id'];
+                    $quantity = $item['quantity'];
+                    $price = $item['price'];
+
+                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
+                    VALUES ('$order->id'  , $id , $quantity ,$price )";
+                     DB::insert($sql);
+
+                    
+                }
+
                 return view('payment.payment' , ["total" => $payment_total]);
     
                 
@@ -190,7 +225,7 @@ class CheckoutController extends Controller
                 }
 
                
-
+                
 
 
                 

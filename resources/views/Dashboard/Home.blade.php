@@ -17,11 +17,9 @@
 
 <div class="div flex">
 
-
-@include('SideBar')
-
-
-
+ <div class="w-1/4">
+ @include('SideBar')
+ </div>
 
  <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
@@ -78,6 +76,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- BUY ME A BEER AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
 <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">

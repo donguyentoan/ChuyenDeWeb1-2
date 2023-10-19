@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>K-WD Dashboard</title>
+    <title>Dashboard Pizza Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
@@ -15,10 +15,14 @@
   </head>
 <body>
 
+
 <div class="div flex">
 
+<div class="w-1/4">
+ @include('SideBar')
+ </div>
 
-@include('SideBar')
+
 
 
 
@@ -37,7 +41,6 @@
                       <th class="px-4 py-3">address</th>
                      
                       <th class="px-4 py-3">Product Name</th>
-                      <th class="px-4 py-3">Quantity</th>
                       <th class="px-4 py-3">Price</th>
                       <th class="px-4 py-3">Status</th>
                       <th class="px-4 py-3">Payment Method</th>
@@ -81,25 +84,60 @@
                       </td>
                     
                       <td class="px-4 py-3 text-sm">
-                      {{$value->nameproduct}}
+                      {{$value->nameproduct}} <br>
+                      <small> {{$value->quantity}}x</small>
                       </td>
-                      <td class="px-4 py-3 text-sm">
-                      {{$value->quantity}}
-                      </td>
+                    
                       <td class="px-4 py-3 text-sm">
                       {{$value->price}}
                       </td>
+                      
                       <td class="px-4 py-3 text-sm text-green-700 bg-green-100">
-                        @if($value->status == 0)
-                            <p>Đang Giao</p>
-                        @endif
-                     
-                      </td>
+            <form method="get" action="/update-status">
+              @csrf
+              @method('PUT')
+              <input type="hidden" name="status" value="{{ $value->status }}">
+              <input type="hidden" name="customerID" value="{{$value->customer_id}}">
+              <div x-data="{ toggle: {{ $value->status === 1 ? 'true' : 'false' }} }">
+                <button
+                  class="transition ease-in-out duration-300 w-12 bg-gray-200 rounded-full focus:outline-none"
+                  :class="{ 'bg-green-300': toggle }"
+                  x-on:click="toggle = !toggle; updateStatus()"
+                >
+                  <div
+                    class="transition ease-in-out duration-300 rounded-full h-6 w-6 bg-white shadow"
+                    :class="{ 'transform translate-x-full': toggle }"
+                  ></div>
+                </button>
+              
+                <div class="text-xs" x-text="toggle ? 'Hoàn Thành':'Đang Giao Hàng'"></div>
+              </div>
+              
+            </form>
+
+  <script>
+    function updateStatus() {
+      document.querySelector('input[name="status"]').value = toggle ? '1' : '0';
+      // You can remove the previous updateStatus code
+      
+      // Submit the form to update the status
+      document.querySelector('form').submit();
+    }
+  </script>
+</td>
+
+
+                    
 
                       <td class="px-4 py-3 text-sm">
                         @if($value->payment_method == 2)
                         <p>COD</p>
                         @endif
+                        @if($value->payment_method == 1)
+                        <p>VN Pay</p>
+                        @endif
+
+
                      
                       </td>
 
@@ -109,6 +147,7 @@
                       <td class="px-4 py-3 text-sm">
                       {{$value->date_order}}
                       </td>
+                     
                       <td class="px-4 py-3">
                         <div class="flex items-center space-x-4 text-sm">
                           <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">

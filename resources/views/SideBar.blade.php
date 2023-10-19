@@ -1,4 +1,4 @@
-<aside class="flex-shrink-0 hidden w-64 bg-gradient-to-r from-cyan-500 to-blue-500 border-r dark:border-primary-darker dark:bg-darker md:block">
+<aside class=" h-full flex-shrink-0 hidden w-64 bg-gradient-to-r from-cyan-500 to-blue-500 border-r dark:border-primary-darker dark:bg-darker md:block">
           <div class="flex flex-col h-full">
           <a class="border-b-[1px] border-white text-lg font-bold flex items-center  text-gray-800 dark:text-gray-200" href="#">
             <img class="w-16 h-16" src="/image/pizzaa.png" alt="">

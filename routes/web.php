@@ -5,7 +5,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
 
@@ -79,6 +81,21 @@ Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
 
 
 Route::get('/OrderDetail', [OrderController::class, 'index']);
+
+Route::get('/update-status', [AdminController::class, 'updateStatus']);
+Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
+
+Route::get('/filter',  [FilterController::class , 'getManufacture']);
+
+
+
+
+Route::get('/products',  [ProductController::class , 'index']);
+Route::get('/products/filter', [ProductController::class , 'filter']);
+
+
+
+
 
 
 

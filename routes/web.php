@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,7 @@ Route::get('/', [HomeController::class , 'index']);
 Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
 
 
 Route::get('/auth/login', function () {

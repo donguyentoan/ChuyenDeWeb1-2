@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
@@ -39,6 +40,12 @@ class AdminController extends Controller
         $orders = $this->OrderRepositories->getAllOrder();
         return view('Dashboard.OrderList' ,[ "orders" => $orders]);
     }
+
+    public function addProduct(){
+        $categories = Categories::all();
+        return view("Dashboard.AddProduct",compact("categories"));
+    }
+
 
     public function updateStatus(Request $request)
     {

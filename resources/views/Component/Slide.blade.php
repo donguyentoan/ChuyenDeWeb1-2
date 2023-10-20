@@ -1,33 +1,58 @@
-<div class="slider">
-        <div class="list" style="left: -1280px;">
-            <div class="item">
-                <img src="/image/banner1.jpg" alt="">
-            </div>
-            <div class="item active">
-                <img src="/image/banner2.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="/image/banner3.jpeg" alt="">
-            </div>
-            <div class="item">
-                <img src="/image/banner4.webp" alt="">
-            </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <section class="slider">
+        <div class="slider__container">
+            <figure>
+                <img src="./image/banner10.jpg" alt="Excursions on the mountain">
+                <figcaption>Excursions on the mountain</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner1.jpg" alt="Sailing on a river">
+                <figcaption>Sailing on a river</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner7.jpg" alt="Caves exploration">
+                <figcaption>Caves exploration</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner3.jpeg" alt="Transportations in a metropolis">
+                <figcaption>Transportations in a metropolis</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner4.webp" alt="Green island">
+                <figcaption>Green island</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner5.jpg" alt="Storm">
+                <figcaption>Storm</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner6.jpg" alt="Fog">
+                <figcaption>Fog</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner7.jpg" alt="Flying like a bird of prey">
+                <figcaption>Flying like a bird of prey</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner8.jpg" alt="The love of 2 creatures">
+                <figcaption>The love of 2 creatures</figcaption>
+            </figure>
+            <figure>
+                <img src="./image/banner9.jpg" alt="The sea waves">
+                <figcaption>The sea waves</figcaption>
+            </figure>
+            <!-- Duplicate the first slide at the end of the slides block
+                to have the illusion of a continuous infinite loop -->
+            <figure>
+                <img src="https://picsum.photos/id/1036/1920/700" alt="Excursions on the mountain">
+                <figcaption>Excursions on the mountain</figcaption>
+            </figure>
         </div>
-        <!-- button prev and next -->
-        <div class="buttons">
-            <button class="flex justify-center items-center" id="prev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-</svg>  </button>
-            <button class="flex justify-center items-center" id="next"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-</svg></button>
-        </div>
-        <!-- dot -->
-        <ul class="dots">
-            <li class=""></li>
-            <li class="active"></li>
-            <li class=""></li>
-            <li class=""></li>
-            <li class=""></li>
-        </ul>
-    </div>
+    </section>
+</body>
+</html>

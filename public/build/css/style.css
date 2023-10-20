@@ -1,84 +1,123 @@
+@keyframes slide {
+    0% {
+        left: 0%;
+    }
 
+    8% {
+        left: 0%;
+    }
 
+    10% {
+        left: -100%;
+    }
+
+    18% {
+        left: -100%;
+    }
+
+    20% {
+        left: -200%;
+    }
+
+    28% {
+        left: -200%;
+    }
+
+    30% {
+        left: -300%;
+    }
+
+    38% {
+        left: -300%;
+    }
+
+    40% {
+        left: -400%;
+    }
+
+    48% {
+        left: -400%;
+    }
+
+    50% {
+        left: -500%;
+    }
+
+    58% {
+        left: -500%;
+    }
+
+    60% {
+        left: -600%;
+    }
+
+    68% {
+        left: -600%;
+    }
+
+    70% {
+        left: -700%;
+    }
+
+    78% {
+        left: -700%;
+    }
+
+    80% {
+        left: -800%;
+    }
+
+    88% {
+        left: -800%;
+    }
+
+    90% {
+        left: -900%;
+    }
+
+    98% {
+        left: -900%;
+    }
+
+    100% {
+        left: -1000%;
+    }
+}
 
 .slider {
-    
-    height: 500px;
-    margin: auto;
-    position: relative;
+    width: 1920px;
+    height: 600px;
     overflow: hidden;
 }
 
-.list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+.slider__container {
     display: flex;
-    width: max-content;
-    transition: 1s;
+    position: relative;
+    animation: 30s slide infinite;
+    font-size: 0;
+    width: 1000%;
 }
 
-.list img {
-    width: 1300px;
-    max-width: 100vw;
+.slider__container figure {
+    flex: 1 0 auto;
+    width: 10%;
+    overflow: hidden;
+}
+
+.slider__container img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: filter 1s ease-in-out;
+    margin: auto;
 }
 
-.buttons {
+.slider__container figcaption {
     position: absolute;
-    top: 45%;
-    width: 98%;
-    display: flex;
-    justify-content: space-between;
-    right: 11px;
-}
-
-.buttons button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-weight: bold;
-}
-
-.dots {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    color: #fff;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 32px;
+    color: #f4f4f4;
+    padding: 10px 16px;
+    text-shadow: 2px 2px 6px #222;
     width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.dots li {
-    list-style: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 20px;
-    transition: 1s;
-}
-
-.dots li.active {
-    background-color: #fff;
-    width: 30px;
-}
-
-.list .item:not(.active) img {
-    filter: blur(3px);
-}
-@media screen and (max-width: 768px) 
-{
-    .slider {
-        height: 400px;
-    } 
 }

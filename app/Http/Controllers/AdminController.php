@@ -65,32 +65,21 @@ class AdminController extends Controller
     
         $fileName = null; // Đặt giá trị mặc định cho biến $fileName
     
-        // if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        //     // Xử lý tệp ở đây
-        //     $file = $request->file('image');
-        //     $fileName = time(). $file->getClientOriginalName();
-        //     $path = 'upload';
-        //     $file->move($path, $fileName);
-        // }
-
-        $file = $request->file('image');
-         $ext = $file->extension();
-        $file_name = time() . '-' . 'service.' . $ext;
-        $file_name = $file->getClientOriginalName();
-        //dd($file_name);
-        $file->move('upload', $file_name);
-        $services->images = $file_name;
-    
-    
-        // $product = new Products(); // Tạo một đối tượng Product mới
-        // $fileName;
-    
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // Xử lý tệp ở đây
+            $file = $request->file('image');
+            $fileName = time(). $file->getClientOriginalName();
+            $path = 'upload';
+            $file->move($path, $fileName);
+        }
 
         // Sử dụng cú pháp SQL đúng cách với các giá trị được đặt trong dấu `'`
         $sql = "INSERT INTO products (name, description, image, price, categories_id, Manufacture_id) VALUES ('" . $request->input("name") . "', '" . $request->input("description") . "', '" . $fileName . "', '" . $request->input("price") . "', '" . $request->input("categorie") . "', '" . $request->input("manufacture") . "')";
         DB::insert($sql);
+
     
-        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu']); // Đăng nhập thất bại
+        return view('Home');
+
     }
     
 

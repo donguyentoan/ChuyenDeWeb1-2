@@ -24,7 +24,7 @@
         <!-- EndSideBar -->
 
         <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#12263f] p-10">
-            <form action="/uploads" method="get" enctype="multipart/form-data">
+            <form action="/uploads" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>

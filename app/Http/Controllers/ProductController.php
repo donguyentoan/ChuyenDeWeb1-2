@@ -38,13 +38,10 @@ public function filter(Request $request)
     return view('products.filtered', compact('filteredProducts'));
 }
 
-public function addProduct(Request $request){
-    $products = new Products();    
-    $products->name = $request->name;
-    $products->description = $request->description;
-    $products->image = $request->image;
-    $products->price = $request->price;
-    $products->discount = $request->discount;
-}
+
+    public function showForm()
+    {
+        return view('upload');
+    }
 
 }

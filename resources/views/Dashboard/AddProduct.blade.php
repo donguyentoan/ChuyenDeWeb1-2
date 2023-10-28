@@ -24,7 +24,8 @@
         <!-- EndSideBar -->
 
         <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#12263f] p-10">
-            <form>
+            <form action="/uploads" method="get" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                     <input type="text" id="name" name="name"
@@ -41,35 +42,47 @@
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="img-product">Upload
                         Image</label>
-                    <input
+                    <input id="image" type="file" name="image"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        aria-describedby="user_avatar_help" id="img-product" type="file" name="img-product">
+                        aria-describedby="user_avatar_help" >
                     <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Tải hình ảnh sản
                         phẩm lên</div>
                 </div>
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                    <input type="text" id="description"
+                    <input type="text" id="price" name="price"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                         placeholder="Nhập giá sản phẩm" required>
                 </div>
                 <!--  -->
                 <div class="mb-6">
-                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose product classification</label>
-                    <select id="countries"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Chọn phân loại</option>
-                        <?php
-                        foreach ($categories as $category) {
-                            echo "<option value='$category->id'>$category->name</option>";
-                        }
-                        ?>
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
+                        product classification</label>
+                    <select id="categorie" name="categorie"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+
+                        @foreach ($categories as $category)
+                        <option name="categorie" value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+
                     </select>
                 </div>
-                <!--  -->
+                <div class="mb-6">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
+                        manufacture classification</label>
+                    <select id="manufacture" name="manufacture"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+
+                        @foreach ($manufactures as $manufacture)
+                        <option name="manufacture" value="{{ $manufacture->id }}">{{ $manufacture->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
                 <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Product</button>
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                    Product</button>
             </form>
         </div>
     </div>

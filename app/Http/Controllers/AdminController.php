@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\Manufactures;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +44,46 @@ class AdminController extends Controller
 
     public function addProduct(){
         $categories = Categories::all();
-        return view("Dashboard.AddProduct",compact("categories"));
+        $manufactures = Manufactures::all();
+        return view("Dashboard.AddProduct", [
+            "categories" => $categories,
+            "manufactures" => $manufactures,
+        ]);
+       
     }
 
+    public function upload(Request $request){
+        
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'price' => 'required',
+            'categorie' => 'required',
+            'manufacture' => 'required',
+        ]);
+    
+        $fileName = null; // Đặt giá trị mặc định cho biến $fileName
+    
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // Xử lý tệp ở đây
+            $file = $request->file('image');
+            $fileName = time(). $file->getClientOriginalName();
+            $path = 'upload';
+            $file->move($path, $fileName);
+        }
+    
+        $product = new Products(); // Tạo một đối tượng Product mới
+        $product->image = $fileName;
+    
+
+        // Sử dụng cú pháp SQL đúng cách với các giá trị được đặt trong dấu `'`
+        $sql = "INSERT INTO products (name, description, image, price, categories_id, Manufacture_id) VALUES ('" . $request->input("name") . "', '" . $request->input("description") . "', '" . $request->input("image") . "', '" . $request->input("price") . "', '" . $request->input("categorie") . "', '" . $request->input("manufacture") . "')";
+        DB::insert($sql);
+    
+        return redirect()->back()->with('success', 'Added successfully');
+    }
+    
 
     public function updateStatus(Request $request)
     {

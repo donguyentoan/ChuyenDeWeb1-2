@@ -28,6 +28,8 @@ Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
+Route::get('/uploads', [AdminController::class, 'upload']);
+
 
 
 Route::get('/auth/login', function () {

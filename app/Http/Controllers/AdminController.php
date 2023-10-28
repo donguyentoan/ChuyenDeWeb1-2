@@ -57,7 +57,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required',
             'categorie' => 'required',
             'manufacture' => 'required',
@@ -65,23 +65,32 @@ class AdminController extends Controller
     
         $fileName = null; // Đặt giá trị mặc định cho biến $fileName
     
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Xử lý tệp ở đây
-            $file = $request->file('image');
-            $fileName = time(). $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
-        }
+        // if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        //     // Xử lý tệp ở đây
+        //     $file = $request->file('image');
+        //     $fileName = time(). $file->getClientOriginalName();
+        //     $path = 'upload';
+        //     $file->move($path, $fileName);
+        // }
+
+        $file = $request->file('image');
+         $ext = $file->extension();
+        $file_name = time() . '-' . 'service.' . $ext;
+        $file_name = $file->getClientOriginalName();
+        //dd($file_name);
+        $file->move('upload', $file_name);
+        $services->images = $file_name;
     
-        $product = new Products(); // Tạo một đối tượng Product mới
-        $product->image = $fileName;
+    
+        // $product = new Products(); // Tạo một đối tượng Product mới
+        // $fileName;
     
 
         // Sử dụng cú pháp SQL đúng cách với các giá trị được đặt trong dấu `'`
-        $sql = "INSERT INTO products (name, description, image, price, categories_id, Manufacture_id) VALUES ('" . $request->input("name") . "', '" . $request->input("description") . "', '" . $request->input("image") . "', '" . $request->input("price") . "', '" . $request->input("categorie") . "', '" . $request->input("manufacture") . "')";
+        $sql = "INSERT INTO products (name, description, image, price, categories_id, Manufacture_id) VALUES ('" . $request->input("name") . "', '" . $request->input("description") . "', '" . $fileName . "', '" . $request->input("price") . "', '" . $request->input("categorie") . "', '" . $request->input("manufacture") . "')";
         DB::insert($sql);
     
-        return redirect()->back()->with('success', 'Added successfully');
+        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu']); // Đăng nhập thất bại
     }
     
 

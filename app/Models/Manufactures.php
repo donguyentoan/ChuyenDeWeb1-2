@@ -12,4 +12,8 @@ class Manufactures extends Model
         'name',
       
     ];
+<<<<<<< HEAD
+=======
+
+>>>>>>> add-products
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SearchProductController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,9 @@ Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDis
 Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
+Route::post('/uploads', [AdminController::class, 'upload']);
+
 
 
 

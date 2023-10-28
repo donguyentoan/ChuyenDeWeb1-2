@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Categories;
 use Illuminate\Http\Request;
-
 
 class ProductController extends Controller
 {
-    
 
 
     public function index()
@@ -30,4 +29,23 @@ class ProductController extends Controller
         return view('Search', compact('search'));
     }
 
+<<<<<<< HEAD
 }
+=======
+    if ($brand) {
+        $query->where('brand', $brand);
+    }
+
+    $filteredProducts = $query->get();
+
+    return view('products.filtered', compact('filteredProducts'));
+}
+
+
+    public function showForm()
+    {
+        return view('upload');
+    }
+
+}
+>>>>>>> add-products

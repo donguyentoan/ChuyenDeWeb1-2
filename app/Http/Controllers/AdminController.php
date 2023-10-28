@@ -31,7 +31,7 @@ class AdminController extends Controller
         // $products = $this->HomeRepositories->getAllProducts();
          $categories = $this->CategoriesRepositories->getAllCategories();
         
-         $products = Products::paginate(3);
+         $products = Products::paginate(5);
         return view('Dashboard.ProductList' , compact('products' , 'categories' ));
       
     }

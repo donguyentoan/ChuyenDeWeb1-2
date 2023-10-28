@@ -5,18 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./build/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
-
 @include('component.Header')
-
-
-
-@include('component.Slide')
-
-<section class="text-gray-600 body-font">
-<div class="container pb-24 mx-auto">
 
 <dialog id="firstModal" class="p-10 border-2 border-gray-300 rounded-xl w-11/12 h-4/5 mx-auto relative">
     <div class="close absolute top-0 right-0 w-7 h-7 rounded-full flex justify-center align-center bg-red-500">
@@ -85,28 +78,41 @@
             </div>
   </dialog>
 
-<section class="text-gray-600 body-font">
-    <div class="container pb-24  mx-auto">
-        @foreach($categories as $category)
-            <div class="mb-6">
-              <div class="bg-[#00603c] mt-10 mb-5 rounded-xl">
-                <h1 class="text-xl font-bold text-center text-white " >{{$category->name}}</h1>
-              </div>
 
+<section class="text-gray-600 body-font flex">
+   
+    <div class="w-1/4 p-6 border-2  border-black-500  mr-2  rounded-r-xl ">
+    <h3 class="text-xl font-bold border-b-2 border-black-500">Categories</h3>
+    <form action="/searchProduct">
+          <div class="list-group">
+    
+
+            @foreach($manufacture as $ct)
+                    <div class="list-group-item checkbox pt-3">
+                        
+                        <label class="" ><input name="manu" type="checkbox" class="common_selector ram  mr-2 w-3" value="{{ $ct->id}}" > {{ $ct->name}} </label>
+                    </div>
+                    @endforeach            
+                </div>
+                <input type="submit" class="bg-blue-500 px-5 py-1" value="Search" >
+         </div>
+    </form>
+  
+    <div class="w-full">    
               <div class="flex flex-wrap ">
-              @foreach($category->products as $product)
+          @foreach($search as $key)
               <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$product->image}}" alt="blog">
+                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$key->image}}" alt="blog">
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
-                    <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
-                    <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
+                    <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$key -> name}}</h1>
+                    <p class="leading-relaxed text-xs mb-3">{{$key->description}}</p>
                     <div class=" items-center flex justify-between ">
-                      <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
+                      <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$key->price}}đ</span>  </p>
                         <div class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
+                        <input  onclick="showModal('{{ $key->name }}', {{ $key->price }} , {{ $key->id }} , '{{ $key->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                           </svg>
                         </div>
@@ -114,20 +120,34 @@
                   </div>
                 </div>
               </div>
-            
-              @endforeach
-       
+            @endforeach
+      
+      
        
              </div>
+             <div class="panigation p-8 ">
+            
+            {{ $search->links() }}
+       </div>
               
                 
             </div>
-        @endforeach
+    
     </div>
 </section>
 
-<!-- Trong cùng trang HTML -->
-<script>
+
+
+
+
+
+
+
+
+
+    <script>
+
+
   updateMiniCart();
   let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
 
@@ -282,20 +302,4 @@ function addToMiniCart() {
 </script>
 
 
-
-
-        
-</div>
-
-</section>
-
-
-
-
-
-
-
-@include('component.Footer')
-
-
-    
+@include('Component.Footer')

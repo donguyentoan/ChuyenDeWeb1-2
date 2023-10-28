@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
@@ -39,8 +38,6 @@ class CheckoutController extends Controller
             // Xử lý tệp không tồn tại
             return response()->json(['error' => 'File not found'], 404);
         }
-
-
         $filePath = public_path('json/districts.json'); // Đường dẫn đến tệp JSON trong thư mục public
         $districts = [];
 
@@ -162,7 +159,6 @@ class CheckoutController extends Controller
                    
                 }
                 $order->status = 0;
-
                 $order->payment_method = 1;
                 $order->save();
                 foreach($miniCart as $item)
@@ -176,18 +172,12 @@ class CheckoutController extends Controller
                     $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$price )";
                      DB::insert($sql);
-
-                    
                 }
-
                 return view('payment.payment' , ["total" => $payment_total]);
-    
-                
             }
             else{
 
                  $miniCart = json_decode(urldecode(request('miniCartData')), true);
-
                 //  dd($miniCart);
                 $order = new Orders();
                 $newDeliveryInfo =  DeliveryInformations::all();
@@ -198,12 +188,9 @@ class CheckoutController extends Controller
                     $order->deliveryInformation_date = $value['date_order'];
 
                 }
-
                 foreach($miniCart as $item)
                 {
-
                     $order->total_amount = ($item['quantity'] * $item['price']);
-                   
                 }
                 $order->status = 0;
 
@@ -212,16 +199,12 @@ class CheckoutController extends Controller
                 foreach($miniCart as $item)
                 {
                     $orderdetail = new OrderDetails(); 
-
                     $id = $item['id'];
                     $quantity = $item['quantity'];
                     $price = $item['price'];
-
                     $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$price )";
                      DB::insert($sql);
-
-                    
                 }
 
                

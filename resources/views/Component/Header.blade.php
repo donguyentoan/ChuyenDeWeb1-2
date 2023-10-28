@@ -4,26 +4,29 @@
             <img class="w-14 h-14" src="/image/gt-removebg-preview.png" alt="">
             <span class="ml-3 text-lg font-mono">Pizza Store</span>
         </a>
+      <form action="/searchProduct" method="get">
+      <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
+                  <div class="space-y-10  ">
+                      <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl shadow-lg ">
+                          <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
+                                  viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                              </svg>
+                              <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
+                          </div>
+                          <div
+                              class="bg-red-600 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+                              <input class="text-sm" type="submit" value="Search"> 
+                            
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      </form>
+        
        
-        <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
-            <div class="space-y-10  ">
-                <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl shadow-lg ">
-                    <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input class="bg-gray-100 outline-none placeholder:text-sm" type="text"
-                            placeholder="Article name or keyword..." />
-                    </div>
-                    <div
-                        class="bg-red-600 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-                        <span class="text-sm">Search</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <nav class="md:ml-auto flex pt-4 flex-wrap items-center text-base justify-center">
             <div class="right-wrap">
                 <div class="account flex items-center">
@@ -72,6 +75,9 @@
                     <hr class="mb-4">
                     <div class="list_item">
                     <ul class="minicart">
+
+
+
                       
                     </ul>
                       <div>

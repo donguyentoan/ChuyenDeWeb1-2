@@ -19,24 +19,15 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'categories'));
     }
 
-public function filter(Request $request)
-{
-    $category = $request->input('category');
-    $brand = $request->input('brand');
-
-    $query = Products::query();
-
-    if ($category) {
-        $query->where('category', $category);
+    public function filterProducts(Request $request) {
+        // Get the selected checkboxes from the request
+        $selectedCategories = $request->input('categories');
+    
+        // Query your products based on the selected categories
+        $search = Products::whereIn('category', $selectedCategories)->get();
+    
+        // Return the filtered products as a response
+        return view('Search', compact('search'));
     }
-
-    if ($brand) {
-        $query->where('brand', $brand);
-    }
-
-    $filteredProducts = $query->get();
-
-    return view('products.filtered', compact('filteredProducts'));
-}
 
 }

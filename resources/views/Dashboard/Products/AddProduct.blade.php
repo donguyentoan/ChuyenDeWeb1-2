@@ -23,7 +23,7 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs  p-10">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#0cb1d8] p-10">
             <form action="/uploads" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
@@ -81,7 +81,7 @@
                     </select>
                 </div>
                 <button type="submit"
-                    class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add
                     Product</button>
             </form>
         </div>

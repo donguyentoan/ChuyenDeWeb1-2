@@ -48,7 +48,7 @@
                                 <div class="flex items-center text-sm">
                                     <!-- Avatar with inset shadow -->
                                     <div class="relative hidden w-28  h-28 object-contain  mr-3 rounded-full md:block">
-                                        <img class="object-contain w-full h-full " src="./image/{{$product->image}}"
+                                        <img class="object-contain w-full h-full " src="./upload/{{$product->image}}"
                                             alt="" loading="lazy">
                                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                         </div>

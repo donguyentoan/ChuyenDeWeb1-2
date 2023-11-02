@@ -54,8 +54,10 @@ Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
-Route::post('/uploads', [AdminController::class, 'upload']);
+Route::post('/uploads', [AdminController::class, 'uploadImageProduct']);
 Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
+Route::delete('/products/{product}', 'ProductController@destroy');
+
 
 
 

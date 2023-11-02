@@ -26,6 +26,8 @@ class AdminController extends Controller
         return view('Dashboard.Home');
     }
 
+    //Product
+    //-------------------------------------------------------------------------------------------------------------------------------
     public function showProductList()
     {
         // $products = $this->HomeRepositories->getAllProducts();
@@ -51,7 +53,15 @@ class AdminController extends Controller
         ]);
        
     }
-    public function upload(Request $request){
+
+    public function EditProduct($id){
+        $product = Products::find($id);
+        $categories = Categories::all();
+        $manufactures = Manufactures::all();
+        return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
+    }
+
+    public function uploadImageProduct(Request $request){
         
         $request->validate([
             'name' => 'required',
@@ -80,6 +90,10 @@ class AdminController extends Controller
         return redirect('/productList');
 
     }
+
+    //end function product
+    //--------------------------------------------------------------------------------------------------------------
+
     public function updateStatus(Request $request)
     {
         $id_customer = $request->input('customerID');
@@ -108,10 +122,5 @@ class AdminController extends Controller
             return back();
 
     }
-    public function EditProduct($id){
-        $product = Products::find($id);
-        $categories = Categories::all();
-        $manufactures = Manufactures::all();
-        return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
-    }
+    
 }

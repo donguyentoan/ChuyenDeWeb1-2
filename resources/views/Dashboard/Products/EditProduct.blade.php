@@ -19,32 +19,32 @@
     <div class="div flex">
         <!-- SideBar -->
         <div class="w-1/7">
-            @include('SideBar')
+        @include('component.SideBar')
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#12263f] p-10">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs  p-10">
             <form action="/uploads" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                     <input type="text" id="name" name="name"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                        placeholder="Nhập tên sản phẩm" required>
+                        placeholder="Nhập tên sản phẩm" required value="{{$product->name}}"> 
                 </div>
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                     <input type="text" id="description" name="description"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                        placeholder="Nhập mô tả sản phẩm" required>
+                        placeholder="Nhập mô tả sản phẩm" required value="{{$product->description}}">
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="img-product">Upload
                         Image</label>
                     <input id="image" type="file" name="image"
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        aria-describedby="user_avatar_help" >
+                        class=" p-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        aria-describedby="user_avatar_help"  >
                     <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Tải hình ảnh sản
                         phẩm lên</div>
                 </div>
@@ -53,19 +53,20 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
                     <input type="text" id="price" name="price"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                        placeholder="Nhập giá sản phẩm" required>
+                        placeholder="Nhập giá sản phẩm" required value="{{$product->price}}">
                 </div>
-                <!--  -->
+               
                 <div class="mb-6">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
                         product classification</label>
                     <select id="categorie" name="categorie"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-
-                        @foreach ($categories as $category)
-                        <option name="categorie" value="{{ $category->id }}">{{ $category->name }}</option>
+                        @foreach($categories as $item)
+                            @if($item->id == $product->categories_id)
+                            <option name="categorie" value="">{{$item->name}}</option>
+                            @endif
                         @endforeach
-
+                   
                     </select>
                 </div>
                 <div class="mb-6">
@@ -73,9 +74,10 @@
                         manufacture classification</label>
                     <select id="manufacture" name="manufacture"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-
-                        @foreach ($manufactures as $manufacture)
-                        <option name="manufacture" value="{{ $manufacture->id }}">{{ $manufacture->name }}</option>
+                       @foreach($manufactures as $item)
+                        @if($item->id == $product->Manufacture_id)
+                            <option name="manufacture" value="">{{$item->name}}</option>
+                            @endif
                         @endforeach
 
                     </select>

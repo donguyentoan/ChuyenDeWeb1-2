@@ -18,7 +18,7 @@
 <div class="div flex">
 
  <div class="w-1/4">
- @include('SideBar')
+ @include('component.SideBar')
  </div>
 
  <div class="w-full overflow-hidden rounded-lg shadow-xs">

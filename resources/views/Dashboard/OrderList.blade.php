@@ -20,15 +20,11 @@
     <div class="div flex">
 
         <div class="w-1/7">
-            @include('SideBar')
+        @include('component.SideBar')
         </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-                <div class="button_add flex justify-end mr-3">
-                    <a href=""><button
-                            class="flex  mx-auto  text-white bg-gradient-to-r from-cyan-500 to-blue-500 border-0 py-2 px-9 m-5  rounded text-xs">Add
-                            Product</button></a>
-                </div>
+                
 
                 <table class="w-full whitespace-no-wrap">
                     <thead>

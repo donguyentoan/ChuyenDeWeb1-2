@@ -55,6 +55,8 @@ Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
 Route::post('/uploads', [AdminController::class, 'upload']);
+Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
+
 
 
 

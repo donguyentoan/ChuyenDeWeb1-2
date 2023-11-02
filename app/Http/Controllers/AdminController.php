@@ -32,7 +32,7 @@ class AdminController extends Controller
          $categories = $this->CategoriesRepositories->getAllCategories();
         
          $products = Products::paginate(5);
-        return view('Dashboard.ProductList' , compact('products' , 'categories' ));
+        return view('Dashboard..Products.ProductList' , compact('products' , 'categories'));
       
     }
 
@@ -45,13 +45,12 @@ class AdminController extends Controller
     public function addProduct(){
         $categories = Categories::all();
         $manufactures = Manufactures::all();
-        return view("Dashboard.AddProduct", [
+        return view("Dashboard.Products.AddProduct", [
             "categories" => $categories,
             "manufactures" => $manufactures,
         ]);
        
     }
-
     public function upload(Request $request){
         
         $request->validate([
@@ -78,11 +77,9 @@ class AdminController extends Controller
         DB::insert($sql);
 
     
-        return view('Home');
+        return redirect('/productList');
 
     }
-    
-
     public function updateStatus(Request $request)
     {
         $id_customer = $request->input('customerID');
@@ -111,7 +108,10 @@ class AdminController extends Controller
             return back();
 
     }
-
-    
-
+    public function EditProduct($id){
+        $product = Products::find($id);
+        $categories = Categories::all();
+        $manufactures = Manufactures::all();
+        return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
+    }
 }

@@ -29,23 +29,5 @@ class ProductController extends Controller
         return view('Search', compact('search'));
     }
 
-<<<<<<< HEAD
 }
-=======
-    if ($brand) {
-        $query->where('brand', $brand);
-    }
-
-    $filteredProducts = $query->get();
-
-    return view('products.filtered', compact('filteredProducts'));
-}
-
-
-    public function showForm()
-    {
-        return view('upload');
-    }
-
-}
->>>>>>> add-products
+  

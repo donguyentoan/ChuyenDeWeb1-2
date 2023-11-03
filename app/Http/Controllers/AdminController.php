@@ -28,22 +28,18 @@ class AdminController extends Controller
 
     //Product
     //-------------------------------------------------------------------------------------------------------------------------------
+    
+    //hiển thị danh sách sản phẩm và phân trang sp 
     public function showProductList()
     {
-        // $products = $this->HomeRepositories->getAllProducts();
-         $categories = $this->CategoriesRepositories->getAllCategories();
-        
-         $products = Products::paginate(5);
-        return view('Dashboard..Products.ProductList' , compact('products' , 'categories'));
-      
+        $categories = $this->CategoriesRepositories->getAllCategories();
+        $manufacture = Manufactures::all();
+
+        $products = Products::paginate(5);
+        return view('Dashboard..Products.ProductList' , compact('products' , 'categories', 'manufacture'));
     }
 
-    public function showOrder(){
-
-        $orders = $this->OrderRepositories->getAllOrder();
-        return view('Dashboard.OrderList' ,[ "orders" => $orders]);
-    }
-
+    //lấy dữ liệu categories và manufactures
     public function addProduct(){
         $categories = Categories::all();
         $manufactures = Manufactures::all();
@@ -54,12 +50,70 @@ class AdminController extends Controller
        
     }
 
+    //sửa sản phẩm
     public function EditProduct($id){
         $product = Products::find($id);
         $categories = Categories::all();
         $manufactures = Manufactures::all();
         return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
     }
+
+    //cập nhật sản phẩm
+    public function updateProduct(Request $request, $id){     
+        $product = Products::find($id);
+        
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'categorie' => 'required',
+            'manufacture' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        //if (co file) $request->hasFile('photo')
+        //upload image
+        //check if file photo exists and delete old photo
+        if ($request->hasFile('image')) {
+            //xoa anh cu
+            $oldPhoto = $product->image;
+            if ($oldPhoto != null) {
+                unlink('upload/'.$oldPhoto);
+            }
+            //upload anh moi
+            $file = $request->file('image');
+            $fileName = time(). $file->getClientOriginalName();
+            $path = 'upload';
+            $file->move($path, $fileName);
+            $product->image = $fileName;
+        }
+        else {
+            $product->image = $product->image;
+        }
+
+    $product->name = $request->input('name');
+    $product->description = $request->input('description');
+    $product->price = $request->input('price');
+    $product->categories_id = $request->input('categorie');
+    $product->Manufacture_id = $request->input('manufacture');
+    $product->save();
+
+    return redirect('/productList')->with('success', 'Product updated successfully');
+}
+
+    //xóa sản phẩm
+    public function destroyProduct($id){
+        // Lấy tham số trang hiện tại
+        //$page = request('page');
+
+        $product = Products::find($id);
+        $product->delete();
+
+        // Chuyển hướng quay lại trang hiện tại sau khi xóa
+        return redirect("/productList");
+    }
+
 
     public function uploadImageProduct(Request $request){
         
@@ -93,6 +147,107 @@ class AdminController extends Controller
 
     //end function product
     //--------------------------------------------------------------------------------------------------------------
+
+
+    //Category
+    //--------------------------------------------------------------------------------------------------------------
+
+    //hiển thị danh sách categories
+    public function showCategories() {
+        $categories = Categories::paginate(0);
+        
+        return view('Dashboard..Categories.categoriesList' , compact('categories'));
+    }
+
+    //thêm categories
+    public function addCategories(Request $request) {
+        $category = new Categories();
+        $category->name = $request->input('name');
+        $category->save();
+
+        return redirect('/showCategories');
+    }
+
+    //xóa categories    
+    public function destroyCategorie($id) {
+        $categories = Categories::find($id);
+        $categories->delete();
+
+        // Chuyển hướng quay lại trang hiện tại sau khi xóa
+        return redirect("/showCategories");
+    }
+
+    //sửa categories
+    public function editCategories($id) {
+        $categories = Categories::find($id);
+        return view('Dashboard.Categories.EditCategories' , ['categories' => $categories]);
+    }
+
+    //update categories
+    public function updateCategories(Request $request, $id) {
+        $categories = Categories::find($id);
+        $categories->name = $request->input('name');
+        $categories->save();
+
+        return redirect('/showCategories');
+    }
+    
+
+    //end function categories
+    //--------------------------------------------------------------------------------------------------------------
+
+
+    //Manufacture
+    //--------------------------------------------------------------------------------------------------------------
+
+    //hiển thị danh sách manufacture
+    public function showManufactures() {
+        $manufactures = Manufactures::paginate(0);
+        
+        return view('Dashboard..Manufactures.ManufacturesList' , compact('manufactures'));
+    }
+
+    //thêm manufacture
+    public function addManufacture(Request $request) {
+        $manufacture = new Manufactures();
+        $manufacture->name = $request->input('name');
+        $manufacture->save();
+
+        return redirect('/showManufactures');
+    }
+
+    //xóa manufacture
+    public function destroyManufacture($id) {
+        $manufacture = Manufactures::find($id);
+        $manufacture->delete();
+
+        // Chuyển hướng quay lại trang hiện tại sau khi xóa
+        return redirect("/showManufactures");
+    }
+
+    //sửa manufacture
+    public function editManufacture($id) {
+        $manufacture = Manufactures::find($id);
+        return view('Dashboard.Manufactures.EditManufactures' , ['manufacture' => $manufacture]);
+    }
+
+    //sửa manufacture
+    public function updateManufacture(Request $request , $id) {
+        $manufacture = Manufactures::find($id);
+        $manufacture->name = $request->input('name');
+        $manufacture->save();
+
+        return redirect('/showManufactures');
+    }
+
+    //end function manufacture
+    //--------------------------------------------------------------------------------------------------------------
+
+    //hiển thị các đơn hàng của khách hàng
+    public function showOrder(){
+        $orders = $this->OrderRepositories->getAllOrder();
+        return view('Dashboard.OrderList' ,[ "orders" => $orders]);
+    }
 
     public function updateStatus(Request $request)
     {

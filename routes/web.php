@@ -49,19 +49,34 @@ Route::get('/searchProduct', [SearchProductController::class , 'Result_Search'])
 Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
+
+
 // Admin
+    //product
 Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/productList', [AdminController::class , 'showProductList'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
 Route::post('/uploads', [AdminController::class, 'uploadImageProduct']);
 Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
-Route::delete('/products/{product}', 'ProductController@destroy');
+Route::delete('/deleteProduct/{id}', [AdminController::class, 'destroyProduct']);
+Route::post('/updateProduct/{id}', [AdminController::class, 'updateProduct']);
+    
+    //categories
+Route::get('/showCategories', [AdminController::class , 'showCategories'] );
+Route::post('/addCategories', [AdminController::class, 'addCategories']);
+Route::delete('/deleteCategorie/{id}', [AdminController::class, 'destroyCategorie']);
+Route::get('/editCategories/{id}', [AdminController::class , 'editCategories'] );
+Route::post('/updateCategories/{id}', [AdminController::class, 'updateCategories']);
 
+    //manufacture
+Route::get('/showManufactures', [AdminController::class , 'showManufactures'] );
+Route::post('/addManufacture', [AdminController::class, 'addManufacture']);
+Route::delete('/deleteManufacture/{id}', [AdminController::class, 'destroyManufacture']);
+Route::get('/editManufacture/{id}', [AdminController::class , 'editManufacture'] );
+Route::post('/updateManufacture/{id}', [AdminController::class, 'updateManufacture']);
 
-
-
-
+    //user
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 

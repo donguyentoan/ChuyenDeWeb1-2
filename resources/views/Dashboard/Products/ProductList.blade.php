@@ -15,13 +15,10 @@
 </head>
 
 <body>
-
     <div class="div flex">
-
         <div class="w-1/7">
-        @include('component.SideBar')
+            @include('component.SideBar')
         </div>
-
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <div class="button_add flex justify-end mr-3">
@@ -29,22 +26,24 @@
                             class="flex  mx-auto  text-white bg-gradient-to-r from-cyan-500 to-blue-500 border-0 py-2 px-9 m-5  rounded text-xs">Add
                             Product</button></a>
                 </div>
-
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">Client</th>
-                            <th class="px-4 py-3">Amount</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Date</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">Description</th>
+                            <th class="px-4 py-3">Price</th>
+                            <th class="px-4 py-3">Categories</th>
+                            <th class="px-4 py-3">Manufactures</th>
+                            <th class="px-4 py-3">Last Update</th>
                             <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         @foreach($products as $product)
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
+                        <tr class="text-gray-700 dark:text-gray-400 items-center">
+                            <!-- sản phẩm -->
+                            <td class="px-3 py-3 w-3/12">
                                 <div class="flex items-center text-sm">
                                     <!-- Avatar with inset shadow -->
                                     <div class="relative hidden w-28  h-28 object-contain  mr-3 rounded-full md:block">
@@ -53,33 +52,59 @@
                                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                         </div>
                                     </div>
+                                    <!-- Name -->
                                     <div>
                                         <p class="font-semibold">{{$product->name}}</p>
-                                        @foreach($categories as $item)
-                                        @if($item->id == $product->categories_id )
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-
-                                            {{$item->name}}
-                                        </p>
-                                        @endif
-                                        @endforeach
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{$product->price}}đ
+                            <!-- description -->
+                            <td class="px-4 py-3 text-sm w-4/12">
+                                {{ Str::limit($product->description, 1000) }}
                             </td>
-                            <td class="px-4 py-3 text-xs">
+
+                            <!-- price -->
+                            <td class="px-4 py-3 text-xs w-1/12">
                                 <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
+                                    class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">
+                                    {{ number_format($product->price, 0, ',', ',') }}đ
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{$product->created_at}}
+
+                            <!-- Categories  -->
+                            <td class="px-4 py-3 text-sm w-1/12">
+                                @foreach($categories as $item)
+                                @if($item->id == $product->categories_id )
+                                <p class="text-xs text-gray-600 dark:text-gray-400">
+                                    {{$item->name}}
+                                </p>
+                                @endif
+                                @endforeach
                             </td>
-                            <td class="px-4 py-3">
+
+
+                            <!-- Manufactures -->
+                            <td class="px-4 py-3 text-sm w-1/12">
+                                @foreach($manufacture as $items)
+                                @if($items->id == $product->Manufacture_id )
+                                <p class="text-xs text-gray-600 dark:text-gray-400">
+                                    {{$items->name}}
+                                </p>
+                                @endif
+                                @endforeach
+                            </td>
+
+                            <!-- Lần update cuối cùng -->
+                            <td class="px-4 py-3 text-sm w-1/12">
+                                {{$product->updated_at}}
+                            </td>
+
+                            <!-- button xóa sửa -->
+                            <td class="px-4 py-3 1/12">
                                 <div class="flex items-center space-x-4 text-sm">
+
+
+
                                     <a href="/EditProduct/{{$product->id}}">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
@@ -91,41 +116,33 @@
                                             </svg>
                                         </button>
                                     </a>
-                                   
-                                    <button
-                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                        aria-label="Delete">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="#0fb1d8" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
+
+                                    <form action="/deleteProduct/{{$product->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                            aria-label="Delete">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="#0fb1d8" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+
                                 </div>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-
                 <div class="panigation p-8 ">
-            
-            {{ $products->links() }}
-       </div>
-
-               
+                    {{ $products->links() }}
+                </div>
             </div>
-
-           
         </div>
-
-
     </div>
-
-
-
-
-
 </body>
 
 </html>

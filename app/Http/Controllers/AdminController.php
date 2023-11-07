@@ -34,8 +34,8 @@ class AdminController extends Controller
     {
         $categories = $this->CategoriesRepositories->getAllCategories();
         $manufacture = Manufactures::all();
+        $products = Products::latest('updated_at')->paginate(5);
 
-        $products = Products::paginate(5);
         return view('Dashboard..Products.ProductList' , compact('products' , 'categories', 'manufacture'));
     }
 
@@ -99,7 +99,7 @@ class AdminController extends Controller
     $product->Manufacture_id = $request->input('manufacture');
     $product->save();
 
-    return redirect('/productList')->with('success', 'Product updated successfully');
+    return redirect('/productList');
 }
 
     //xóa sản phẩm
@@ -154,7 +154,7 @@ class AdminController extends Controller
 
     //hiển thị danh sách categories
     public function showCategories() {
-        $categories = Categories::paginate(5);
+        $categories = Categories::latest('updated_at')->paginate(5);
         
         return view('Dashboard..Categories.categoriesList' , compact('categories'));
     }
@@ -180,7 +180,7 @@ class AdminController extends Controller
     //sửa categories
     public function editCategories($id) {
         $categorie = Categories::find($id);
-        $categories = Categories::paginate(5);
+        $categories = Categories::latest('updated_at')->paginate(5);
         return view('Dashboard.Categories.EditCategories', ['categorie' => $categorie, 'categories' => $categories]);
     }
     
@@ -203,8 +203,7 @@ class AdminController extends Controller
 
     //hiển thị danh sách manufacture
     public function showManufactures() {
-        $manufactures = Manufactures::paginate(5);
-        
+        $manufactures = Manufactures::latest('updated_at')->paginate(5);
         return view('Dashboard..Manufactures.ManufacturesList' , compact('manufactures'));
     }
 
@@ -228,7 +227,7 @@ class AdminController extends Controller
 
     //sửa manufacture
     public function editManufacture($id) {
-        $manufactures = Manufactures::paginate(5);
+        $manufactures = Manufactures::latest('updated_at')->paginate(5);
         $manufacture = Manufactures::find($id);
         return view('Dashboard.Manufactures.EditManufactures' , ['manufacture' => $manufacture , "manufactures" => $manufactures]);
     }

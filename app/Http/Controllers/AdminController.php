@@ -154,7 +154,7 @@ class AdminController extends Controller
 
     //hiển thị danh sách categories
     public function showCategories() {
-        $categories = Categories::paginate(0);
+        $categories = Categories::paginate(5);
         
         return view('Dashboard..Categories.categoriesList' , compact('categories'));
     }
@@ -179,10 +179,11 @@ class AdminController extends Controller
 
     //sửa categories
     public function editCategories($id) {
-        $categories = Categories::find($id);
-        return view('Dashboard.Categories.EditCategories' , ['categories' => $categories]);
+        $categorie = Categories::find($id);
+        $categories = Categories::paginate(5);
+        return view('Dashboard.Categories.EditCategories', ['categorie' => $categorie, 'categories' => $categories]);
     }
-
+    
     //update categories
     public function updateCategories(Request $request, $id) {
         $categories = Categories::find($id);
@@ -202,7 +203,7 @@ class AdminController extends Controller
 
     //hiển thị danh sách manufacture
     public function showManufactures() {
-        $manufactures = Manufactures::paginate(0);
+        $manufactures = Manufactures::paginate(5);
         
         return view('Dashboard..Manufactures.ManufacturesList' , compact('manufactures'));
     }
@@ -213,7 +214,7 @@ class AdminController extends Controller
         $manufacture->name = $request->input('name');
         $manufacture->save();
 
-        return redirect('/showManufactures');
+        return redirect('/showManufactures')->with('success', 'Manufacture updated successfully');
     }
 
     //xóa manufacture
@@ -227,8 +228,9 @@ class AdminController extends Controller
 
     //sửa manufacture
     public function editManufacture($id) {
+        $manufactures = Manufactures::paginate(5);
         $manufacture = Manufactures::find($id);
-        return view('Dashboard.Manufactures.EditManufactures' , ['manufacture' => $manufacture]);
+        return view('Dashboard.Manufactures.EditManufactures' , ['manufacture' => $manufacture , "manufactures" => $manufactures]);
     }
 
     //sửa manufacture

@@ -86,11 +86,11 @@
                             <!-- Manufactures -->
                             <td class="px-4 py-3 text-sm w-1/12">
                                 @foreach($manufacture as $items)
-                                @if($items->id == $product->Manufacture_id )
+                                @if($items->id == $product->manufacture_id )
                                 <p class="text-xs text-gray-600 dark:text-gray-400">
                                     {{$items->name}}
                                 </p>
-                                @endif
+                                @endif  
                                 @endforeach
                             </td>
 

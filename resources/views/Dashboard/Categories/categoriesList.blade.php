@@ -94,9 +94,10 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="panigation p-8 ">
+                {{ $categories->links() }}
+            </div>
         </div>
     </div>
-
 </body>
-
 </html>

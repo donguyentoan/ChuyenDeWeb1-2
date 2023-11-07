@@ -22,6 +22,12 @@
         </div>
         <!-- EndSideBar -->
 
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#0cb1d8] p-10">
             <form action="/addManufacture" method="post" enctype="multipart/form-data">
                 @csrf
@@ -33,7 +39,7 @@
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add
-                    Categories</button>
+                    Manufacture</button>
             </form>
             <table class="w-full whitespace-no-wrap mt-3">
                 <thead>
@@ -94,6 +100,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="panigation p-8 ">
+                {{ $manufactures->links() }}
+            </div>
         </div>
     </div>
 

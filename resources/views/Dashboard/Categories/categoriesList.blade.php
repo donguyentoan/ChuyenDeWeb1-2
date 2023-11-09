@@ -28,7 +28,7 @@
 
                 @if (session('success'))
                 <div id="success-message"
-                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md"
+                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md "
                     role="alert">
                     <div class="flex">
                         <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
@@ -124,7 +124,7 @@
         var successMessage = document.getElementById("success-message");
         successMessage.style.display = "block";
 
-        // Ẩn thông báo sau 5 giây
+        // Ẩn thông báo sau ? giây
         setTimeout(function() {
             successMessage.style.display = "none";
         }, 3000);

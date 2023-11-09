@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./build/css/style.css">
 </head>
 <body>
@@ -139,7 +140,7 @@
     // Cập nhật thông tin sản phẩm trong modal
     document.getElementById('modal-product-name').textContent = productName;
     document.getElementById('modal-product-id').textContent = productId;
-    document.getElementById('modal-product-Image').src = "/image/"+productImage;
+    document.getElementById('modal-product-Image').src = "/upload/"+productImage;
   
     
 

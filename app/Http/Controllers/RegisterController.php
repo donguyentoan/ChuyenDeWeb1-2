@@ -44,7 +44,7 @@ class RegisterController extends Controller
             Auth::login($user);
 
             return redirect('/');
-
+            
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }

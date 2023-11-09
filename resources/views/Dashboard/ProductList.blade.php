@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Dashboard Pizza Store</title>
+    <title>K-WD Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
@@ -15,13 +15,11 @@
   </head>
 <body>
 
-
 <div class="div flex">
 
-<div class="w-1/4">
+<div class="w-1/4 " >
  @include('SideBar')
  </div>
-
 
 
 
@@ -36,118 +34,47 @@
                 <table class="w-full whitespace-no-wrap">
                   <thead>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                      <th class="px-4 py-3">id</th>
-                      <th class="px-4 py-3">Name</th>
-                      <th class="px-4 py-3">address</th>
-                     
-                      <th class="px-4 py-3">Product Name</th>
-                      <th class="px-4 py-3">Price</th>
+                      <th class="px-4 py-3">Client</th>
+                      <th class="px-4 py-3">Amount</th>
                       <th class="px-4 py-3">Status</th>
-                      <th class="px-4 py-3">Payment Method</th>
-                      <th class="px-4 py-3">Total Amount</th>
-                      <th class="px-4 py-3">Time</th>
-                      
+                      <th class="px-4 py-3">Date</th>
                       <th class="px-4 py-3">Actions</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                 
-                  @foreach($orders as $value)
-
-                  
+                  @foreach($products as $products)
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">
                         <div class="flex items-center text-sm">
                           <!-- Avatar with inset shadow -->
-                         
-                          <p class="font-semibold"> {{$value->customer_id}}</p>
-                           
-                      
+                          <div class="relative hidden w-28  h-28 object-contain  mr-3 rounded-full md:block">
+                            <img class="object-contain w-full h-full " src="./image/{{$products->image}}" alt="" loading="lazy">
+                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                          </div>
                           <div>
-                           
-                           
-                            
-                        
+                            <p class="font-semibold">{{$products->name}}</p>
+                            @foreach($categories as $item)
+                            @if($item->id == $products->categories_id )
+                            <p class="text-xs text-gray-600 dark:text-gray-400">
+
+                            {{$item->name}}
+                            </p>
+                            @endif
+                            @endforeach
                           </div>
                         </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
-                      <p class="font-semibold"> {{$value->name}}</p>
+                      {{$products->price}}đ
                       </td>
-                      <?php
-                      $adress = $value->apartmentNumber . "". $value->StreetNames . $value->details
-                      ?>
                       <td class="px-4 py-3 text-xs">
-                        <span class="px-2 py-1 font-semibold leading-tight dark:bg-green-700 dark:text-green-100">
-                        {{$adress}}
+                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                          Approved
                         </span>
                       </td>
-                    
                       <td class="px-4 py-3 text-sm">
-                      {{$value->nameproduct}} <br>
-                      <small> {{$value->quantity}}x</small>
+                      {{$products->created_at}}
                       </td>
-                    
-                      <td class="px-4 py-3 text-sm">
-                      {{$value->price}}
-                      </td>
-                      
-                      <td class="px-4 py-3 text-sm text-green-700 bg-green-100">
-            <form method="get" action="/update-status">
-              @csrf
-              @method('PUT')
-              <input type="hidden" name="status" value="{{ $value->status }}">
-              <input type="hidden" name="customerID" value="{{$value->customer_id}}">
-              <div x-data="{ toggle: {{ $value->status === 1 ? 'true' : 'false' }} }">
-                <button
-                  class="transition ease-in-out duration-300 w-12 bg-gray-200 rounded-full focus:outline-none"
-                  :class="{ 'bg-green-300': toggle }"
-                  x-on:click="toggle = !toggle; updateStatus()"
-                >
-                  <div
-                    class="transition ease-in-out duration-300 rounded-full h-6 w-6 bg-white shadow"
-                    :class="{ 'transform translate-x-full': toggle }"
-                  ></div>
-                </button>
-              
-                <div class="text-xs" x-text="toggle ? 'Hoàn Thành':'Đang Giao Hàng'"></div>
-              </div>
-              
-            </form>
-
-  <script>
-    function updateStatus() {
-      document.querySelector('input[name="status"]').value = toggle ? '1' : '0';
-      // You can remove the previous updateStatus code
-      
-      // Submit the form to update the status
-      document.querySelector('form').submit();
-    }
-  </script>
-</td>
-
-
-                    
-
-                      <td class="px-4 py-3 text-sm">
-                        @if($value->payment_method == 2)
-                        <p>COD</p>
-                        @endif
-                        @if($value->payment_method == 1)
-                        <p>VN Pay</p>
-                        @endif
-
-
-                     
-                      </td>
-
-                      <td class="px-4 py-3 text-sm">
-                      {{$value->total_amount}}
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                      {{$value->date_order}}
-                      </td>
-                     
                       <td class="px-4 py-3">
                         <div class="flex items-center space-x-4 text-sm">
                           <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
@@ -163,13 +90,21 @@
                         </div>
                       </td>
                     </tr>
-                @endforeach
+                  
+                  
+                   @endforeach
                    
 
                    
                   </tbody>
                 </table>
+              
+               
               </div>
+              
+
+
+             
               <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                 <span class="flex items-center col-span-3">
                   Showing 21-30 of 100

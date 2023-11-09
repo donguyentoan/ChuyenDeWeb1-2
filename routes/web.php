@@ -7,10 +7,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchProductController;
 
 
@@ -27,9 +29,17 @@ use App\Http\Controllers\SearchProductController;
 */
 /////home
 Route::get('/', [HomeController::class , 'index']);
+
 Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
 Route::get('/auth/register', function () { return view('Login.register');});
+Route::get('/register' , [RegisterController::class, 'register']);
+Route::get('/newpost', [NewPostController::class , 'index']);
+Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
+///////
+
+
+
 Route::get('/addtocart', function () { return view('addtocart');});
 Route::get('/checkout', function () { return view('Checkout'); });
 Route::get('/cart' , [CartController::class , 'index']);

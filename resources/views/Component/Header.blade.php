@@ -40,7 +40,7 @@
                     <div class="login-and-register">
                         <a href="/auth/login" class="register">Đăng nhập</a>
                         <span>/</span>
-                        <a href="/register?returnUrl=%2F" class="login">Tạo tài khoản</a>
+                        <a href="/auth/register" class="login">Tạo tài khoản</a>
                     </div>
                 </div>
             </div>

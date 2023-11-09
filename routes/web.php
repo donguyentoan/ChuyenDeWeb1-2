@@ -4,16 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FilterController;
-use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SearchProductController;
+use App\Http\Controllers\LoginController;
+
 
 
 
@@ -27,70 +25,95 @@ use App\Http\Controllers\SearchProductController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/////home
+
 Route::get('/', [HomeController::class , 'index']);
-
-Route::get('/auth/login', function () { return view('Login.login');});
-Route::post('/login',  [LoginController::class , 'login']);
-Route::get('/auth/register', function () { return view('Login.register');});
-Route::get('/register' , [RegisterController::class, 'register']);
-Route::get('/newpost', [NewPostController::class , 'index']);
-Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
-///////
+Route::get('/dashboard', [AdminController::class , 'index'] );
+Route::get('/productList', [AdminController::class , 'showProductList'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 
 
+Route::get('/auth/login', [LoginController::class , 'index']);
+Route::post('/login' , [LoginController::class , 'login'] )->name('login');
+// forget
+Route::get('/forgot-password', [LoginController::class , 'indexforgot']);
 
-Route::get('/addtocart', function () { return view('addtocart');});
-Route::get('/checkout', function () { return view('Checkout'); });
+// Login with gg
+Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
+
+// // Handle the password reset request
+Route::post('/forgot-password', [LoginController::class,'sendResetLinkEmail'])->name('password.email');
+
+// Display the password reset form
+Route::get('/reset-password/{token}',  [LoginController::class,'showResetForm'])->name('password.reset');
+
+// Handle the password reset form submission
+Route::post('/reset-password',  [LoginController::class,'reset'])->name('password.update');
+
+
+
+// Love
+// Route::get('/love-items', [LoveItemController::class, 'index'])->name('love-items.index');
+// Route::post('/love-items', [LoveItemController::class, 'store'])->name('love-items.store');
+// Route::delete('/love-items/{loveItem}', [LoveItemController::class, 'destroy'])->name('love-items.destroy');
+
+
+
+Route::get('/auth/register', function () {
+    return view('Login.register');
+});
+
+Route::get('/addtocart', function () {
+    return view('addtocart');
+});
+
+Route::get('/checkout', function () {
+    return view('Checkout');
+});
+
+
+Route::get('/mini', function () {
+    return view('Component.test');
+});
+
+
+Route::post('/add-to-cart', [CartController::class , 'addtocart']);
+
+
+
+Route::get('/delItemCart/{$id}', [CartController::class , 'deleteItemCart']);
+
+
+
+
+
+Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
+
+Route::get('/get-cart-data', 'CartController@getCartData')->name('cart.get-data');
+Route::get('/delete/{$id}' , [CartController::class , 'removeFromCart']);
 Route::get('/cart' , [CartController::class , 'index']);
 Route::get('/checkout/orderForm' , [CheckoutController::class , 'index']);
+
 Route::get('/checkout/orderinfo' , [CheckoutController::class , 'infoOrder']);
 Route::get('/checkout/orderinfos' , [CheckoutController::class , 'saveinfoOrder']);
 Route::post('/checkout/receivingIformation' , [CheckoutController::class , 'receivingIformation']);
-Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
-Route::get('/OrderDetail', [OrderController::class, 'index']);
-Route::get('/update-status', [AdminController::class, 'updateStatus']);
-Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
-Route::get('/filter',  [FilterController::class , 'getManufacture']);
-Route::get('/products',  [ProductController::class , 'index']);
-Route::get('/products/filter', [ProductController::class , 'filter']);
-Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
-/// API 
+
+
 Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
 
-// Admin
-    //product
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/productList', [AdminController::class , 'showProductList'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
-Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
-Route::post('/uploads', [AdminController::class, 'uploadImageProduct']);
-Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
-Route::delete('/deleteProduct/{id}', [AdminController::class, 'destroyProduct']);
-Route::post('/updateProduct/{id}', [AdminController::class, 'updateProduct']);
-    
-    //categories
-Route::get('/showCategories', [AdminController::class , 'showCategories'] );
-Route::post('/addCategories', [AdminController::class, 'addCategories']);
-Route::delete('/deleteCategorie/{id}', [AdminController::class, 'destroyCategorie']);
-Route::get('/editCategories/{id}', [AdminController::class , 'editCategories'] );
-Route::post('/updateCategories/{id}', [AdminController::class, 'updateCategories']);
+Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
+Route::get('/OrderDetail', [OrderController::class, 'index']);
 
-    //manufacture
-Route::get('/showManufactures', [AdminController::class , 'showManufactures'] );
-Route::post('/addManufacture', [AdminController::class, 'addManufacture']);
-Route::delete('/deleteManufacture/{id}', [AdminController::class, 'destroyManufacture']);
-Route::get('/editManufacture/{id}', [AdminController::class , 'editManufacture'] );
-Route::post('/updateManufacture/{id}', [AdminController::class, 'updateManufacture']);
+Route::get('/update-status', [AdminController::class, 'updateStatus']);
+Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 
-    //user
+Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
-Route::post('/filter-products', 'ProductController@filterProducts');
-
-
+Route::get('/products',  [ProductController::class , 'index']);
+Route::get('/products/filter', [ProductController::class , 'filter']);
 
 
 

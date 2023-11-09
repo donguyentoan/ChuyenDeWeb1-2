@@ -17,7 +17,7 @@
               <a class=" text-white font-light hover:underline cursor-pointer text-sm">Ưu đãi thành viên</a>
             </li>
             <li>
-              <a href="/newpost" class=" text-white font-light hover:underline cursor-pointer text-sm">Tin tức & sự kiện</a>
+              <a class=" text-white font-light hover:underline cursor-pointer text-sm">Tin tức & sự kiện</a>
             </li>
             <li>
               <a class=" text-white font-light hover:underline cursor-pointer text-sm">Tuyển dụng</a>

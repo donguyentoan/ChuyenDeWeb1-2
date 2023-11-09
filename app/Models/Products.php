@@ -14,12 +14,12 @@ class Products extends Model
         'description',
         'image',
         'price',
-        'categories_id',
-        'manufactures_id',
+        'Category_id',
+        'Manufacture_id',
+        'Combo_id',
     ];
     public function categories()
     {
         return $this->hasMany(Categories::class);
     }
 }
-

@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>K-WD Dashboard | Register</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>K-WD Dashboard | Forgot Password</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
       rel="stylesheet"
@@ -13,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
   </head>
   <body>
+
     <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
       <!-- Loading screen -->
       <div
@@ -29,76 +29,47 @@
           href="../index.html"
           class="inline-block mb-6 text-3xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
         >
-        PIZZA STORE
+          K-WD
         </a>
         <main>
+          <h1 class="sr-only">Request new password</h1>
           <div class="w-full max-w-sm px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
-            <h1 class="text-xl font-semibold text-center">Register</h1>
-            <form action="#" class="space-y-6">
-              <input
-                class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
-                type="text"
-                name="username"
-                placeholder="Username"
-                required
-              />
-              <input
+            <p class="text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+              You forgot your password? Here you can easily retrieve a new password.
+            </p>
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <form action="{{route('password.email')}}" method="post"class="space-y-6">
+              @csrf
+               <input
                 class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
                 type="email"
                 name="email"
                 placeholder="Email address"
                 required
               />
-              <input
-                class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
-              <input
-                class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
-                type="password"
-                name="password_confirmation"
-                placeholder="Confirm Password"
-                required
-              />
-              <div class="flex items-center justify-between">
-                <!-- Remember me toggle -->
-                <label class="flex items-center">
-                  <div class="relative inline-flex items-center">
-                    <input
-                      type="checkbox"
-                      name="accept_terms"
-                      class="w-10 h-4 transition bg-gray-200 border-none rounded-full shadow-inner outline-none appearance-none toggle checked:bg-primary-light disabled:bg-gray-200 focus:outline-none"
-                    />
-                    <span
-                      class="absolute top-0 left-0 w-4 h-4 transition-all transform scale-150 bg-white rounded-full shadow-sm"
-                    ></span>
-                  </div>
-                  <span class="ml-3 text-sm font-normal text-gray-500 dark:text-gray-400">
-                    I accept the
-                    <a href="#" class="text-sm text-blue-600 hover:underline">Terms and Conditions</a>
-                  </span>
-                </label>
-              </div>
+              <!-- @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror -->
               <div>
                 <button
                   type="submit"
-                  class=" bg-[#006a32] w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-primary  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker"
+                  class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker"
                 >
-                  Register
+                Send Password Reset Link
                 </button>
               </div>
             </form>
 
-           
-
-          
-
-            <!-- Login link -->
+            <!-- Reset password link -->
             <div class="text-sm text-gray-600 dark:text-gray-400">
-              Already have an account? <a href="login.html" class="text-blue-600 hover:underline">Login</a>
+              <a href="/reset-password" class="text-blue-600 hover:underline">Reset password</a>
             </div>
           </div>
         </main>
@@ -190,5 +161,6 @@
         }
       }
     </script>
+
   </body>
 </html>

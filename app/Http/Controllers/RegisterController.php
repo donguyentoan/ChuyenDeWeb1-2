@@ -23,7 +23,7 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8'],
             'password_confirmation' => ['required', 'min:8'],
         ]);
-
+///
         if (User::where('email', $request->email)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
         }

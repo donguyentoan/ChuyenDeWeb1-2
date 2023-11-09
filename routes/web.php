@@ -12,8 +12,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SearchProductController;
-
-
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ManufacturesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,31 +50,31 @@ Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
+Route::get('/dashboard', [AdminController::class , 'index'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 
 // Admin
     //product
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/productList', [AdminController::class , 'showProductList'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
-Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
-Route::post('/uploads', [AdminController::class, 'uploadImageProduct']);
-Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
-Route::delete('/deleteProduct/{id}', [AdminController::class, 'destroyProduct']);
-Route::post('/updateProduct/{id}', [AdminController::class, 'updateProduct']);
+Route::get('/productList', [ProductController::class , 'index'] );
+Route::get('/AddProduct', [ProductController::class , 'create'] );
+Route::post('/uploads', [ProductController::class, 'store']);
+Route::get('/EditProduct/{id}', [ProductController::class , 'edit'] );
+Route::post('/updateProduct/{id}', [ProductController::class, 'update']);
+Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy']);
     
     //categories
-Route::get('/showCategories', [AdminController::class , 'showCategories'] );
-Route::post('/addCategories', [AdminController::class, 'addCategories']);
-Route::delete('/deleteCategorie/{id}', [AdminController::class, 'destroyCategorie']);
-Route::get('/editCategories/{id}', [AdminController::class , 'editCategories'] );
-Route::post('/updateCategories/{id}', [AdminController::class, 'updateCategories']);
+Route::get('/showCategories', [CategoriesController::class , 'index'] );
+Route::post('/addCategories', [CategoriesController::class, 'store']);
+Route::delete('/deleteCategorie/{id}', [CategoriesController::class, 'destroy']);
+Route::get('/editCategories/{id}', [CategoriesController::class , 'edit'] );
+Route::post('/updateCategories/{id}', [CategoriesController::class, 'update']);
 
     //manufacture
-Route::get('/showManufactures', [AdminController::class , 'showManufactures'] );
-Route::post('/addManufacture', [AdminController::class, 'addManufacture']);
-Route::delete('/deleteManufacture/{id}', [AdminController::class, 'destroyManufacture']);
-Route::get('/editManufacture/{id}', [AdminController::class , 'editManufacture'] );
-Route::post('/updateManufacture/{id}', [AdminController::class, 'updateManufacture']);
+Route::get('/showManufactures', [ManufacturesController::class , 'index'] );
+Route::post('/addManufacture', [ManufacturesController::class, 'store']);
+Route::delete('/deleteManufacture/{id}', [ManufacturesController::class, 'destroy']);
+Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
+Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
     //user
 

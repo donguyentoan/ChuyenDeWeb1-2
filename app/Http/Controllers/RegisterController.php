@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'min:8'],
         ]);
 
+<<<<<<< HEAD
         if (User::where('email', $request->email)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
         }
@@ -44,6 +45,42 @@ class RegisterController extends Controller
             Auth::login($user);
 
             return redirect('/');
+=======
+
+        $data = User::all();
+
+        $temp = true;
+
+        $existingUser = User::where('email', $request->email)->first();
+
+        if ($existingUser) {
+            return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
+        }
+
+
+        if ($request->password == $request->password_confirmation) {
+
+            foreach ($data as $item) {
+
+
+                if ($item->phone == $request->phone) {
+
+                    return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']); // Đăng nhập thất bại
+
+                }
+
+                $user = User::create([
+                    'name' => $request->username,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+
+                Auth::login($user);
+
+                return redirect('/');
+            }
+>>>>>>> f87dea6e3e4aa17e7f0e4eb1193ce10697d9134b
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }

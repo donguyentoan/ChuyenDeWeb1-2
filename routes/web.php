@@ -40,9 +40,12 @@ Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 ///////
 
 
+<<<<<<< HEAD
 Route::get('/contact', [ContactController::class, 'index']);
 
 
+=======
+>>>>>>> f87dea6e3e4aa17e7f0e4eb1193ce10697d9134b
 
 Route::get('/addtocart', function () { return view('addtocart');});
 Route::get('/checkout', function () { return view('Checkout'); });

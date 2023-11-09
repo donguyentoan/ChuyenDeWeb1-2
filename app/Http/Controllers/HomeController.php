@@ -24,7 +24,7 @@ class HomeController extends Controller
        
        
         $categories = $this->CategoriesRepositories->getAllCategories();
-        
+        $product = Products::all();
 
         return view('Home' ,[ "categories" => $categories]);
 

@@ -57,18 +57,22 @@
                 </div>
                
                 <div class="mb-6">
-                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
-                        product classification</label>
-                    <select id="categorie" name="categorie"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-                        @foreach($categories as $item)
-                            @if($item->id == $product->categories_id)
-                            <option name="categorie" value="">{{$item->name}}</option>
-                            @endif
-                        @endforeach
-                   
-                    </select>
-                </div>
+    <label for="categorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose product classification</label>
+    <select id="categorie" name="categorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option value="">Select a category</option> <!-- A default option for selection -->
+
+        @foreach($categories as $item)
+            <option value="{{ $item->id }}"
+                @if($item->id == $product->categories_id)
+                selected
+                @endif
+            >
+                {{ $item->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
                 <div class="mb-6">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
                         manufacture classification</label>

@@ -66,7 +66,7 @@
             </div>
                 </label>
 
-                <a href="forgot-password.html" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+                <a href="/forgot-password" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
               </div>
               <div>
                 <button

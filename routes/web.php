@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\SearchProductController;
 
 
@@ -26,6 +28,12 @@ use App\Http\Controllers\SearchProductController;
 |
 */
 /////home
+Route::get('/forgot-password', function () {
+    return view('Login.forgotPassword');
+})->middleware('guest')->name('password.request');
+
+
+Route::get('/forgot-passwords', [LoginController::class , '']);
 Route::get('/', [HomeController::class , 'index']);
 Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
@@ -57,6 +65,9 @@ Route::get('/AddProduct', [AdminController::class , 'addProduct'] );
 Route::post('/uploads', [AdminController::class, 'uploadImageProduct']);
 Route::get('/EditProduct/{id}', [AdminController::class , 'EditProduct'] );
 Route::delete('/products/{product}', 'ProductController@destroy');
+Route::get('/categories/{id}', [CategoriesController::class , 'index'] );
+
+
 
 
 

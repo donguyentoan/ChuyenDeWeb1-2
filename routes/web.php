@@ -39,10 +39,7 @@ Route::get('/newpost', [NewPostController::class , 'index']);
 Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 ///////
 
-
 Route::get('/contact', [ContactController::class, 'index']);
-
-
 
 Route::get('/addtocart', function () { return view('addtocart');});
 Route::get('/checkout', function () { return view('Checkout'); });

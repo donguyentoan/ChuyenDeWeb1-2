@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'min:8'],
         ]);
 
+
         if (User::where('email', $request->email)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
         }
@@ -44,6 +45,7 @@ class RegisterController extends Controller
             Auth::login($user);
 
             return redirect('/');
+      
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }

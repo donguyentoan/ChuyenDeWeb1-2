@@ -41,6 +41,8 @@ Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 
 
 Route::get('/contact', [ContactController::class, 'index']);
+Route::get('/contact_cus',  [ContactController::class , 'contact_cus']);
+
 
 
 Route::get('/addtocart', function () { return view('addtocart');});

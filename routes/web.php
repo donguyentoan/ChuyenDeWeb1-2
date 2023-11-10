@@ -10,16 +10,11 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
-<<<<<<< HEAD
 use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
-=======
 use App\Http\Controllers\LoginController;
 
-
-
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5
 
 /*
 |--------------------------------------------------------------------------
@@ -59,9 +54,9 @@ Route::post('/reset-password',  [LoginController::class,'reset'])->name('passwor
 
 
 // Love
-// Route::get('/love-items', [LoveItemController::class, 'index'])->name('love-items.index');
-// Route::post('/love-items', [LoveItemController::class, 'store'])->name('love-items.store');
-// Route::delete('/love-items/{loveItem}', [LoveItemController::class, 'destroy'])->name('love-items.destroy');
+Route::get('/love-items', [LoveItemController::class, 'index'])->name('love-items.index');
+Route::post('/love-items', [LoveItemController::class, 'store'])->name('love-items.store');
+Route::delete('/love-items/{loveItem}', [LoveItemController::class, 'destroy'])->name('love-items.destroy');
 
 
 
@@ -112,7 +107,6 @@ Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDis
 Route::get('/dashboard', [AdminController::class , 'index'] );
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
 
-<<<<<<< HEAD
 // Admin
     //product
 Route::get('/productList', [ProductController::class , 'index'] );
@@ -139,13 +133,11 @@ Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']
     //user
 
 Route::post('/filter-products', 'ProductController@filterProducts');
-=======
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
 Route::get('/OrderDetail', [OrderController::class, 'index']);
 
 Route::get('/update-status', [AdminController::class, 'updateStatus']);
 Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5
 
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 

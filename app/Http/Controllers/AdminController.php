@@ -25,21 +25,7 @@ class AdminController extends Controller
         return view('Dashboard.Home');
     }
 
-<<<<<<< HEAD
-    
-    //hiển thị các đơn hàng của khách hàng
-=======
-    public function showProductList()
-    {
-        // $products = $this->HomeRepositories->getAllProducts();
-         $categories = $this->CategoriesRepositories->getAllCategories();
-        
-         $products = Products::paginate(3);
-        return view('Dashboard.ProductList' , compact('products' , 'categories' ));
-      
-    }
 
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5
     public function showOrder(){
 
         $orders = $this->OrderRepositories->getAllOrder();

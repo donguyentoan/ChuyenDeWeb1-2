@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
-<<<<<<< HEAD
+
 use App\Models\Manufactures;
 use App\Models\Categories;
-=======
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
@@ -18,16 +17,15 @@ use App\Repositories\CategoriesRepositories;
 
 class ProductController extends Controller
 {
-<<<<<<< HEAD
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-=======
     
 
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5
+
 
     public function index()
     {
@@ -38,7 +36,6 @@ class ProductController extends Controller
         return view('Dashboard..Products.ProductList' , compact('products' , 'categories', 'manufacture'));
     }
 
-<<<<<<< HEAD
     /**
      * Show the form for creating a new resource.
      *
@@ -200,26 +197,3 @@ class ProductController extends Controller
 }
 
 }
-=======
-public function filter(Request $request)
-{
-    $category = $request->input('category');
-    $brand = $request->input('brand');
-
-    $query = Products::query();
-
-    if ($category) {
-        $query->where('category', $category);
-    }
-
-    if ($brand) {
-        $query->where('brand', $brand);
-    }
-
-    $filteredProducts = $query->get();
-
-    return view('products.filtered', compact('filteredProducts'));
-}
-
-}
->>>>>>> f7caa68561d676bfdc04a160c9b0d2b2bb9df1c5

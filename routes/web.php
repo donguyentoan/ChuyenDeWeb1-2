@@ -14,6 +14,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,9 @@ Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 
+    //Like product
+Route::post('/like', [LikeController::class, 'like']);
+Route::delete('/unlike', [LikeController::class, 'unlike']);
 
 
 

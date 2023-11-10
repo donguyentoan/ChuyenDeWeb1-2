@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./build/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+
 </head>
 
 <body>
@@ -17,6 +19,7 @@
 
 
     @include('component.Slide')
+    @csrf
 
     <section class="text-gray-600 body-font">
         <div class="container pb-24 mx-auto">
@@ -123,11 +126,11 @@
                                             <p class="text-sm">Giá Chỉ Từ <br> <span
                                                     class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>
                                             </p>
-                                            
-                                            
+
+                                            <!-- like product -->
                                             <div class="">
-                                            <i class="fa-solid fa-thumbs-up"></i>
-                                            <i class="fa-regular fa-heart"></i>
+                                                <i class="fa-solid fa-thumbs-up"
+                                                    onclick="likeProduct({{ $product->id }})"></i>
                                             </div>
 
                                             <div
@@ -301,6 +304,50 @@
             }
 
 
+            // like product --------------------------------------
+            function likeProduct(productId) {
+                // Gửi yêu cầu AJAX để thực hiện hành động like
+                fetch('/like', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        },
+                        body: JSON.stringify({
+                            id_product: productId,
+                            id_user: /* Lấy ID người dùng từ đâu đó */ ,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // In ra thông báo từ server (thông báo like success)
+                        // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi like thành công
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function unlikeProduct(productId) {
+                // Gửi yêu cầu AJAX để thực hiện hành động unlike
+                fetch('/unlike', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        },
+                        body: JSON.stringify({
+                            id_product: productId,
+                            id_user: /* Lấy ID người dùng từ đâu đó */ ,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // In ra thông báo từ server (thông báo unlike success)
+                        // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi unlike thành công
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
 
 
 

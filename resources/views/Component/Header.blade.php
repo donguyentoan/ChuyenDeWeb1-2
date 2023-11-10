@@ -1,4 +1,4 @@
-<header class="text-gray-600 body-font w-screen">
+<header class="text-gray-600 body-font w-full">
     <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
         <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <img class="w-14 h-14" src="/image/gt-removebg-preview.png" alt="">
@@ -124,7 +124,7 @@ function updateMiniCart() {
   total1 = total1 + (product.price * product.quantity);
     cartHTML += `
     <li class="minicart--item flex mb-5">
-      <div class="placeholder w-20 h-26 mr-4 ">  <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/${product.image}" alt="product"></div>
+      <div class="placeholder w-20 h-26 mr-4 ">  <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/${product.image}" alt="product"></div>
         <div class="content flex-1">
           <h1 class="text-sm font-bold mb-2">${product.name}</h1>
           <p class="text-sm"><span class="font-bold text-sm">Giá :</span>  ${formattedNumber}đ  <span> ${product.quantity}x</span></p>

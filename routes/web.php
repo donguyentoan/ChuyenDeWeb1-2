@@ -34,14 +34,14 @@ Route::get('/', [HomeController::class , 'index']);
 Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
 Route::get('/auth/register', function () { return view('Login.register');});
-Route::get('/register' , [RegisterController::class, 'register']);
+Route::post('/register' , [RegisterController::class, 'register']);
 Route::get('/newpost', [NewPostController::class , 'index']);
 Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 ///////
 
 
 Route::get('/contact', [ContactController::class, 'index']);
-Route::get('/contact_cus',  [ContactController::class , 'contact_cus']);
+Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
 
 
 

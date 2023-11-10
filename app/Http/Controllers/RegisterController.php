@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Validator;
 
 class RegisterController extends Controller
@@ -23,7 +24,7 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8'],
             'password_confirmation' => ['required', 'min:8'],
         ]);
-///
+
         if (User::where('email', $request->email)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
         }
@@ -41,10 +42,20 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+
+            $recipientEmail = $request->email;
+
+            $content = 'Tạo tài khoản thành công';
+
+            Mail::raw($content, function ($email) use ($recipientEmail, $request) {
+                $email->to($recipientEmail)
+                    ->subject("Pizza Store")
+                    ->from($request->email, $request->name);
+            });
+
             Auth::login($user);
 
             return redirect('/');
-            
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }

@@ -102,7 +102,7 @@
               <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$product->image}}" alt="blog">
+                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$product->image}}">
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
@@ -110,7 +110,7 @@
                     <div class=" items-center flex justify-between ">
                       <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
                         <div class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
+                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id_product }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                           </svg>
                         </div>
@@ -144,7 +144,7 @@
     document.getElementById('modal-product-name').textContent = productName;
     document.getElementById('modal-product-id').textContent = productId;
     document.getElementById('modal-product-Image').src = "/image/"+productImage;
-    console.log(productImage);
+    
     
 
     // Cập nhật giá ban đầu cho sản phẩm mới

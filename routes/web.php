@@ -34,11 +34,18 @@ Route::get('/', [HomeController::class , 'index']);
 
 Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
+Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});
 Route::get('/register' , [RegisterController::class, 'register']);
 Route::get('/newpost', [NewPostController::class , 'index']);
 Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 ///////
+
+
+// Login with gg
+Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
+
 
 
 Route::get('/contact', [ContactController::class, 'index']);

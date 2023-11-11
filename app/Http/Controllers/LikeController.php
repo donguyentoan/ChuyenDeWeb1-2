@@ -9,10 +9,11 @@ class LikeController extends Controller
 {
     public function like(Request $request)
     {
+        $current_user = Auth::user();
         $like = Like::create([
             "like_count" => 1,
             "id_product" => $request->id_product,
-            "id_user" => $request->id_user,
+            "id_user" =>  $current_user->id,
         ]);
     
         return response()->json([

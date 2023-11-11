@@ -128,9 +128,9 @@
                                             </p>
 
                                             <!-- like product -->
-                                            <button onclick="likeProduct({{ $product->id }})">
-                                                <i class="fa-solid fa-thumbs-up"></i>
-                                            </button>
+                                            <a href="/like/{{$product->id}}"> <i class="fa-solid fa-thumbs-up"></i></a>
+                                               
+                                         
                                             <!-- getLikeCount product -->
                                             <span id="like-count-{{ $product->id }}">a</span>
 
@@ -307,25 +307,30 @@
 
             // like product --------------------------------------
             function likeProduct(productId) {
+
+
+
+
+                var_dump("da vao");
                 // Gửi yêu cầu AJAX để thực hiện hành động like
-                fetch('/like', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        },
-                        body: JSON.stringify({
-                            id_product: productId,
-                            id_user: /* Lấy ID người dùng từ đâu đó */ ,
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data); // In ra thông báo từ server (thông báo like success)
-                        // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi like thành công
-                    })
-                    .catch(error => console.error('Error:', error));
+                // fetch('/like', {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                //                 'content')
+                //         },
+                //         body: JSON.stringify({
+                //             id_product: productId,
+                //             id_user: /* Lấy ID người dùng từ đâu đó */ ,
+                //         })
+                //     })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         console.log(data); // In ra thông báo từ server (thông báo like success)
+                //         // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi like thành công
+                //     })
+                //     .catch(error => console.error('Error:', error));
             }
 
             function unlikeProduct(productId) {

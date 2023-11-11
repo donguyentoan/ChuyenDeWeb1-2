@@ -16,7 +16,7 @@ class LikeController extends Controller
         ]);
     
         return response()->json([
-            "message" => "Like success",
+            "message    " => "Like success",
             "like" => $like,
         ]);
     }

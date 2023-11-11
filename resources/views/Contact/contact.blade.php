@@ -9,8 +9,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
+<?php
+
+if (isset($announcement)) {
+    print('<script >alert("' . $announcement. '");</script>');
+}
+?>
 
 <body>
+
 
     @include('Component.Header')
     <section class="text-gray-600 body-font bg-green-100 ">
@@ -19,7 +26,8 @@
 
             <div class=" lg:w-2/3 p-5 flex flex-col flex-wrap lg:w-1/2 lg:pl-12 lg:text-left text-center rounded-lg
             border-solid border-2 border-white-600  ">
-                <form method="get" action="/contact_cus">
+                <form method="post" action="/contact_cus">
+                    @csrf
                     <div class="rounded-lg flex flex-col md:ml-auto w-full mt-10 md:mt-0 mb-5">
                         <div class=" flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                             <div class="relative flex-grow w-full">

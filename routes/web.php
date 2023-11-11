@@ -31,68 +31,18 @@ use App\Http\Controllers\LikeController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [AdminController::class , 'index'] );
-    Route::get('/productList', [AdminController::class , 'showProductList'] );
-    Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
-    
-});
 
-
-
-Route::get('/auth/login', [LoginController::class , 'index']);
-Route::post('/login' , [LoginController::class , 'login'] )->name('login');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// forget
-
-
-// Login with gg
-Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
-
-
-Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
-Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
-Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-
-
-// Love
-Route::get('/love-items', [LoveItemController::class, 'index'])->name('love-items.index');
-Route::post('/love-items', [LoveItemController::class, 'store'])->name('love-items.store');
-Route::delete('/love-items/{loveItem}', [LoveItemController::class, 'destroy'])->name('love-items.destroy');
-
-
-
-Route::get('/auth/register', function () {
-    return view('Login.register');
-});
-
-Route::get('/addtocart', function () {
-    return view('addtocart');
-});
-
-Route::get('/checkout', function () {
-    return view('Checkout');
-});
-
-
-Route::get('/mini', function () {
-    return view('Component.test');
-});
-
-
-Route::post('/add-to-cart', [CartController::class , 'addtocart']);
-
-
-
-Route::get('/delItemCart/{$id}', [CartController::class , 'deleteItemCart']);
-
-
+Route::get('/auth/login', function () { return view('Login.login');});
+Route::post('/login',  [LoginController::class , 'login']);
+Route::get('/auth/register', function () { return view('Login.register');});
+Route::get('/register' , [RegisterController::class, 'register']);
+Route::get('/newpost', [NewPostController::class , 'index']);
+Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
+///////
 
 
 Route::get('/contact', [ContactController::class, 'index']);
-Route::get('/contact_cus',  [ContactController::class , 'contact_cus']);
+Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
 
 
 

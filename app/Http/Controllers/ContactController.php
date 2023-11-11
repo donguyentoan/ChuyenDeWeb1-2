@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
 {
@@ -25,14 +26,19 @@ class ContactController extends Controller
 
         $recipientEmail = 'donguyentoan2003@gmail.com';
         
-        $content = $request->content;
+        $content = $request->content . '     Email :' . $request->email . '     Phone : '. $request->phone;
 
         Mail::raw($content, function ($email) use ($recipientEmail, $request) {
-            $email->to($recipientEmail)
+            $email->to($recipientEmail , $request->fullname)
                 ->subject($request->subject)
-                ->from($request->email, $request->fullname); 
+                ->from($request->email, $request->fullname);
         });
 
-        return 'Email sent successfully';
+        $announcement = 'Bạn đã gửi email thành công !!!';
+
+        return view('contact.contact', compact('announcement'));
+
+       
+
     }
 }

@@ -96,7 +96,7 @@
                                             <div
                                                 class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
                                                 <input
-                                                    onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"
+                                                    onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id_product }} , '{{ $product->image }}' )"
                                                     type="button" value="Mua Ngay"> <svg
                                                     xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 "

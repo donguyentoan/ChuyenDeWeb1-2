@@ -23,10 +23,10 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'required|email|min:8|max:50',
-        //     'password' => 'required|min:8|max:50'
-        // ]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
         $remember = $request->filled('remember');
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $remember)) {
@@ -42,8 +42,6 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/auth/login');
     }
-
-   
 
     // 
     //login with gg

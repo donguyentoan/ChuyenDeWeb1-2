@@ -196,4 +196,13 @@ class ProductController extends Controller
     return redirect("/productList")->with('success', 'Delete successfully');
 }
 
+    //like product
+    public function like($id)
+    {
+        $product = Products::find($id);
+        $product->like = $product->like + 1;
+        $product->save();
+        return redirect()->back();
+    }
+
 }

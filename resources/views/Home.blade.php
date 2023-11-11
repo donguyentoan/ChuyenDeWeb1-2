@@ -7,6 +7,8 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./build/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+
 </head>
 
 <body>
@@ -47,6 +49,7 @@
     @include('component.Header')
 
     @include('component.Slide')
+    @csrf
 
     <section class="text-gray-600 body-font">
         <div class="container pb-24 mx-auto">
@@ -82,6 +85,13 @@
                                             <p class="text-sm">Giá Chỉ Từ <br> <span
                                                     class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>
                                             </p>
+                                            
+                                            
+                                            <div class="">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                            <i class="fa-regular fa-heart"></i>
+                                            </div>
+
                                             <div
                                                 class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
                                                 <input
@@ -253,6 +263,11 @@
                 });
                 return selectedToppings;
             }
+
+
+
+
+
             // JavaScript
             </script>
 

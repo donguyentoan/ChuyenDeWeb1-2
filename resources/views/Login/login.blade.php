@@ -48,14 +48,12 @@
                 </div>
                 <!-- <span class="ml-3 text-sm font-normal text-gray-500 dark:text-gray-400">Remember me</span> -->
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}">
-                  <label class="form-check-label" for="remember">
-                    Remember Me
-                  </label>
+                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <label for="remember">Remember Me</label>
                 </div>
               </label>
 
-              <a href="/forgot-password" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+              <a href="/forget-password" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
             </div>
             <div>
               <button type="submit" class="bg-[#006a32] w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">

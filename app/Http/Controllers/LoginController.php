@@ -32,58 +32,20 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             return redirect('/');
         }
-        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu']); // Đăng nhập thất bại
+        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu'])->withInput($request->only('email', 'remember')); // Đăng nhập thất bại
 
 
     }
 
-    // Forget pass
-    public function indexforgot()
-    {
-        return view('Login.forgot-password');
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/auth/login');
     }
 
+   
 
-    public function sendResetLinkEmail(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
-    }
-
-    //  reset
-    public function showResetForm(Request $request, $token)
-    {
-        return view('Login.reset-password', ['token' => $token, 'email' => $request->email]);
-    }
-
-    public function reset(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
-        ]);
-
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->save();
-                $user->setRememberToken(Str::random(60));
-                event(new User($user));
-            }
-        );
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
-    }
+    // 
     //login with gg
     public function redirectToGoogle()
     {

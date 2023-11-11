@@ -37,13 +37,13 @@
             <p class="text-sm font-medium text-center text-gray-500 dark:text-gray-400">
               You forgot your password? Here you can easily retrieve a new password.
             </p>
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
+            @if (Session::has('message'))
+                         <div class="alert alert-success" role="alert">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
 
-            <form action="{{route('password.email')}}" method="post"class="space-y-6">
+            <form action="{{ route('forget.password.post') }}" method="post"class="space-y-6">
               @csrf
                <input
                 class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
@@ -52,11 +52,10 @@
                 placeholder="Email address"
                 required
               />
-              <!-- @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror -->
+              @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                  @endif
+          
               <div>
                 <button
                   type="submit"

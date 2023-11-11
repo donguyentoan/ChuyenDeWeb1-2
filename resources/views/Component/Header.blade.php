@@ -27,18 +27,42 @@
         <nav class="md:ml-auto flex pt-4 flex-wrap items-center text-base justify-center">
             <div class="right-wrap">
                 <div class="account flex items-center">
-                    <div href="/customer/info" class="icon pr-2"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path
-                                d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                        </svg></div>
-                    <div class="login-and-register">
+                    <div href="/customer/info" class="icon pr-2">
+                    <button id="Dropdown" class="flex items-center h-8 pl-3 pr-2  focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                              width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                              <path
+                                  d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                              <path fill-rule="evenodd"
+                                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                          </svg>
+                          <svg class="w-4 h-4 mt-px ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                          </button>
+                          @auth
+                            <div id="dropshow" class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Tài Khoản</a>
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng </a>
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+                                <button class=" w-full flex items-center h-8 px-3 text-sm hover:bg-gray-200" type="submit">Đăng Xuất</button>
+                            </form>
+                           
+                          </div>
+                        @endauth
+                      </div>
+                        @auth
+   
+                          <p>Welcome, {{ auth()->user()->name }}!</p>
+                      @else
+                      <div class="login-and-register">
                         <a href="/auth/login" class="register">Đăng nhập</a>
                         <span>/</span>
                         <a href="/register?returnUrl=%2F" class="login">Tạo tài khoản</a>
-                    </div>
+                      </div>
+                      @endauth
+                      
                 </div>
             </div>
         </nav>
@@ -100,6 +124,17 @@
     </nav>
 
     <script>
+
+const Dropdown = document.getElementById('Dropdown');
+        const dropshow = document.getElementById('dropshow');
+
+        Dropdown.addEventListener('click', function () {
+            if (dropshow.style.display === "block") {
+                dropshow.style.display = "none";
+            } else {
+                dropshow.style.display = "block";
+            }
+        });
         updateMiniCart();
 
 function updateMiniCart() {
@@ -169,6 +204,10 @@ function updateMiniCart() {
 
     
 }
+
+
+ 
+    
 
 
 

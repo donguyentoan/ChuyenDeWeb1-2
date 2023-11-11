@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SearchProductController;
 
 
 /*
@@ -28,29 +29,30 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/productList', [AdminController::class , 'showProductList'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AdminController::class , 'index'] );
+    Route::get('/productList', [AdminController::class , 'showProductList'] );
+    Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+    
+});
+
 
 
 Route::get('/auth/login', [LoginController::class , 'index']);
 Route::post('/login' , [LoginController::class , 'login'] )->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // forget
-Route::get('/forgot-password', [LoginController::class , 'indexforgot']);
+
 
 // Login with gg
 Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
 
-// // Handle the password reset request
-Route::post('/forgot-password', [LoginController::class,'sendResetLinkEmail'])->name('password.email');
 
-// Display the password reset form
-Route::get('/reset-password/{token}',  [LoginController::class,'showResetForm'])->name('password.reset');
-
-// Handle the password reset form submission
-Route::post('/reset-password',  [LoginController::class,'reset'])->name('password.update');
-
+Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 // Love

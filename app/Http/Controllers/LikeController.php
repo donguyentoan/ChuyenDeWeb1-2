@@ -34,16 +34,14 @@ class LikeController extends Controller
         ]);
     }
 
-    //show like
-    public function showLike(Request $request)
+    // get like count
+    public function getLikeCount(Request $request , $id_product)
     {
-        $like = Like::where("id_product", $request->id_product)
-            ->where("id_user", $request->id_user)
-            ->first();
-    
+        $like = Like::where("id_product", $id_product)->count();
         return response()->json([
-            "message" => "Unlike success",
+            "like" => $like,
         ]);
     }
+  
     
 }

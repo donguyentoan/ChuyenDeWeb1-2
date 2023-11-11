@@ -128,10 +128,11 @@
                                             </p>
 
                                             <!-- like product -->
-                                            <div class="">
-                                                <i class="fa-solid fa-thumbs-up"
-                                                    onclick="likeProduct({{ $product->id }})"></i>
-                                            </div>
+                                            <button onclick="likeProduct({{ $product->id }})">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                            </button>
+                                            <!-- getLikeCount product -->
+                                            <span id="like-count-{{ $product->id }}">a</span>
 
                                             <div
                                                 class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
@@ -348,8 +349,6 @@
                     })
                     .catch(error => console.error('Error:', error));
             }
-
-
 
             // JavaScript
             </script>

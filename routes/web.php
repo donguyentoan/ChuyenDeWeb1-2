@@ -11,6 +11,7 @@ use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
@@ -88,6 +89,10 @@ Route::post('/add-to-cart', [CartController::class , 'addtocart']);
 Route::get('/delItemCart/{$id}', [CartController::class , 'deleteItemCart']);
 
 
+
+
+Route::get('/contact', [ContactController::class, 'index']);
+Route::get('/contact_cus',  [ContactController::class , 'contact_cus']);
 
 
 

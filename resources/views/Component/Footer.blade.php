@@ -43,7 +43,7 @@
           <h2 class="title-font text-white font-black text-lg tracking-widest mb-3">LIÊN HỆ</h2>
           <nav class="list-none mb-10">
             <li>
-              <a class=" text-white font-light hover:underline cursor-pointer text-sm">Liên hệ</a>
+              <a href="/contact" class=" text-white font-light hover:underline cursor-pointer text-sm">Liên hệ</a>
             </li>
             <li>
               <a class=" text-white font-light hover:underline cursor-pointer text-sm">Hướng dẫn mua hàng</a>

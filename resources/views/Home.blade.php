@@ -50,7 +50,7 @@
     @include('component.Header')
 
     @include('component.Slide')
-    @csrf
+  
 
     <section class="text-gray-600 body-font">
         <div class="container pb-24 mx-auto">
@@ -122,16 +122,11 @@
 
             // const basePrice = parseFloat(document.getElementById('modal-product-price-hidden').value);
             let totalPrice = basePrice;
-
-
             function showModal(productName, productPrice, productId, productImage) {
                 // Cập nhật thông tin sản phẩm trong modal
                 document.getElementById('modal-product-name').textContent = productName;
                 document.getElementById('modal-product-id').textContent = productId;
-                document.getElementById('modal-product-Image').src = "/upload/" +
-                    productImage;
-
-
+                document.getElementById('modal-product-Image').src = "/upload/" + productImage;
 
                 // Cập nhật giá ban đầu cho sản phẩm mới
                 basePrice = productPrice;

@@ -6,8 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
@@ -45,7 +45,13 @@ Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 // Login with gg
 Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
+Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
+Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+
+Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 Route::get('/contact', [ContactController::class, 'index']);

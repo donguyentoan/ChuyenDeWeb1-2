@@ -3,20 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\SearchProductController;
-use App\Http\Controllers\LikeController;
 
 
 /*
@@ -111,6 +112,10 @@ Route::delete('/unlike', [LikeController::class, 'unlike']);
 
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
+Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
+Route::get('/sale' , [SaleController::class , 'index'] );
+
+Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
 
 
 

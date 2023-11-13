@@ -19,7 +19,7 @@
 <div class="div flex">
 
 <div class="w-1/4">
- @include('SideBar')
+ @include('Component.SideBar')
  </div>
 
 

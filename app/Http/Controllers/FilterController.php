@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Models\Categories;
+use App\Models\Manufactures;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
@@ -15,25 +16,21 @@ class FilterController extends Controller
         $category = Categories::all();
         return view('Filter.filter', ["categories" =>$category ]);
     }
-    
+
+
     public function filter(Request $request)
     {
-        $category = $request->input('categories_id');
-      
-            echo $category;
-        // $query = Products::query();
-    
-        // if ($category) {
-        //     $query->where('category', $category);
-        // }
-    
-        // if ($brand) {
-        //     $query->where('brand', $brand);
-        // }
-    
-        // $filteredProducts = $query->get();
-    
-        // return view('products.filtered', compact('filteredProducts'));
+        $manufacture = Manufactures::all();
+
+        $selectedManufacturers = $request->input('manu', []);
+
+        // Use the selected manufacturers to filter products
+        $search = Products::whereIn('Manufacture_id', $selectedManufacturers)->paginate(8);
+
+        // Pass the filtered products to the view or perform other actions
+        return view('Search', compact('search', 'manufacture'));
     }
+    
+   
     
 }

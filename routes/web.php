@@ -31,7 +31,6 @@ use App\Http\Controllers\LikeController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
-
 Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
@@ -39,21 +38,14 @@ Route::get('/auth/register', function () { return view('Login.register');});
 Route::get('/register' , [RegisterController::class, 'register']);
 Route::get('/newpost', [NewPostController::class , 'index']);
 Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
-///////
-
-
 // Login with gg
 Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
 Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
 Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
-
 Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
-
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-
-
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
 

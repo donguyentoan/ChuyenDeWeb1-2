@@ -37,7 +37,7 @@ Route::get('/auth/login', function () { return view('Login.login');});
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});
-Route::get('/register' , [RegisterController::class, 'register']);
+Route::post('/register' , [RegisterController::class, 'register']);
 Route::get('/newpost', [NewPostController::class , 'index']);
 Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 // Login with gg

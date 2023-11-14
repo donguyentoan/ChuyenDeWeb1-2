@@ -79,65 +79,7 @@
                     </a>
                 </div>
             </div>
-
-
-            <!-- Pages links -->
-            <div x-data="{ isActive: false, open: false }">
-                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
-                <a href="#" @click="$event.preventDefault(); open = !open"
-                    class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light  dark:hover:bg-primary"
-                    :class="{ ' dark:bg-primary': isActive || open }" role="button" aria-haspopup="true"
-                    :aria-expanded="(open || isActive) ? 'true' : 'false'">
-                    <span aria-hidden="true">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
-                            stroke="white">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                        </svg>
-                    </span>
-                    <span class="ml-2 text-sm text-white font-bold"> Pages </span>
-                    <span aria-hidden="true" class="ml-auto">
-                        <!-- active class 'rotate-180' -->
-                        <svg class="w-4 h-4 transition-transform transform" :class="{ 'rotate-180': open }"
-                            xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke="white">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </a>
-                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Pages">
-                    <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                    <!-- inActive classes 'text-white dark:text-white' -->
-                    <a href="pages/blank.html" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
-                        Blank
-                    </a>
-                    <a href="pages/404.html" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
-                        404
-                    </a>
-                    <a href="pages/500.html" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
-                        500
-                    </a>
-                    <a href="#" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
-                        Profile (soon)
-                    </a>
-                    <a href="#" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                        Pricing (soon)
-                    </a>
-                    <a href="#" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                        Kanban (soon)
-                    </a>
-                    <a href="#" role="menuitem"
-                        class="block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                        Feed (soon)
-                    </a>
-                </div>
-            </div>
-
+            
             <!-- Authentication links -->
             <div x-data="{ isActive: false, open: false}">
                 <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->

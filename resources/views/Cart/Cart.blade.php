@@ -40,13 +40,12 @@
 
     <script>
         updateMiniCart();
-      
+
   var mini = document.querySelector('.cart_item');
   const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
   var cartHTML = '';
 
   miniCart.forEach(product => {
-    
     var total = 0
     total = (product.price * product.quantity);
     let formattedNumber = total.toLocaleString('en-US', {
@@ -54,8 +53,6 @@
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
-  
-  
     cartHTML += `
                     <div class="mt-4">
                         <div class="md:flex items-center justify-around border-b border-gray-300 pb-4 mb-4">
@@ -92,9 +89,6 @@
                             </div>
                     </div>
     `;
-  
-  
-  
    
   });
   
@@ -209,8 +203,6 @@ function updateMiniCart() {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
-    
-  
     cartHTML += `
     <li class="minicart--item flex mb-5">
       <div class="placeholder w-20 h-26 mr-4 "><img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/pizza.png" alt="product"></div>

@@ -15,6 +15,7 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\SearchProductController;

@@ -116,8 +116,7 @@
                
              
             </div>
-            
-
+          
   </dialog>
 
 <section class="text-gray-600 body-font">
@@ -141,7 +140,8 @@
                     <div class=" items-center flex justify-between ">
                       <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
                         <div class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id_product }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
+                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                           </svg>
                         </div>
@@ -175,12 +175,8 @@
     document.getElementById('modal-product-name').textContent = productName;
     document.getElementById('modal-product-id').textContent = productId;
     document.getElementById('modal-product-Image').src = "/upload/"+productImage;
-    
-    
-
     // Cập nhật giá ban đầu cho sản phẩm mới
     basePrice = productPrice;
-
     // Hiển thị giá ban đầu trên modal
     const formattedInitialBasePrice = basePrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
     document.getElementById('modal-product-price').textContent = `${formattedInitialBasePrice}đ`;
@@ -190,10 +186,9 @@
     document.getElementById('modal-product-price-hidden').value = basePrice;
     document.getElementById('modal-product-id-hidden').value = productId;
     document.getElementById('modal-product-image-hidden').value = productImage;
-
     // Mở modal
     firstModal.showModal();
-}
+  }
 
   // Lấy các phần tử HTML cần sử dụng
   const toppingCheckboxes = document.querySelectorAll('.topping');
@@ -253,7 +248,6 @@ function addToMiniCart() {
     const size = document.querySelector('input[name="size"]:checked').value;
     const crust = getSelectedToppings();
     const notes = document.querySelector('textarea[name="ghichu"]').value;
-
     // Tạo đối tượng sản phẩm
     const product = {
         id: productId,
@@ -265,10 +259,8 @@ function addToMiniCart() {
         notes: notes,
         quantity: 1
     };
-
     // Thêm sản phẩm vào giỏ hàng (sử dụng local storage hoặc nơi bạn lưu trữ giỏ hàng)
     const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
-    
     // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
     const existingProductIndex = miniCart.findIndex(item => item.id === productId);
     if (existingProductIndex !== -1) {
@@ -278,9 +270,7 @@ function addToMiniCart() {
         // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
         miniCart.push(product);
     }
-    
     localStorage.setItem('miniCartss', JSON.stringify(miniCart));
-
     // Cập nhật số lượng sản phẩm trong mini cart
     const itemCount = document.querySelector('.minicart--item-count');
     itemCount.textContent = miniCart.length;

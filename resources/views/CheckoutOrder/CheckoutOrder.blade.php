@@ -65,10 +65,18 @@
        <button class="text-white bg-[#006a31] md:w-[26%] h-10 border-0 md:py-2  md:px-16 md:my-16 md:mx-6 w-full p-2 mr-2 focus:outline-none hover:bg-indigo-600 rounded text-lg flex justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left mt-1.5 mr-1.5" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
       </svg><a href="/">Tiếp tục </a> </button>
-     
-     <button class="text-white bg-[#006a31] md:w-[26%] h-10 border-0 md:py-2  md:px-16 md:my-16 md:mx-6 w-full p-2 ml-2 focus:outline-none hover:bg-indigo-600 rounded  text-lg flex justify-center"> <a href="/auth/login">Thanh toán</a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right mt-2 ml-2" viewBox="0 0 16 16">
+      @auth
+      <button class="text-white bg-[#006a31] md:w-[26%] h-10 border-0 md:py-2  md:px-16 md:my-16 md:mx-6 w-full p-2 ml-2 focus:outline-none hover:bg-indigo-600 rounded  text-lg flex justify-center"> <a href="/checkout/orderinfo">Thanh toán</a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right mt-2 ml-2" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
       </svg></button>
+    
+      @else
+      <button class="text-white bg-[#006a31] md:w-[26%] h-10 border-0 md:py-2  md:px-16 md:my-16 md:mx-6 w-full p-2 ml-2 focus:outline-none hover:bg-indigo-600 rounded  text-lg flex justify-center"> <a href="/auth/login">Thanh toán</a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right mt-2 ml-2" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+      </svg></button>
+
+
+      @endauth
      
 
   </div>

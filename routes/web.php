@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
@@ -33,7 +34,9 @@ use App\Http\Controllers\SearchProductController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
+
 Route::get('/auth/login', function () { return view('Login.login');});
+
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});

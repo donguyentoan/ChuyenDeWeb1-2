@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
-use App\Models\Manufactures;
-use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
@@ -27,9 +25,9 @@ class AdminController extends Controller
         return view('Dashboard.Home');
     }
 
-    
-    //hiển thị các đơn hàng của khách hàng
+
     public function showOrder(){
+
         $orders = $this->OrderRepositories->getAllOrder();
         return view('Dashboard.OrderList' ,[ "orders" => $orders]);
     }
@@ -62,5 +60,7 @@ class AdminController extends Controller
             return back();
 
     }
+
     
+
 }

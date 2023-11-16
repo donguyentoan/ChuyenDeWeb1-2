@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./build/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
@@ -14,9 +13,40 @@
 
 <body>
 
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
+
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "155737337627217");
+  chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+
+<!-- Your SDK code -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v18.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
     @include('component.Header')
-
-
 
     @include('component.Slide')
     @csrf
@@ -25,79 +55,7 @@
         <div class="container pb-24 mx-auto">
 
             <dialog id="firstModal" class="p-10 border-2 border-gray-300 rounded-xl w-11/12 h-4/5 mx-auto relative">
-                <div
-                    class="close absolute top-0 right-0 w-7 h-7 rounded-full flex justify-center align-center bg-red-500">
-                    <button onclick="firstModal.close()"> X</button>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class=" w-full h-full rounded-md">
-
-                        <img id="modal-product-Image" class="w-10/12" src="" alt="">
-                        <input type="hidden" value="190" id="modal-product-image-hidden">
-                        <div>
-                            <!-- <p class="text-2xl font-bold pr-20 text-center" id="total-price">190.000đ</p> -->
-                            <p class="text-2xl font-bold pr-20 text-center pt-20 " id="modal-product-price">1900</p>
-                            <input type="hidden" value="190" id="modal-product-price-hidden">
-                            <!-- <input id="price_hidden" type="hidden" value="1900" > -->
-                        </div>
-                        <p id="price" class="text-xl font-bold pr-20 text-center"> </p>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <p id="modal-product-name" class="text-xl font-bold pr-20 ">Tên Sản Phẩm</p>
-                        <p class="hidden" id="modal-product-id"></p>
-                        <input type="hidden" value="Tên Sản Phẩm" id="modal-product-name-hidden">
-                        <input type="hidden" value="Tên Sản Phẩm" id="modal-product-id-hidden">
-                        <p class="text-[#007d43]">Kích thước nhỏ 6``</p>
-                        <p class="leading-relaxed text-base mb-3">Tôm, Đào hoà quyện bùng nổ cùng sốt Thousand Island
-                        </p>
-                        <h1 class="title-font text-lg font-bold text-[#007d43] mb-3">Kích Thước </h1>
-                        <div class="size">
-                            <label class="pr-3">
-                                <input type="radio" class="size" name="size" value="small" data-price="0"> Size nhỏ
-                                (+$0)
-                            </label>
-                            <label class="pr-3">
-                                <input type="radio" class="size" name="size" value="medium" data-price="100000"> Size
-                                trung bình (+$2)
-                            </label>
-                            <label class="pr-3">
-                                <input type="radio" class="size" name="size" value="large" data-price="200000"> Size lớn
-                                (+$4)
-                            </label>
-                        </div>
-                        <h1 class="title-font text-lg font-bold text-[#007d43] mb-3">Đế</h1>
-                        <div class="toppng">
-                            <label class="pr-2">
-                                <input type="checkbox" class="topping mr-2" value="Dày" data-topping="100">Dày
-                            </label>
-                            <label class="pr-2">
-                                <input type="checkbox" class="topping" value="Mỏng Giòn" data-topping="105"> Mỏng giòn
-                            </label>
-                            <label class="pr-2">
-                                <input type="checkbox" class="topping" value="Viền Phô Mai" data-topping="110"> Viền phô
-                                mai
-                            </label>
-                            <label class="pr-2">
-                                <input type="checkbox" class="topping" value="Viền Phô Mai Xúc Xích" data-topping="115">
-                                Viền phô mai xúc xích
-                            </label>
-                        </div>
-
-                        <div class="comment">
-                            <h1 class="title-font text-lg font-bold text-[#007d43] mb-3">Ghi Chú</h1>
-                            <textarea class="border-2 border-gray-200" name="ghichu" id="" cols="55" rows="5">
-          </textarea>
-                        </div>
-
-                        <!-- <button onclick="addItemToCart('Pizza Hải Sản', 190.000)"  class="bg-[#007d43] hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 w-full border border-gray-400 rounded-xl shadow"> -->
-
-                        <button onclick="addToMiniCart()"
-                            class="text-center text-white add-to-cart-btn bg-[#007d43] font-semibold py-2 px-4 w-full border border-gray-400 rounded-xl shadow">
-                            THÊM VÀO GIỎ HÀNG</button>
-                    </div>
-                    <div>
-                    </div>
+                <!-- Modal content -->
             </dialog>
 
             <section class="text-gray-600 body-font">
@@ -119,7 +77,8 @@
                                             src="/upload/{{$product->image}}" alt="blog">
                                     </div>
                                     <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
-                                        <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}
+                                        <h1 class="title-font text-lg font-bold text-gray-900 mb-3">
+                                            {{$product->name}}
                                         </h1>
                                         <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
                                         <div class=" items-center flex justify-between ">
@@ -137,7 +96,6 @@
 
                                             <div
                                                 class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-
                                                 <input
                                                     onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"
                                                     type="button" value="Mua Ngay"> <svg
@@ -152,19 +110,13 @@
                                     </div>
                                 </div>
                             </div>
-
                             @endforeach
-
-
                         </div>
-
-
                     </div>
                     @endforeach
                 </div>
             </section>
 
-            <!-- Trong cùng trang HTML -->
             <script>
             updateMiniCart();
             let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
@@ -177,7 +129,8 @@
                 // Cập nhật thông tin sản phẩm trong modal
                 document.getElementById('modal-product-name').textContent = productName;
                 document.getElementById('modal-product-id').textContent = productId;
-                document.getElementById('modal-product-Image').src = "/upload/" + productImage;
+                document.getElementById('modal-product-Image').src = "/upload/" +
+                    productImage;
 
 
 
@@ -185,14 +138,18 @@
                 basePrice = productPrice;
 
                 // Hiển thị giá ban đầu trên modal
-                const formattedInitialBasePrice = basePrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
-                document.getElementById('modal-product-price').textContent = `${formattedInitialBasePrice}đ`;
+                const formattedInitialBasePrice = basePrice.toFixed(0).replace(
+                    /\d(?=(\d{3})+$)/g, '$&,');
+                document.getElementById('modal-product-price').textContent =
+                    `${formattedInitialBasePrice}đ`;
 
                 // Lưu thông tin sản phẩm vào biến ẩn để sử dụng khi thêm vào giỏ hàng
-                document.getElementById('modal-product-name-hidden').value = productName;
+                document.getElementById('modal-product-name-hidden').value =
+                    productName;
                 document.getElementById('modal-product-price-hidden').value = basePrice;
                 document.getElementById('modal-product-id-hidden').value = productId;
-                document.getElementById('modal-product-image-hidden').value = productImage;
+                document.getElementById('modal-product-image-hidden').value =
+                    productImage;
 
                 // Mở modal
                 firstModal.showModal();
@@ -218,8 +175,10 @@
 
             // JavaScript
             function updateTotalPrice() {
-                const selectedSize = document.querySelector('input[name="size"]:checked');
-                const sizePrice = selectedSize ? parseFloat(selectedSize.getAttribute('data-price')) : 0;
+                const selectedSize = document.querySelector(
+                    'input[name="size"]:checked');
+                const sizePrice = selectedSize ? parseFloat(selectedSize.getAttribute(
+                    'data-price')) : 0;
                 const toppingPrice = calculateToppingPrice();
                 totalPrice = basePrice + sizePrice + toppingPrice;
 
@@ -240,19 +199,23 @@
                 let toppingPrice = 0;
                 toppingCheckboxes.forEach(checkbox => {
                     if (checkbox.checked) {
-                        toppingPrice += parseFloat(checkbox.getAttribute('data-topping'));
+                        toppingPrice += parseFloat(checkbox.getAttribute(
+                            'data-topping'));
                     }
-                });
+                }); 
                 return toppingPrice;
             }
 
 
             function addToMiniCart() {
                 // Lấy thông tin sản phẩm từ các phần tử HTML
-                const productName = document.getElementById('modal-product-name-hidden').value;
-                const productImage = document.getElementById('modal-product-image-hidden').value;
+                const productName = document.getElementById('modal-product-name-hidden')
+                    .value;
+                const productImage = document.getElementById(
+                    'modal-product-image-hidden').value;
                 const productPrice = totalPrice; // Lấy tổng giá
-                const productId = document.getElementById('modal-product-id-hidden').value;
+                const productId = document.getElementById('modal-product-id-hidden')
+                    .value;
                 const size = document.querySelector('input[name="size"]:checked').value;
                 const crust = getSelectedToppings();
                 const notes = document.querySelector('textarea[name="ghichu"]').value;
@@ -273,7 +236,8 @@
                 const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
 
                 // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-                const existingProductIndex = miniCart.findIndex(item => item.id === productId);
+                const existingProductIndex = miniCart.findIndex(item => item.id ===
+                    productId);
                 if (existingProductIndex !== -1) {
                     // Nếu sản phẩm đã tồn tại, tăng quantity lên
                     miniCart[existingProductIndex].quantity += 1;
@@ -291,9 +255,6 @@
                 // Đóng modal sau khi thêm sản phẩm thành công
             }
 
-
-
-
             // Hàm lấy các topping đã chọn
             function getSelectedToppings() {
                 const selectedToppings = [];
@@ -306,6 +267,7 @@
             }
 
 
+<<<<<<< HEAD
             // like product --------------------------------------
             function likeProduct(productId) {
                 console.log("Product liked: " + productId);
@@ -351,22 +313,18 @@
                     })
                     .catch(error => console.error('Error:', error));
             }
+=======
+>>>>>>> master
 
             // JavaScript
             </script>
 
 
-
-
-
         </div>
-
     </section>
 
-
-
-
-
-
-
     @include('component.Footer')
+
+</body>
+
+</html>

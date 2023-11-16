@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
+
 use App\Models\Manufactures;
 use App\Models\Categories;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
 use App\Repositories\OrderRepositories;
 use App\Repositories\CategoriesRepositories;
 
+
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
+
+
 
     public function index()
     {

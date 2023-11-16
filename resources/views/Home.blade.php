@@ -270,8 +270,17 @@
 <<<<<<< HEAD
             // like product --------------------------------------
             function likeProduct(productId) {
+<<<<<<< HEAD
                 console.log("Product liked: " + productId);
                 // // Gửi yêu cầu AJAX để thực hiện hành động like
+=======
+
+
+
+
+                var_dump("da vao");
+                // Gửi yêu cầu AJAX để thực hiện hành động like
+>>>>>>> 112be4fdc44348b474478fb125b94547c8e73751
                 // fetch('/like', {
                 //         method: 'POST',
                 //         headers: {

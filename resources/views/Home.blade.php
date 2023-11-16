@@ -139,7 +139,7 @@
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
-                    <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
+                    <p class="leading-relaxed text-xs mb-3">{{ Str::limit($product->description, $limit = 50, $end = '...')}}</p>
                     <div class=" items-center flex justify-between ">
                       <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
                         <div class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">

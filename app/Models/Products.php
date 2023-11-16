@@ -23,4 +23,16 @@ class Products extends Model
     {
         return $this->hasMany(Categories::class);
     }
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'id_product');
+    }
+
+    // Method to get the like count
+    public function getLikeCount()
+    {
+        // Ensure there are likes associated with the product
+        return $this->likes->count();
+    }
 }

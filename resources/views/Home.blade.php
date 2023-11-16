@@ -8,41 +8,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./build/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
 
-<!-- Messenger Plugin chat Code -->
-<div id="fb-root"></div>
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
-<!-- Your Plugin chat code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
 
-<script>
-  var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "155737337627217");
-  chatbox.setAttribute("attribution", "biz_inbox");
-</script>
+    <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "155737337627217");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
 
-<!-- Your SDK code -->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml            : true,
-      version          : 'v18.0'
-    });
-  };
+    <!-- Your SDK code -->
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v18.0'
+        });
+    };
 
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 
 
@@ -86,12 +87,13 @@
                                                     class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>
                                             </p>
 
-                                            <!-- like product -->
+                                            <!-- Thích sản phẩm -->
                                             <a href="/like/{{$product->id}}">
                                                 <i class="fa-solid fa-thumbs-up"></i>
                                             </a>
-                                            <!-- getLikeCount product -->
-                                        
+
+                                            <!-- Lấy số lượng like của sản phẩm -->
+                                            
 
 
                                             <div
@@ -202,7 +204,7 @@
                         toppingPrice += parseFloat(checkbox.getAttribute(
                             'data-topping'));
                     }
-                }); 
+                });
                 return toppingPrice;
             }
 
@@ -266,66 +268,36 @@
                 return selectedToppings;
             }
 
+            //like
 
-<<<<<<< HEAD
-            // like product --------------------------------------
-            function likeProduct(productId) {
-<<<<<<< HEAD
-                console.log("Product liked: " + productId);
-                // // Gửi yêu cầu AJAX để thực hiện hành động like
-=======
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     // Lắng nghe sự kiện click trên nút thích
+            //     document.querySelectorAll('.like-button').forEach(function(button) {
+            //         button.addEventListener('click', function(event) {
+            //             event.preventDefault();
 
+            //             // Lấy id sản phẩm từ thuộc tính data-product-id
+            //             var productId = this.getAttribute('data-product-id');
 
-
-
-                var_dump("da vao");
-                // Gửi yêu cầu AJAX để thực hiện hành động like
->>>>>>> 112be4fdc44348b474478fb125b94547c8e73751
-                // fetch('/like', {
-                //         method: 'POST',
-                //         headers: {
-                //             'Content-Type': 'application/json',
-                //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                //                 'content')
-                //         },
-                //         body: JSON.stringify({
-                //             id_product: productId,
-                //             id_user: /* Lấy ID người dùng từ đâu đó */ ,
-                //         })
-                //     })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         console.log(data); // In ra thông báo từ server (thông báo like success)
-                //         // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi like thành công
-                //     })
-                //     .catch(error => console.error('Error:', error));
-            }
-
-            function unlikeProduct(productId) {
-                // Gửi yêu cầu AJAX để thực hiện hành động unlike
-                fetch('/unlike', {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        },
-                        body: JSON.stringify({
-                            id_product: productId,
-                            id_user: /* Lấy ID người dùng từ đâu đó */ ,
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data); // In ra thông báo từ server (thông báo unlike success)
-                        // Cập nhật giao diện hoặc thực hiện các thao tác khác sau khi unlike thành công
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-=======
->>>>>>> master
-
-            // JavaScript
+            //             // Gửi yêu cầu AJAX đến /like/{id}
+            //             fetch('/like/' + productId, {
+            //                     method: 'POST', // hoặc 'GET' tùy thuộc vào cách bạn xử lý ở phía server
+            //                     headers: {
+            //                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Thêm token CSRF nếu cần
+            //                     },
+            //                 })
+            //                 .then(response => response.json())
+            //                 .then(data => {
+            //                     // Cập nhật số lượng like trên giao diện
+            //                     document.getElementById('likeCount' + productId)
+            //                         .textContent = data.like;
+            //                 })
+            //                 .catch(error => {
+            //                     console.error('Lỗi:', error);
+            //                 });
+            //         });
+            //     });
+            // });
             </script>
 
 

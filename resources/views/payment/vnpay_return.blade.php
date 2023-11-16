@@ -13,10 +13,11 @@
         <!-- Custom styles for this template -->
         <link href="/assets/jumbotron-narrow.css" rel="stylesheet">  
         <script src="/assets/jquery-1.11.3.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <?php
-        require_once("./config.php");
+        @include('/config');
         $vnp_SecureHash = $_GET['vnp_SecureHash'];
         $inputData = array();
         foreach ($_GET as $key => $value) {
@@ -38,7 +39,7 @@
             }
         }
 
-        $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+        // $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret ?? '');
         ?>
         <!--Begin display -->
         <div class="container">
@@ -80,15 +81,13 @@
                     <label >Kết quả:</label>
                     <label>
                         <?php
-                        if ($secureHash == $vnp_SecureHash) {
+                       
                             if ($_GET['vnp_ResponseCode'] == '00') {
                                 echo "<span style='color:blue'>GD Thanh cong</span>";
                             } else {
                                 echo "<span style='color:red'>GD Khong thanh cong</span>";
                             }
-                        } else {
-                            echo "<span style='color:red'>Chu ky khong hop le</span>";
-                        }
+                        
                         ?>
 
                     </label>
@@ -97,9 +96,8 @@
             <p>
                 &nbsp;
             </p>
-            <footer class="footer">
-                   <p>&copy; VNPAY <?php echo date('Y')?></p>
-            </footer>
+           
         </div>  
+        @include('Component.Footer')
     </body>
 </html>

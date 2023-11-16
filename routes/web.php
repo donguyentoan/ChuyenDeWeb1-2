@@ -53,7 +53,7 @@ Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswor
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
-
+Route::get('/like/{id}', [LikeController::class, 'like']);
 
 
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
@@ -102,6 +102,9 @@ Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
+Route::get('/vnpay_return' , [paymentController::class , 'vnpay_return'] );
+
+
 Route::get('/OrderDetail', [OrderController::class, 'index']);
 
 

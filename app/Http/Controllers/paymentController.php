@@ -12,4 +12,7 @@ class paymentController extends Controller
         return view('payment.vnpay_create_payment');
 
     }
+    public function vnpay_return(){
+        return view('payment.vnpay_return');
+    }
 }

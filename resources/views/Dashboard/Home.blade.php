@@ -32,12 +32,15 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
 
   <div class="div flex">
+
+
 
     <div class="w-1/5">
       @include('Component.SideBar')
@@ -572,13 +575,95 @@
               <a href="https://github.com/Kamona-WD" target="_blank" class="text-blue-500 hover:underline">Ahmed Kamel</a>
             </div>
           </footer>
+          
         </div>
+        <script>
+    // Access specific property in JavaScript
+    
+   
+</script>
 
     
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
         <script src="./builds/js/script.js"></script>
+        
 
         <script>
+
+
+const salesDataInJs = @json($salesData);
+    
+    // Assuming each object has a 'doanh_so' property
+    const doanhSoValues = salesDataInJs.map(item => item.doanh_so);
+
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+const cssColors = (color) => {
+  return getComputedStyle(document.documentElement).getPropertyValue(color)
+
+}
+
+const getColor = () => {
+  return window.localStorage.getItem('color') ?? 'cyan'
+}
+
+const colors = {
+  primary: cssColors(`--color-${getColor()}`),
+  primaryLight: cssColors(`--color-${getColor()}-light`),
+  primaryLighter: cssColors(`--color-${getColor()}-lighter`),
+  primaryDark: cssColors(`--color-${getColor()}-dark`),
+  primaryDarker: cssColors(`--color-${getColor()}-darker`),
+}
+const monthlySalesData = doanhSoValues;
+const barChart = new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        data: monthlySalesData,
+        backgroundColor: colors.primary,
+        hoverBackgroundColor: colors.primaryDark,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: false,
+          ticks: {
+            beginAtZero: true,
+            stepSize: 50,
+            fontSize: 12,
+            fontColor: '#97a4af',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: 10,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          gridLines: false,
+          ticks: {
+            fontSize: 12,
+            fontColor: '#97a4af',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: 5,
+          },
+          categoryPercentage: 0.5,
+          maxBarThickness: '10',
+        },
+      ],
+    },
+    cornerRadius: 2,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+  },
+})
       const setup = () => {
         const getTheme = () => {
           if (window.localStorage.getItem('dark')) {
@@ -709,6 +794,7 @@
           updateLineChart,
         }
       }
+      
     </script>
 </body>
 

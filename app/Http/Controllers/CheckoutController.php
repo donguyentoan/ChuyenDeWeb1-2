@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 
 use App\Models\Orders;
+
+
+use Faker\Core\Number;
 use App\Models\OrderDetails;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\DeliveryInformations;
 use Illuminate\Support\Facades\Session;
 
@@ -179,8 +182,10 @@ class CheckoutController extends Controller
 
                     
                 }
-
-                return view('payment.payment' , ["total" => $payment_total]);
+                $number = $payment_total;
+                $formattedNumber = number_format($number, 0, '.', ',');
+                // Output: 12,345.67
+                return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total]);
     
                 
             }

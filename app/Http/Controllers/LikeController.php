@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Http\Request;
+use App\Models\Products;
 
 class LikeController extends Controller
 {
-    public function like(Request $request)
+    public function like($id)
     {
+       $product = Products::find($id);
+       $current_user = auth()->user();
+       $user = $current_user->id;
+         
         $like = Like::create([
             "like_count" => 1,
-            "id_product" => $request->id_product,
-            "id_user" => $request->id_user,
+            "id_product" => $product->id,
+            "id_user" => $user,
         ]);
-    
-        return response()->json([
-            "message    " => "Like success",
-            "like" => $like,
-        ]);
+        
+        $like = Like::find($id);
     }
     
     public function unlike(Request $request)

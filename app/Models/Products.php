@@ -15,6 +15,7 @@ class Products extends Model
         'description',
         'image',
         'price',
+        'like_count',
         'Category_id',
         'Manufacture_id',
         'Combo_id',

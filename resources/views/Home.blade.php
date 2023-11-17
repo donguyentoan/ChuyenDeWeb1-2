@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./build/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+.likeIcon.liked {
+    color: #0566ff;
+}
+</style>
 
 <body>
 
@@ -74,27 +84,30 @@
                                 <div
                                     class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                                     <div class="w-2/5 md:w-full md:p-0 ">
-                                        <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in"
+                                        <img class="hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in w-80 h-80 object-contain z-0"
                                             src="/upload/{{$product->image}}" alt="blog">
                                     </div>
-                                    <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
+                                    <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2 z-50">
                                         <h1 class="title-font text-lg font-bold text-gray-900 mb-3">
                                             {{$product->name}}
                                         </h1>
-                                        <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
-                                        <div class=" items-center flex justify-between ">
+                                        <p class="leading-relaxed text-xs mb-3 my-5 line-clamp-1">
+                                            {{$product->description}}</p>
+                                        <div class=" items-center flex justify-between items-end">
                                             <p class="text-sm">Giá Chỉ Từ <br> <span
                                                     class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>
                                             </p>
+                                            <div>
+                                                <!-- Thích sản phẩm -->
+                                                <button class="like-button" data-product-id="{{ $product->id }}">
+                                                    <i class="fa-solid fa-thumbs-up likeIcon"></i>
+                                                </button>
 
-                                            <!-- Thích sản phẩm -->
-                                            <a href="/like/{{$product->id}}">
-                                                <i class="fa-solid fa-thumbs-up"></i>
-                                            </a>
-
-                                            <!-- Lấy số lượng like của sản phẩm -->
-                                            
-
+                                                <!-- Hiển thị số lượng like của sản phẩm -->
+                                                <span id="likeCount{{ $product->id }}">
+                                                    {{ $product->like_count ?? 0 }}
+                                                </span>
+                                            </div>
 
                                             <div
                                                 class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
@@ -120,6 +133,74 @@
             </section>
 
             <script>
+            //like product
+            document.addEventListener('DOMContentLoaded', function() {
+                // Lặp qua tất cả các nút thích
+                document.querySelectorAll('.like-button').forEach(function(button) {
+                    // Lấy ID sản phẩm từ data attribute
+                    var productId = button.getAttribute('data-product-id');
+
+                    // Gọi hàm để kiểm tra trạng thái like và cập nhật giao diện
+                    checkLikeStatus(productId);
+
+                    // Lắng nghe sự kiện click trên nút thích
+                    button.addEventListener('click', function() {
+                        toggleLike(productId);
+                    });
+                });
+
+                // Hàm kiểm tra trạng thái like và cập nhật giao diện
+                function checkLikeStatus(productId) {
+                    fetch('/check-like/' + productId)
+                        .then(response => response.json())
+                        .then(data => {
+                            var likeButton = document.querySelector('.like-button[data-product-id="' +
+                                productId + '"] .likeIcon');
+
+                            // Thêm hoặc xóa class "liked" tùy thuộc vào trạng thái like
+                            if (data.isLiked) {
+                                likeButton.classList.add('liked');
+                            } else {
+                                likeButton.classList.remove('liked');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Lỗi:', error);
+                        });
+                }
+
+                // Hàm thực hiện thêm hoặc xóa like
+                function toggleLike(productId) {
+                    fetch('/like/' + productId, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Cập nhật số lượng like trên giao diện
+                            var likeCountElement = document.getElementById('likeCount' + productId);
+                            likeCountElement.textContent = data.like;
+
+                            // Thêm hoặc xóa class "liked" tùy thuộc vào trạng thái like
+                            var likeButton = document.querySelector('.like-button[data-product-id="' +
+                                productId + '"] .likeIcon');
+                            if (data.isLiked) {
+                                likeButton.classList.add('liked');
+                            } else {
+                                likeButton.classList.remove('liked');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Lỗi:', error);
+                        });
+                }
+            });
+
+
+            // ----------------------------------------------------------------------------------------
+
             updateMiniCart();
             let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
 
@@ -146,12 +227,10 @@
                     `${formattedInitialBasePrice}đ`;
 
                 // Lưu thông tin sản phẩm vào biến ẩn để sử dụng khi thêm vào giỏ hàng
-                document.getElementById('modal-product-name-hidden').value =
-                    productName;
+                document.getElementById('modal-product-name-hidden').value = productName;
                 document.getElementById('modal-product-price-hidden').value = basePrice;
                 document.getElementById('modal-product-id-hidden').value = productId;
-                document.getElementById('modal-product-image-hidden').value =
-                    productImage;
+                document.getElementById('modal-product-image-hidden').value = productImage;
 
                 // Mở modal
                 firstModal.showModal();
@@ -267,37 +346,6 @@
                 });
                 return selectedToppings;
             }
-
-            //like
-
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     // Lắng nghe sự kiện click trên nút thích
-            //     document.querySelectorAll('.like-button').forEach(function(button) {
-            //         button.addEventListener('click', function(event) {
-            //             event.preventDefault();
-
-            //             // Lấy id sản phẩm từ thuộc tính data-product-id
-            //             var productId = this.getAttribute('data-product-id');
-
-            //             // Gửi yêu cầu AJAX đến /like/{id}
-            //             fetch('/like/' + productId, {
-            //                     method: 'POST', // hoặc 'GET' tùy thuộc vào cách bạn xử lý ở phía server
-            //                     headers: {
-            //                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Thêm token CSRF nếu cần
-            //                     },
-            //                 })
-            //                 .then(response => response.json())
-            //                 .then(data => {
-            //                     // Cập nhật số lượng like trên giao diện
-            //                     document.getElementById('likeCount' + productId)
-            //                         .textContent = data.like;
-            //                 })
-            //                 .catch(error => {
-            //                     console.error('Lỗi:', error);
-            //                 });
-            //         });
-            //     });
-            // });
             </script>
 
 

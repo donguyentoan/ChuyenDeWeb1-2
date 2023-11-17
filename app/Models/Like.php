@@ -11,7 +11,6 @@ class Like extends Model
 
     protected $fillable = [
         "id_like",
-        "like_count", 
         "id_product",
         "id_user",
     ];

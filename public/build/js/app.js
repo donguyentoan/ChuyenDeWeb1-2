@@ -1,3 +1,10 @@
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+    }
+};
 
 // script.js
 const toppingCheckboxes = document.querySelectorAll('.topping');
@@ -50,6 +57,7 @@ function calculateToppingPrice() {
 
 // Cập nhật tổng tiền khi trang web được tải
 updateTotalPrice();
+
 
 
 

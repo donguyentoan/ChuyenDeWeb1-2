@@ -27,6 +27,11 @@ html {
 
 <body>
 
+@include('component.Header')
+
+
+
+
 
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
@@ -69,7 +74,7 @@ html {
 
 
 
-    @include('component.Header')
+    
 
 
     @include('component.Slide')

@@ -16,7 +16,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\BannersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +32,7 @@ use App\Http\Controllers\LikeController;
 Route::get('/', [HomeController::class , 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class , 'index'] );
-    Route::get('/productList', [AdminController::class , 'showProductList'] );
     Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
-    
 });
 
 
@@ -149,6 +147,13 @@ Route::get('/filter',  [FilterController::class , 'getManufacture']);
 //Route::get('/like/{id}', [LikeController::class, 'like']);
 Route::post('/like/{id}', [LikeController::class, 'like']);
 Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
+
+    //Banners
+Route::get('/bannerList', [BannersController::class , 'index'] );
+Route::post('/addBanners', [BannersController::class, 'store']);
+Route::delete('/deleteBanners/{id}', [BannersController::class, 'destroy']);
+Route::get('/editBanners/{id}', [BannersController::class , 'edit'] );
+Route::post('/updateBanners/{id}', [BannersController::class, 'update']);
 
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);

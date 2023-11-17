@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -99,6 +100,10 @@ Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
 Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
     //user
+Route::get('/showUser', [UserController::class , 'index'] );
+Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
+Route::get('/editUser/{id}', [UserController::class , 'edit'] );
+Route::post('/updateUser/{id}', [UserController::class, 'update']);
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );

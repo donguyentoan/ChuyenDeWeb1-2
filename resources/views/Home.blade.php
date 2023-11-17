@@ -14,8 +14,6 @@
 
 @include('component.Header')
 
-
-
 @include('component.Slide')
 
 <!-- Messenger Plugin chat Code -->

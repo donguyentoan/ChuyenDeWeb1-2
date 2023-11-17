@@ -22,7 +22,6 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
-use App\Http\Controllers\LikeController;
 use App\Http\Controllers\BannersController;
 
 /*

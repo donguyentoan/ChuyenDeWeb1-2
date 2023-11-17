@@ -80,7 +80,7 @@ html {
                         <div class="flex flex-wrap ">
                             @foreach($category->products as $product)
                             <div
-                                class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
+                                class="mt-10 md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300">
                                 <div
                                     class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                                     <div class="w-2/5 md:w-full md:p-0 ">
@@ -133,11 +133,12 @@ html {
             </section>
 
             <script>
-            //like product
+
+            //likeProduct------------------------------------------------------------
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Lặp qua tất cả các nút thích
                 document.querySelectorAll('.like-button').forEach(function(button) {
-                    // Lấy ID sản phẩm từ data attribute
                     var productId = button.getAttribute('data-product-id');
 
                     // Gọi hàm để kiểm tra trạng thái like và cập nhật giao diện
@@ -154,15 +155,7 @@ html {
                     fetch('/check-like/' + productId)
                         .then(response => response.json())
                         .then(data => {
-                            var likeButton = document.querySelector('.like-button[data-product-id="' +
-                                productId + '"] .likeIcon');
-
-                            // Thêm hoặc xóa class "liked" tùy thuộc vào trạng thái like
-                            if (data.isLiked) {
-                                likeButton.classList.add('liked');
-                            } else {
-                                likeButton.classList.remove('liked');
-                            }
+                            updateLikeButton(productId, data.isLiked);
                         })
                         .catch(error => {
                             console.error('Lỗi:', error);
@@ -183,20 +176,22 @@ html {
                             var likeCountElement = document.getElementById('likeCount' + productId);
                             likeCountElement.textContent = data.like;
 
-                            // Thêm hoặc xóa class "liked" tùy thuộc vào trạng thái like
-                            var likeButton = document.querySelector('.like-button[data-product-id="' +
-                                productId + '"] .likeIcon');
-                            if (data.isLiked) {
-                                likeButton.classList.add('liked');
-                            } else {
-                                likeButton.classList.remove('liked');
-                            }
+                            // Cập nhật trạng thái like trên nút thích
+                            updateLikeButton(productId, data.isLiked);
                         })
                         .catch(error => {
                             console.error('Lỗi:', error);
                         });
                 }
+
+                // Hàm cập nhật trạng thái like trên nút thích
+                function updateLikeButton(productId, isLiked) {
+                    var likeButton = document.querySelector('.like-button[data-product-id="' + productId +
+                        '"] .likeIcon');
+                    likeButton.classList.toggle('liked', isLiked);
+                }
             });
+
 
 
             // ----------------------------------------------------------------------------------------

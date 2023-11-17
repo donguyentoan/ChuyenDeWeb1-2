@@ -22,7 +22,8 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
-
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\BannersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,11 +121,17 @@ Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
-    Route::post('/like/{id}', [LikeController::class, 'like']);
-    Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
-    
-    
-    
+//Route::get('/like/{id}', [LikeController::class, 'like']);
+Route::post('/like/{id}', [LikeController::class, 'like']);
+Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
+
+    //Banners
+Route::get('/bannerList', [BannersController::class , 'index'] );
+Route::post('/addBanners', [BannersController::class, 'store']);
+Route::delete('/deleteBanners/{id}', [BannersController::class, 'destroy']);
+Route::get('/editBanners/{id}', [BannersController::class , 'edit'] );
+Route::post('/updateBanners/{id}', [BannersController::class, 'update']);
+
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
 Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);

@@ -24,16 +24,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-
-
-
     public function index()
     {
         $categories = Categories::all();
         $manufacture = Manufactures::all();
         $products = Products::latest('updated_at')->paginate(5);
 
-        return view('Dashboard..Products.ProductList' , compact('products' , 'categories', 'manufacture'));
+        return view('Dashboard.Products.ProductList' , compact('products' , 'categories', 'manufacture'));
     }
 
     /**
@@ -62,7 +59,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
             'price' => 'required',
             'categorie' => 'required',
             'manufacture' => 'required',
@@ -123,55 +120,55 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $product = Products::find($id);
+    {
+        $product = Products::find($id);
 
-    $request->validate([
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required',
-        'categorie' => 'required',
-        'manufacture' => 'required',
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'categorie' => 'required',
+            'manufacture' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
+        ]);
 
-    if ($request->hasFile('image')) {
-        // Delete the old photo if it exists
-        $oldPhoto = $product->image;
-        if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-            $deleted = unlink('upload/' . $oldPhoto);
-            
-            // Check if the delete was successful
-            if ($deleted) {
-                // Upload the new image
+        if ($request->hasFile('image')) {
+            // Delete the old photo if it exists
+            $oldPhoto = $product->image;
+            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                $deleted = unlink('upload/' . $oldPhoto);
+                
+                // Check if the delete was successful
+                if ($deleted) {
+                    // Upload the new image
+                    $file = $request->file('image');
+                    $fileName = time() . $file->getClientOriginalName();
+                    $path = 'upload';
+                    $file->move($path, $fileName);
+                    $product->image = $fileName;
+                }
+            } else {
+                // If there's no old photo or it doesn't exist, just upload the new image
                 $file = $request->file('image');
                 $fileName = time() . $file->getClientOriginalName();
                 $path = 'upload';
                 $file->move($path, $fileName);
                 $product->image = $fileName;
             }
-        } else {
-            // If there's no old photo or it doesn't exist, just upload the new image
-            $file = $request->file('image');
-            $fileName = time() . $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
-            $product->image = $fileName;
         }
+        
+
+        // Update the product information
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->categories_id = $request->input('categorie');
+        $product->Manufacture_id = $request->input('manufacture');
+
+        $product->save();
+
+        return redirect('/productList')->with('success', 'Updated successfully');
     }
-    
-
-    // Update the product information
-    $product->name = $request->input('name');
-    $product->description = $request->input('description');
-    $product->price = $request->input('price');
-    $product->categories_id = $request->input('categorie');
-    $product->Manufacture_id = $request->input('manufacture');
-
-    $product->save();
-
-    return redirect('/productList')->with('success', 'Updated successfully');
-}
 
 
     /**
@@ -181,20 +178,20 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    $product = Products::find($id);
+    {
+        $product = Products::find($id);
 
-    // Xóa tệp hình ảnh nếu tồn tại
-    $oldPhoto = $product->image;
-    if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-        unlink('upload/' . $oldPhoto);
+        // Xóa tệp hình ảnh nếu tồn tại
+        $oldPhoto = $product->image;
+        if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+            unlink('upload/' . $oldPhoto);
+        }
+
+        $product->delete();
+
+        // Chuyển hướng quay lại trang hiện tại sau khi xóa
+        return redirect("/productList")->with('success', 'Delete successfully');
     }
-
-    $product->delete();
-
-    // Chuyển hướng quay lại trang hiện tại sau khi xóa
-    return redirect("/productList")->with('success', 'Delete successfully');
-}
 
     //like product
     public function like($id)

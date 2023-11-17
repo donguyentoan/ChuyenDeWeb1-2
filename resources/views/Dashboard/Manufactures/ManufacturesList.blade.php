@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <script src="/build/js/app.js"></script>
 </head>
 
 <body>
@@ -118,18 +119,6 @@
             </div>
         </div>
     </div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Hiển thị thông báo
-        var successMessage = document.getElementById("success-message");
-        successMessage.style.display = "block";
-
-        // Ẩn thông báo sau 5 giây
-        setTimeout(function() {
-            successMessage.style.display = "none";
-        }, 3000);
-    });
-    </script>
 </body>
 
 </html>

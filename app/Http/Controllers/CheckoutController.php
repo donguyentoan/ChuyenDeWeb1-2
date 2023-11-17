@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 
 use App\Models\Orders;
+
+
+use Faker\Core\Number;
 use App\Models\OrderDetails;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\DeliveryInformations;
 use Illuminate\Support\Facades\Session;
 
 
 class CheckoutController extends Controller
 {
+    
     public function index()
     {
         return view('CheckoutOrder.CheckoutOrder');
@@ -124,6 +128,7 @@ class CheckoutController extends Controller
         
 
     }
+    
 
     public function receivingIformation(Request $request)
     {
@@ -142,7 +147,7 @@ class CheckoutController extends Controller
             if($payment_method == "vnpay")
             {
 
-                $miniCart = json_decode(urldecode(request('miniCartData')), true);
+                
 
                 //  dd($miniCart);
                 $order = new Orders();
@@ -179,8 +184,12 @@ class CheckoutController extends Controller
 
                     
                 }
+                $number = $payment_total;
+                $formattedNumber = number_format($number, 0, '.', ',');
 
-                return view('payment.payment' , ["total" => $payment_total]);
+
+                
+                return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total]);
     
                 
             }
@@ -215,10 +224,13 @@ class CheckoutController extends Controller
 
                     $id = $item['id'];
                     $quantity = $item['quantity'];
+                    
                     $price = $item['price'];
 
+                    $formattedNumber = number_format($price, 0, ',', '.');
+
                     $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
-                    VALUES ('$order->id'  , $id , $quantity ,$price )";
+                    VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
                      DB::insert($sql);
 
                     

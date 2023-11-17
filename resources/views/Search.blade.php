@@ -83,21 +83,20 @@
    
     <div class="w-1/4 p-6 border-2  border-black-500  mr-2  rounded-r-xl ">
     <h3 class="text-xl font-bold border-b-2 border-black-500">Categories</h3>
-    <form action="/searchProduct">
-          <div class="list-group">
-    
-
-            @foreach($manufacture as $ct)
-                    <div class="list-group-item checkbox pt-3">
-                        
-                        <label class="" ><input name="manu" type="checkbox" class="common_selector ram  mr-2 w-3" value="{{ $ct->id}}" > {{ $ct->name}} </label>
-                    </div>
-                    @endforeach            
-                </div>
-                <input type="submit" class="bg-blue-500 px-5 py-1" value="Search" >
-         </div>
-    </form>
-  
+    <form action="{{ route('filter') }}" method="get">
+      <div class="list-group">
+          @foreach($manufacture as $ct)
+          <div class="list-group-item checkbox pt-3">
+              <label class="font-medium"><input name="manu[]" type="checkbox" class="common_selector manu mr-2 w-3 " value="{{ $ct->id }}"> {{ $ct->name }} </label>
+          </div>
+          @endforeach
+      </div>
+      <div class="flex justify-end">
+      <input type="submit" class=" w-20  rounded-md mt-5 bg-blue-500 px-5 py-1" value="Filter">
+      </div>
+     
+  </form>
+</div>
     <div class="w-full">    
               <div class="flex flex-wrap ">
           @foreach($search as $key)
@@ -127,7 +126,8 @@
              </div>
              <div class="panigation p-8 ">
             
-            {{ $search->links() }}
+             {{ $search->appends(request()->input())->links() }}
+
        </div>
               
                 

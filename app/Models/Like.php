@@ -1,13 +1,19 @@
 <?php
 
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models\User;
+use App\Models\Products;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Like extends Model
 {
     use HasFactory;
+
 
     protected $fillable = [
         "id_like",
@@ -15,13 +21,19 @@ class Like extends Model
         "id_user",
     ];
 
+
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id_product');
+        return $this->belongsTo(Products::class, 'id');
     }
+
 
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
     }
 }
+
+
+
+

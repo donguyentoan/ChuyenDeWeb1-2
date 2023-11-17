@@ -30,14 +30,14 @@
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>
                     <input type="text" id="name" name="name"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập tên sản phẩm" required>
                 </div>
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 text-black">Description</label>
                     <input type="text" id="description" name="description"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập mô tả sản phẩm" required>
                 </div>
                 <div class="mb-6">
@@ -63,7 +63,7 @@
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 text-black">Price</label>
                     <input type="text" id="price" name="price"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập giá sản phẩm" required>
                 </div>
                 <!--  -->
@@ -74,8 +74,7 @@
                         class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
 
                         @foreach ($categories as $category)
-                        <option class="text-white" name="categorie" value="{{ $category->id }}">{{ $category->name }}
-                        </option>
+                        <option class="text-black" name="categorie" value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
 
                     </select>
@@ -84,10 +83,10 @@
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
                         manufacture classification</label>
                     <select id="manufacture" name="manufacture"
-                        class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500" >
 
                         @foreach ($manufactures as $manufacture)
-                        <option name="manufacture" value="{{ $manufacture->id }}">{{ $manufacture->name }}</option>
+                        <option class="text-black" name="manufacture" value="{{ $manufacture->id }}">{{ $manufacture->name }}</option>
                         @endforeach
 
                     </select>

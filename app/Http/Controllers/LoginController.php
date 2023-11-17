@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Socialite;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+
 
 
 
@@ -32,6 +34,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             return redirect('/');
         }
+        
         return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu'])->withInput($request->only('email', 'remember')); // Đăng nhập thất bại
 
 
@@ -49,9 +52,13 @@ class LoginController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
+    
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+
+       
+        $user = Socialite::driver('google')->stateless()->user();
+
 
         // Check if the user already exists in your application
         $existingUser = User::where('email', $user->email)->first();

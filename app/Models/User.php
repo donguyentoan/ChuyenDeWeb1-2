@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Socialite\Two\User as SocialiteUser;
 
 class User extends Authenticatable
 {
@@ -20,9 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone',
         'email',
         'password',
-
     ];
 
     /**
@@ -43,12 +42,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public static function createFromSocialite(SocialiteUser $socialiteUser)
-    {
-        return static::create([
-            'name' => $socialiteUser->getName(),
-            'email' => $socialiteUser->getEmail(),
-            'password' => bcrypt('some-random-password')
-        ]);
-    }
 }

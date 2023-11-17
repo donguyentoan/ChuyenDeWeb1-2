@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Validator;
 
 class RegisterController extends Controller
@@ -24,40 +25,37 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'min:8'],
         ]);
 
-
-        $data = User::all();
-
-        $temp = true;
-
-        $existingUser = User::where('email', $request->email)->first();
-
-        if ($existingUser) {
+        if (User::where('email', $request->email)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
         }
 
+        if (User::where('phone', $request->phone)->first()) {
+            return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']);
+        }
 
         if ($request->password == $request->password_confirmation) {
 
-            foreach ($data as $item) {
+            $user = User::create([
+                'name' => $request->username,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
 
-                if ($item->phone == $request->phone) {
+            $recipientEmail = $request->email;
 
-                    return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']); // Đăng nhập thất bại
+            $content = 'Tạo tài khoản thành công';
 
-                }
+            Mail::raw($content, function ($email) use ($recipientEmail, $request) {
+                $email->to($recipientEmail)
+                    ->subject("Pizza Store")
+                    ->from($request->email, $request->name);
+            });
 
-                $user = User::create([
-                    'name' => $request->username,
-                    'phone' => $request->phone,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                ]);
+            Auth::login($user);
 
-                Auth::login($user);
-
-                return redirect('/');
-            }
+            return redirect('/');
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }

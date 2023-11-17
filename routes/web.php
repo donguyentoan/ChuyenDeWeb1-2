@@ -3,20 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
+use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
-use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\BannersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,65 +36,26 @@ use App\Http\Controllers\LikeController;
 */
 
 Route::get('/', [HomeController::class , 'index']);
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [AdminController::class , 'index'] );
-    Route::get('/productList', [AdminController::class , 'showProductList'] );
-    Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
-    
-});
 
+Route::get('/auth/login', function () { return view('Login.login');});
 
-
-Route::get('/auth/login', [LoginController::class , 'index']);
-Route::post('/login' , [LoginController::class , 'login'] )->name('login');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// forget
-
-
+Route::post('/login',  [LoginController::class , 'login']);
+Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
+Route::get('/auth/register', function () { return view('Login.register');});
+Route::post('/register' , [RegisterController::class, 'register']);
+Route::get('/newpost', [NewPostController::class , 'index']);
+Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 // Login with gg
 Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
-
-
 Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+
 Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-
-
-// Love
-Route::get('/love-items', [LoveItemController::class, 'index'])->name('love-items.index');
-Route::post('/love-items', [LoveItemController::class, 'store'])->name('love-items.store');
-Route::delete('/love-items/{loveItem}', [LoveItemController::class, 'destroy'])->name('love-items.destroy');
-
-
-
-Route::get('/auth/register', function () {
-    return view('Login.register');
-});
-
-Route::get('/addtocart', function () {
-    return view('addtocart');
-});
-
-Route::get('/checkout', function () {
-    return view('Checkout');
-});
-
-
-Route::get('/mini', function () {
-    return view('Component.test');
-});
-
-
-Route::post('/add-to-cart', [CartController::class , 'addtocart']);
-
-
-
-Route::get('/delItemCart/{$id}', [CartController::class , 'deleteItemCart']);
-
-
-
+Route::get('/contact', [ContactController::class, 'index']);
+Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
+Route::get('/like/{id}', [LikeController::class, 'like']);
 
 
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
@@ -107,8 +74,8 @@ Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::get('/dashboard', [SaleController::class , 'index'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
 
 // Admin
     //product
@@ -134,9 +101,16 @@ Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
 Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
     //user
+Route::get('/showUser', [UserController::class , 'index'] );
+Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
+Route::get('/editUser/{id}', [UserController::class , 'edit'] );
+Route::post('/updateUser/{id}', [UserController::class, 'update']);
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
+Route::get('/vnpay_return' , [paymentController::class , 'vnpay_return'] );
+
+
 Route::get('/OrderDetail', [OrderController::class, 'index']);
 
 
@@ -150,8 +124,36 @@ Route::get('/filter',  [FilterController::class , 'getManufacture']);
 Route::post('/like/{id}', [LikeController::class, 'like']);
 Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 
+    //Banners
+Route::get('/bannerList', [BannersController::class , 'index'] );
+Route::post('/addBanners', [BannersController::class, 'store']);
+Route::delete('/deleteBanners/{id}', [BannersController::class, 'destroy']);
+Route::get('/editBanners/{id}', [BannersController::class , 'edit'] );
+Route::post('/updateBanners/{id}', [BannersController::class, 'update']);
+
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
+Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
+Route::get('/searchProductDashboard', [SearchProductController::class , 'Result_Search_Dashboard']);
+Route::get('/searchOrder', [SearchProductController::class , 'Result_Search_OrderCustomer']);
+
+Route::get('/sale' , [SaleController::class , 'index'] );
+
+Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+
+
+Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
+Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
+
+
+
+Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
+
+
+
+
+
+
 
 
 

@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 
 use App\Models\Products;
+use App\Models\Banners;
 
 class HomeRepositories
 {
@@ -12,6 +13,13 @@ class HomeRepositories
         $products = Products::paginate(8);
      
         return  $products ;
+    }
+
+    public function getAllBanners()
+    {
+        $banners = Banners::all();
+     
+        return  $banners ;
     }
 
 }

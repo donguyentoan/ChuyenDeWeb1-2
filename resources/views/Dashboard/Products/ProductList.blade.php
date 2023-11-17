@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -12,7 +13,9 @@
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <script src="/build/js/app.js"></script>
 </head>
+
 
 <body>
     <div class="div flex">
@@ -21,7 +24,9 @@
         </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs flex">
 
+
             <div class="w-full overflow-x-auto">
+
 
                 @if (session('success'))
                 <div id="success-message"
@@ -40,11 +45,32 @@
                     </div>
                 </div>
                 @endif
-
-                <div class="button_add flex justify-end mr-3">
+                <div class="button_add flex justify-between items-center mr-3">
+                    <form action="/searchProductDashboard" method="get">
+                        <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
+                                    <div class="space-y-10  ">
+                                        <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
+                                            <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                </svg>
+                                                <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
+                                            </div>
+                                            <div
+                                                class="bg-[#0cb0d8] py-1.5 px-5 text-white font-semibold rounded-lg  transition duration-3000 ">
+                                                <input class="text-sm" type="submit" value="Search">
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
                     <a href="/AddProduct"><button
                             class="flex  mx-auto  text-white bg-gradient-to-r from-cyan-500 to-blue-500 border-0 py-2 px-9 m-5  rounded text-xs">Add
-                            Product</button></a>
+                            Product</button>
+                    </a>
                 </div>
                 <table class="w-full whitespace-no-wrap">
                     <thead>
@@ -83,6 +109,7 @@
                                 {{ Str::limit($product->description, 1000) }}
                             </td>
 
+
                             <!-- price -->
                             <td class="px-4 py-3 text-xs w-1/12">
                                 <span
@@ -90,6 +117,7 @@
                                     {{ number_format($product->price, 0, ',', ',') }}đ
                                 </span>
                             </td>
+
 
                             <!-- Categories  -->
                             <td class="px-4 py-3 text-sm w-1/12">
@@ -103,6 +131,8 @@
                             </td>
 
 
+
+
                             <!-- Manufactures -->
                             <td class="px-4 py-3 text-sm w-1/12">
                                 @foreach($manufacture as $items)
@@ -114,14 +144,19 @@
                                 @endforeach
                             </td>
 
+
                             <!-- Lần update cuối cùng -->
                             <td class="px-4 py-3 text-sm w-1/12">
                                 {{$product->updated_at}}
                             </td>
 
+
                             <!-- button xóa sửa -->
                             <td class="px-4 py-3 1/12">
                                 <div class="flex items-center space-x-4 text-sm">
+
+
+
 
 
 
@@ -137,6 +172,7 @@
                                         </button>
                                     </a>
 
+
                                     <form action="/deleteProduct/{{$product->id}}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -150,6 +186,7 @@
                                             </svg>
                                         </button>
                                     </form>
+
 
                                 </div>
                             </td>
@@ -169,6 +206,7 @@
         var successMessage = document.getElementById("success-message");
         successMessage.style.display = "block";
 
+
         // Ẩn thông báo sau 5 giây
         setTimeout(function() {
             successMessage.style.display = "none";
@@ -176,5 +214,6 @@
     });
     </script>
 </body>
+
 
 </html>

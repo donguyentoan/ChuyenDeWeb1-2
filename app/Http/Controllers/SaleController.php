@@ -11,12 +11,12 @@ class SaleController extends Controller
     {
         $salesData = DB::table('orders')
         ->select(
-            DB::raw('YEAR(deliveryInformation_date) AS nam'),
-            DB::raw('MONTH(deliveryInformation_date) AS thang'),
+            DB::raw('YEAR(created_at) AS nam'),
+            DB::raw('MONTH(created_at) AS thang'),
             DB::raw('SUM(total_amount) AS doanh_so')
         )
         ->where('deliveryInformation_date', '>=', now()->subMonths(12))
-        ->groupBy(DB::raw('YEAR(deliveryInformation_date), MONTH(deliveryInformation_date)'))
+        ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
         ->orderByDesc('nam')
         ->orderByDesc('thang')
         ->get();

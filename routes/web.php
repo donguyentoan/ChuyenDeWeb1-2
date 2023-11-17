@@ -19,6 +19,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
+use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
 
 
@@ -114,15 +115,29 @@ Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
-Route::post('/like', [LikeController::class, 'like']);
-Route::delete('/unlike', [LikeController::class, 'unlike']);
-
+    Route::post('/like/{id}', [LikeController::class, 'like']);
+    Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
+    
+    
+    
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
 Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
 Route::get('/sale' , [SaleController::class , 'index'] );
 
 Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+
+
+Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
+Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
+
+
+
+
+
+
+
+
 
 
 

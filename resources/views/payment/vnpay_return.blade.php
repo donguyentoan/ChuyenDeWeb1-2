@@ -42,60 +42,69 @@
         // $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret ?? '');
         ?>
         <!--Begin display -->
-        <div class="container">
-            <div class="header clearfix">
-                <h3 class="text-muted">VNPAY RESPONSE</h3>
-            </div>
-            <div class="table-responsive">
-                <div class="form-group">
-                    <label >Mã đơn hàng:</label>
+        @include('Component.Header')
+        <div class="container mx-auto flex justify-center">
+            <div class="bg-[#67b869] w-80 p-10 m-5 rounded-xl">
 
-                    <label><?php echo $_GET['vnp_TxnRef'] ?></label>
-                </div>    
-                <div class="form-group">
+           
+                <div class="header clearfix">
+                    <h3 class="text-xl text-center font-bold p-5 ">PIZZA STORE</h3>
+                </div>
+                <div class="table-responsive">
+                    <div class="form-group py-1">
+                        <label >Mã đơn hàng:</label>
 
-                    <label >Số tiền:</label>
-                    <label><?php echo $_GET['vnp_Amount'] ?></label>
-                </div>  
-                <div class="form-group">
-                    <label >Nội dung thanh toán:</label>
-                    <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã phản hồi (vnp_ResponseCode):</label>
-                    <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã GD Tại VNPAY:</label>
-                    <label><?php echo $_GET['vnp_TransactionNo'] ?></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã Ngân hàng:</label>
-                    <label><?php echo $_GET['vnp_BankCode'] ?></label>
-                </div> 
-                <div class="form-group">
-                    <label >Thời gian thanh toán:</label>
-                    <label><?php echo $_GET['vnp_PayDate'] ?></label>
-                </div> 
-                <div class="form-group">
-                    <label >Kết quả:</label>
-                    <label>
-                        <?php
-                       
-                            if ($_GET['vnp_ResponseCode'] == '00') {
-                                echo "<span style='color:blue'>GD Thanh cong</span>";
-                            } else {
-                                echo "<span style='color:red'>GD Khong thanh cong</span>";
-                            }
+                        <label><?php echo $_GET['vnp_TxnRef'] ?></label>
+                    </div>    
+                    <div class="form-group py-1">
+
+                        <label >Số tiền:</label>
+                        <label><?php echo $_GET['vnp_Amount'] ?></label>
+                    </div>  
+                    <div class="form-group py-1">
+                        <label >Nội dung thanh toán:</label>
+                        <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
+                    </div> 
+                    <div class="form-group py-1">
+                        <label >Mã phản hồi (vnp_ResponseCode):</label>
+                        <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
+                    </div> 
+                    <div class="form-group py-1">
+                        <label >Mã GD Tại VNPAY:</label>
+                        <label><?php echo $_GET['vnp_TransactionNo'] ?></label>
+                    </div> 
+                    <div class="form-group py-1">
+                        <label >Mã Ngân hàng:</label>
+                        <label><?php echo $_GET['vnp_BankCode'] ?></label>
+                    </div> 
+                    <div class="form-group py-1">
+                        <label >Thời gian thanh toán:</label>
+                        <label><?php echo $_GET['vnp_PayDate'] ?></label>
+                    </div> 
+                    <div class="form-group py-1">
+                        <label >Kết quả:</label>
+                        <label>
+                            <?php
                         
-                        ?>
+                                if ($_GET['vnp_ResponseCode'] == '00') {
+                                    echo "<span style='color:blue'>GD Thanh cong</span>";
+                                } else {
+                                    echo "<span style='color:red'>GD Khong thanh cong</span>";
+                                }
+                            
+                            ?>
 
-                    </label>
-                </div> 
+                        </label>
+                    </div> 
+                    <div class="form-group py-1 text-center  mt-5">
+                        <a class="bg-white  p-2 rounded-md text-black font-medium " href="/">Thành Công</a>
+                    </div> 
+
+                </div>
+                <p>
+                    &nbsp;
+                </p>
             </div>
-            <p>
-                &nbsp;
-            </p>
            
         </div>  
         @include('Component.Footer')

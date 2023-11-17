@@ -592,22 +592,36 @@
 
 
 const salesDataInJs = @json($salesData);
-    
-    // Assuming each object has a 'doanh_so' property
-    const doanhSoValues = salesDataInJs.map(item => item.doanh_so);
 
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const selectedMonth = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12];  // Change this to the desired month abbreviation
+  
+selectedMonth.forEach(element => {
 
+  salesDataInJs.foreach(item => {
+      if(item.thang = selectedMonth ){
+        const selectedDoanhSoValues = salesDataInJs.map(item => item.doanh_so);
+        alert(selectedDoanhSoValues);
+
+      }
+
+  })
+
+});
+
+
+
+
+
+
+// const selectedDoanhSoValues = selectedSalesData.map(item => item.doanh_so);
 const cssColors = (color) => {
   return getComputedStyle(document.documentElement).getPropertyValue(color)
 
 }
-
 const getColor = () => {
   return window.localStorage.getItem('color') ?? 'cyan'
 }
-
 const colors = {
   primary: cssColors(`--color-${getColor()}`),
   primaryLight: cssColors(`--color-${getColor()}-light`),
@@ -615,7 +629,7 @@ const colors = {
   primaryDark: cssColors(`--color-${getColor()}-dark`),
   primaryDarker: cssColors(`--color-${getColor()}-darker`),
 }
-const monthlySalesData = doanhSoValues;
+const monthlySalesData = selectedDoanhSoValues;
 const barChart = new Chart(document.getElementById('barChart'), {
   type: 'bar',
   data: {

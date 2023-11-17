@@ -44,7 +44,7 @@
                           </button>
                           @auth
                             <div id="dropshow" class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Tài Khoản</a>
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông Tin Tài Khoản</a>
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+    
     public function index()
     {
         return view('CheckoutOrder.CheckoutOrder');
@@ -127,6 +128,7 @@ class CheckoutController extends Controller
         
 
     }
+    
 
     public function receivingIformation(Request $request)
     {
@@ -145,7 +147,7 @@ class CheckoutController extends Controller
             if($payment_method == "vnpay")
             {
 
-                $miniCart = json_decode(urldecode(request('miniCartData')), true);
+                
 
                 //  dd($miniCart);
                 $order = new Orders();
@@ -184,7 +186,9 @@ class CheckoutController extends Controller
                 }
                 $number = $payment_total;
                 $formattedNumber = number_format($number, 0, '.', ',');
-                // Output: 12,345.67
+
+
+                
                 return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total]);
     
                 

@@ -102,9 +102,7 @@
     </div>
     <div class="bg-gray-400">
         <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p class="text-gray-500 text-sm text-center sm:text-left">© 2023 Le Phu Vinh —
-                <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1"
-                    target="_blank">@gmail.com</a>
+            <p class="text-gray-500 text-sm text-center sm:text-left">© 2023 Nhóm J - Chuyên Đề Phát Triển Web 2
             </p>
             <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                 <a class="text-gray-500">

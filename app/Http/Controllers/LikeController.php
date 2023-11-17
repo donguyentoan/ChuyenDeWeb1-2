@@ -30,25 +30,24 @@ class LikeController extends Controller
                 // Nếu trạng thái like là true, giảm giá trị like_count
                 $product->like_count--;
                 $product->save();
+                session(['like_status_' . $product->id => false]);
 
                 // Lưu trạng thái like mới vào session
-                session(['like_status_' . $product->id => false]);
+                return response()->json(['like' => $product->like_count, 'likeStatus' => $likeStatus]);
+
             } else {
                 // Nếu trạng thái like là false, tăng giá trị like_count
                 $product->like_count++;
                 $product->save();
+                session(['like_status_' . $product->id => true]);
 
                 // Lưu trạng thái like mới vào session
-                session(['like_status_' . $product->id => true]);
+                return response()->json(['like' => $product->like_count, 'likeStatus' => $likeStatus]);
             }
 
-            return response()->json(['like' => $product->like_count, 'isLiked' => $likeStatus]);
         }
 
         else {
-
-            // Nếu người dùng đăng nhập và là chủ sở hữu sản phẩm
-            // Xử lý trường hợp này
             
             $user = $current_user->id;
 

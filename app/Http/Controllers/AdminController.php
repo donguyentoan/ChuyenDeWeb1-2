@@ -20,30 +20,13 @@ class AdminController extends Controller
         $this->CategoriesRepositories = $CategoriesRepositories;
         $this->OrderRepositories = $OrderRepositories;
     }
-    public function index()
-    {
-        $salesData = DB::table('orders')
-        ->select(
-            DB::raw('YEAR(deliveryInformation_date) AS nam'),
-            DB::raw('MONTH(deliveryInformation_date) AS thang'),
-            DB::raw('SUM(total_amount) AS doanh_so')
-        )
-        ->where('deliveryInformation_date', '>=', now()->subMonths(12))
-        ->groupBy(DB::raw('YEAR(deliveryInformation_date), MONTH(deliveryInformation_date)'))
-        ->orderByDesc('nam')
-        ->orderByDesc('thang')
-        ->get();
-
-
-        
-        return view('Dashboard.Home', ['salesData' => $salesData]);
-        
-    }
+  
 
 
     public function showOrder(){
 
         $orders = $this->OrderRepositories->getAllOrder();
+        
         return view('Dashboard.OrderList' ,[ "orders" => $orders]);
     }
 

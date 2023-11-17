@@ -594,27 +594,18 @@
 const salesDataInJs = @json($salesData);
 
 
-const selectedMonth = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12];  // Change this to the desired month abbreviation
-  
-selectedMonth.forEach(element => {
+const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  salesDataInJs.foreach(item => {
-      if(item.thang = selectedMonth ){
-        const selectedDoanhSoValues = salesDataInJs.map(item => item.doanh_so);
-        alert(selectedDoanhSoValues);
+// Tạo một đối tượng ánh xạ tháng sang giá trị
+const monthToValueMap = salesDataInJs.reduce((map, item) => {
+  const monthNumber = parseInt(item.thang, 10);
+  map[monthNumber] = item.doanh_so;
+  return map;
+}, {});
 
-      }
+// Tạo mảng dữ liệu cho biểu đồ, gán giá trị mặc định là 0 nếu không có dữ liệu
+const monthlySalesData = months.map(month => monthToValueMap[month] || 0);
 
-  })
-
-});
-
-
-
-
-
-
-// const selectedDoanhSoValues = selectedSalesData.map(item => item.doanh_so);
 const cssColors = (color) => {
   return getComputedStyle(document.documentElement).getPropertyValue(color)
 
@@ -629,7 +620,7 @@ const colors = {
   primaryDark: cssColors(`--color-${getColor()}-dark`),
   primaryDarker: cssColors(`--color-${getColor()}-darker`),
 }
-const monthlySalesData = selectedDoanhSoValues;
+
 const barChart = new Chart(document.getElementById('barChart'), {
   type: 'bar',
   data: {
@@ -678,7 +669,9 @@ const barChart = new Chart(document.getElementById('barChart'), {
     },
   },
 })
-      const setup = () => {
+     
+
+const setup = () => {
         const getTheme = () => {
           if (window.localStorage.getItem('dark')) {
             return JSON.parse(window.localStorage.getItem('dark'))

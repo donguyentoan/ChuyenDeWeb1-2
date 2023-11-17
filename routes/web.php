@@ -74,8 +74,8 @@ Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::get('/dashboard', [SaleController::class , 'index'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
 
 // Admin
     //product
@@ -128,6 +128,9 @@ Route::get('/filter',  [FilterController::class , 'getManufacture']);
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
 Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
+Route::get('/searchProductDashboard', [SearchProductController::class , 'Result_Search_Dashboard']);
+Route::get('/searchOrder', [SearchProductController::class , 'Result_Search_OrderCustomer']);
+
 Route::get('/sale' , [SaleController::class , 'index'] );
 
 Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
@@ -137,6 +140,8 @@ Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
 Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
 
 
+
+Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
 
 
 

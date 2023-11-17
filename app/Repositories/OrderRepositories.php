@@ -13,6 +13,7 @@ class OrderRepositories
     {
         $result = DB::table('orders')
         ->select(
+            'orders.id',
             'orders.customer_id',
             'products.name as nameproduct',
             'orderdetails.quantity',
@@ -29,7 +30,7 @@ class OrderRepositories
         ->join('delivery_informations', 'orders.customer_id', '=', 'delivery_informations.id')
         ->join('orderdetails', 'orders.id', '=', 'orderdetails.order_id')
         ->join('products', 'products.id', '=', 'orderdetails.product_id')
-        ->get();
+        ->paginate(2);
 
         return  $result;
 
@@ -47,7 +48,7 @@ class OrderRepositories
             ->groupBy(DB::raw('YEAR(deliveryInformation_date), MONTH(deliveryInformation_date)'))
             ->orderByDesc('nam')
             ->orderByDesc('thang')
-            ->get();
+            ->paginate(3);
 
         return $salesData;
     }

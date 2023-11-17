@@ -224,10 +224,13 @@ class CheckoutController extends Controller
 
                     $id = $item['id'];
                     $quantity = $item['quantity'];
+                    
                     $price = $item['price'];
 
+                    $formattedNumber = number_format($price, 0, ',', '.');
+
                     $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
-                    VALUES ('$order->id'  , $id , $quantity ,$price )";
+                    VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
                      DB::insert($sql);
 
                     

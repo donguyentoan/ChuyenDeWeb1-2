@@ -123,7 +123,7 @@ html {
 
                                                 <!-- Hiển thị số lượng like của sản phẩm -->
                                                 <span id="likeCount{{ $product->id }}">
-                                                    {{ $product->like_count ?? 0 }}
+                                                    {{ $product->like_count  }}
                                                 </span>
                                             </div>
 
@@ -180,13 +180,15 @@ html {
                             var likeButton = document.querySelector('.like-button[data-product-id="' +
                                 productId + '"] .likeIcon');
 
-
                             // Thêm hoặc xóa class "liked" tùy thuộc vào trạng thái like
-                            if (data.isLiked) {
+                            if(isset(productId) ){
+                              if (data.isLiked) {
                                 likeButton.classList.add('liked');
                             } else {
                                 likeButton.classList.remove('liked');
                             }
+                            }
+                            
                         })
                         .catch(error => {
                             console.error('Lỗi:', error);

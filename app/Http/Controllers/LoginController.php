@@ -34,6 +34,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             return redirect('/');
         }
+        
         return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu'])->withInput($request->only('email', 'remember')); // Đăng nhập thất bại
 
 

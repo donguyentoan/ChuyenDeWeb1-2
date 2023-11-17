@@ -1,13 +1,15 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Like;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Products extends Model
 {
     use HasFactory;
+
 
     protected $fillable = [
         'id_product',
@@ -17,14 +19,14 @@ class Products extends Model
         'price',
         'like_count',
         'Category_id',
-        'Manufacture_id',
-        'Combo_id',
+        'manufacture_id',
+        'like_count',
     ];
     public function categories()
     {
         return $this->hasMany(Categories::class);
     }
-    
+   
     public function likes()
     {
         return $this->hasMany(Like::class, 'id_product');
@@ -37,3 +39,7 @@ class Products extends Model
         return $this->likes->count();
     }
 }
+
+
+
+

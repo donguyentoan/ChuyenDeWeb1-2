@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
+use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
 
 
@@ -53,7 +55,7 @@ Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswor
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
-
+Route::get('/like/{id}', [LikeController::class, 'like']);
 
 
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
@@ -72,8 +74,8 @@ Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
-Route::get('/dashboard', [AdminController::class , 'index'] );
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] );
+Route::get('/dashboard', [SaleController::class , 'index'] );
+Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
 
 // Admin
     //product
@@ -99,9 +101,16 @@ Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
 Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
     //user
+Route::get('/showUser', [UserController::class , 'index'] );
+Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
+Route::get('/editUser/{id}', [UserController::class , 'edit'] );
+Route::post('/updateUser/{id}', [UserController::class, 'update']);
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
+Route::get('/vnpay_return' , [paymentController::class , 'vnpay_return'] );
+
+
 Route::get('/OrderDetail', [OrderController::class, 'index']);
 
 
@@ -111,16 +120,34 @@ Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
-//Route::get('/like/{id}', [LikeController::class, 'like']);
-Route::post('/like/{id}', [LikeController::class, 'like']);
-Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
-
+    Route::post('/like/{id}', [LikeController::class, 'like']);
+    Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
+    
+    
+    
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
 Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
+Route::get('/searchProductDashboard', [SearchProductController::class , 'Result_Search_Dashboard']);
+Route::get('/searchOrder', [SearchProductController::class , 'Result_Search_OrderCustomer']);
+
 Route::get('/sale' , [SaleController::class , 'index'] );
 
 Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+
+
+Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
+Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
+
+
+
+Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
+
+
+
+
+
+
 
 
 

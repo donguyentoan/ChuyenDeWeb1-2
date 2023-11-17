@@ -34,12 +34,15 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
 
   <div class="div flex">
+
+
 
     <div class="w-1/5">
       @include('Component.SideBar')
@@ -573,14 +576,103 @@
               <a href="https://github.com/Kamona-WD" target="_blank" class="text-blue-500 hover:underline">Ahmed Kamel</a>
             </div>
           </footer>
+          
         </div>
+        <script>
+    // Access specific property in JavaScript
+    
+   
+</script>
 
     
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
         <script src="./builds/js/script.js"></script>
+        
 
         <script>
-      const setup = () => {
+
+
+const salesDataInJs = @json($salesData);
+
+
+const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+// Tạo một đối tượng ánh xạ tháng sang giá trị
+const monthToValueMap = salesDataInJs.reduce((map, item) => {
+  const monthNumber = parseInt(item.thang, 10);
+  map[monthNumber] = item.doanh_so;
+  return map;
+}, {});
+
+// Tạo mảng dữ liệu cho biểu đồ, gán giá trị mặc định là 0 nếu không có dữ liệu
+const monthlySalesData = months.map(month => monthToValueMap[month] || 0);
+
+const cssColors = (color) => {
+  return getComputedStyle(document.documentElement).getPropertyValue(color)
+
+}
+const getColor = () => {
+  return window.localStorage.getItem('color') ?? 'cyan'
+}
+const colors = {
+  primary: cssColors(`--color-${getColor()}`),
+  primaryLight: cssColors(`--color-${getColor()}-light`),
+  primaryLighter: cssColors(`--color-${getColor()}-lighter`),
+  primaryDark: cssColors(`--color-${getColor()}-dark`),
+  primaryDarker: cssColors(`--color-${getColor()}-darker`),
+}
+
+const barChart = new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        data: monthlySalesData,
+        backgroundColor: colors.primary,
+        hoverBackgroundColor: colors.primaryDark,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: false,
+          ticks: {
+            beginAtZero: true,
+            stepSize: 50,
+            fontSize: 12,
+            fontColor: '#97a4af',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: 10,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          gridLines: false,
+          ticks: {
+            fontSize: 12,
+            fontColor: '#97a4af',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: 5,
+          },
+          categoryPercentage: 0.5,
+          maxBarThickness: '10',
+        },
+      ],
+    },
+    cornerRadius: 2,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+  },
+})
+     
+
+const setup = () => {
         const getTheme = () => {
           if (window.localStorage.getItem('dark')) {
             return JSON.parse(window.localStorage.getItem('dark'))
@@ -710,6 +802,7 @@
           updateLineChart,
         }
       }
+      
     </script>
 </body>
 

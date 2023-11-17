@@ -20,15 +20,13 @@ class AdminController extends Controller
         $this->CategoriesRepositories = $CategoriesRepositories;
         $this->OrderRepositories = $OrderRepositories;
     }
-    public function index()
-    {
-        return view('Dashboard.Home');
-    }
+  
 
 
     public function showOrder(){
 
         $orders = $this->OrderRepositories->getAllOrder();
+        
         return view('Dashboard.OrderList' ,[ "orders" => $orders]);
     }
 

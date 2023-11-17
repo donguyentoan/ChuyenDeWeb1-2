@@ -8,8 +8,8 @@
         <form action="/searchProduct" method="get">
       <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
                   <div class="space-y-10  ">
-                      <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl shadow-lg ">
-                          <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                      <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
+                          <div class="flex bg-gray-100 border-[1px] border-gray-300 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
                                   viewBox="0 0 24 24" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,7 +18,7 @@
                               <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
                           </div>
                           <div
-                              class="bg-red-600 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+                              class="bg-red-500 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
                               <input class="text-sm" type="submit" value="Search"> 
                             
                           </div>
@@ -44,7 +44,7 @@
                           </button>
                           @auth
                             <div id="dropshow" class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Tài Khoản</a>
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông Tin Tài Khoản</a>
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf

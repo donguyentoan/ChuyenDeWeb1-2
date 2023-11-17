@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <script src="/build/js/app.js"></script>
 </head>
 
 <body>
@@ -19,11 +20,11 @@
     <div class="div flex">
         <!-- SideBar -->
         <div class="w-1/7">
-        @include('component.SideBar')
+            @include('component.SideBar')
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#0cb1d8] p-10">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] p-10">
             <form action="/uploads" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
@@ -42,10 +43,20 @@
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
                         Image</label>
-                    <input id="image" type="file" name="image"
-                        class=" p-2 block w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
-                        aria-describedby="user_avatar_help" >
-                    <div class="mt-1 text-sm text-white text-gray-300" id="user_avatar_help">Tải hình ảnh sản
+                    <div class="flex items-center ">
+                        <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
+                            <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
+                                <img class="object-contain w-full h-full " alt=""
+                                    loading="lazy" id="output">
+                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
+                            class=" p-2 block h-12 w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+                            aria-describedby="user_avatar_help">
+                    </div>
+                    <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản
                         phẩm lên</div>
                 </div>
                 <div class="mb-6">
@@ -60,10 +71,11 @@
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
                         product classification</label>
                     <select id="categorie" name="categorie"
-                        class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500" >
+                        class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
 
                         @foreach ($categories as $category)
-                        <option class="text-white" name="categorie" value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option class="text-white" name="categorie" value="{{ $category->id }}">{{ $category->name }}
+                        </option>
                         @endforeach
 
                     </select>
@@ -72,7 +84,7 @@
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
                         manufacture classification</label>
                     <select id="manufacture" name="manufacture"
-                        class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500" >
+                        class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500">
 
                         @foreach ($manufactures as $manufacture)
                         <option name="manufacture" value="{{ $manufacture->id }}">{{ $manufacture->name }}</option>

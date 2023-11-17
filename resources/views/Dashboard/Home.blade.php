@@ -3,14 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>K-WD Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="build/css/tailwind.css" />
-  <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>K-WD Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="build/css/tailwind.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -35,6 +37,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
 
   <div class="div flex">
@@ -148,6 +151,9 @@
                       </svg>
                     </div>
                   </button>
+=======
+    <div class="div flex">
+>>>>>>> like_product
 
                   <!-- Notification button -->
                   <button @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker">
@@ -182,6 +188,7 @@
                     <img class="w-10 h-10 rounded-full" src="build/images/avatar.jpg" alt="Ahmed Kamel">
                   </button>
 
+<<<<<<< HEAD
                   <!-- User dropdown menu -->
                   <div x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:enter-end="translate-y-0 opacity-100" x-transition:leave="transition-all transform ease-in" x-transition:leave-start="translate-y-0 opacity-100" x-transition:leave-end="translate-y-1/2 opacity-0" @click.away="open = false" class="absolute right-0 w-48 py-1 origin-top-right bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark" role="menu" aria-orientation="vertical" aria-label="User menu" style="display: none;">
                     <a href="#" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
@@ -208,6 +215,30 @@
                       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                       </svg>
+=======
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/3 px-2">
+                <div class="rounded-lg shadow-sm mb-4">
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
+                        <div class="px-3 pt-8 pb-10 text-center relative z-10">
+                            <h4 class="text-sm uppercase text-gray-500 leading-tight">Comments</h4>
+                            <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">8,028</h3>
+                            <p class="text-xs text-green-500 leading-tight">▲ 8.2%</p>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0">
+                            <canvas id="chart3" height="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                    <span class="flex items-center col-span-3">
+                        Showing 21-30 of 100
+>>>>>>> like_product
                     </span>
                     <span class="ml-2 text-sm"> Dashboards </span>
                     <span class="ml-auto" aria-hidden="true">
@@ -560,8 +591,8 @@
                     <canvas id="lineChart" width="1218" height="512" style="display: block; height: 256px; width: 609px;" class="chartjs-render-monitor"></canvas>
                   </div>
                 </div>
-              </div>
             </div>
+<<<<<<< HEAD
           </main>
 
           <!-- Main footer -->
@@ -710,6 +741,100 @@
         }
       }
     </script>
+=======
+        </div>
+
+    </div>
+
+
+    <!-- BUY ME A BEER AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
+    <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+        <div>
+            <a title="Buy me a beer" href="https://www.buymeacoffee.com/scottwindon" target="_blank"
+                class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+                <img class="object-cover object-center w-full h-full rounded-full"
+                    src="https://i.pinimg.com/originals/60/fd/e8/60fde811b6be57094e0abc69d9c2622a.jpg" />
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+
+    <div
+        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <span class="flex items-center col-span-3">
+            Showing 21-30 of 100
+        </span>
+        <span class="col-span-2"></span>
+        <!-- Pagination -->
+        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+            <nav aria-label="Table navigation">
+                <ul class="inline-flex items-center">
+                    <li>
+                        <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                            aria-label="Previous">
+                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                <path
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            1
+                        </button>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            2
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            3
+                        </button>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            4
+                        </button>
+                    </li>
+                    <li>
+                        <span class="px-3 py-1">...</span>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            8
+                        </button>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                            9
+                        </button>
+                    </li>
+                    <li>
+                        <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                            aria-label="Next">
+                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                <path
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </span>
+    </div>
+    </div>
+    </div>
+    =======
+    </div>
+    >>>>>>> origin/banner-slide
+>>>>>>> like_product
 </body>
 
 </html>

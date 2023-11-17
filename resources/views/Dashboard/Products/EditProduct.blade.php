@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <script src="/build/js/app.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#0cb1d8] p-10">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] p-10">
             <form action="/updateProduct/{{$product->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
@@ -46,12 +47,12 @@
                         <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
                             <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
                                 <img class="object-contain w-full h-full " src="/upload/{{$product->image}}" alt=""
-                                    loading="lazy">
+                                    loading="lazy" id="output">
                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                 </div>
                             </div>
                         </div>
-                        <input id="image" type="file" name="image"
+                        <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
                             class=" p-2 block h-12 w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
                             aria-describedby="user_avatar_help">
                     </div>
@@ -103,9 +104,6 @@
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Edit
                     Product</button>
             </form>
-    
-        </div>
-    </div>
 </body>
 
 </html>

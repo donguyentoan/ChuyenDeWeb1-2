@@ -111,8 +111,9 @@ Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
-Route::post('/like', [LikeController::class, 'like']);
-Route::delete('/unlike', [LikeController::class, 'unlike']);
+//Route::get('/like/{id}', [LikeController::class, 'like']);
+Route::post('/like/{id}', [LikeController::class, 'like']);
+Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 
 Route::get('/products',  [ProductController::class , 'index']);
 Route::get('/products/filter', [ProductController::class , 'filter']);
@@ -120,7 +121,6 @@ Route::get('/searchProduct', [SearchProductController::class , 'Result_Search'])
 Route::get('/sale' , [SaleController::class , 'index'] );
 
 Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
-
 
 
 

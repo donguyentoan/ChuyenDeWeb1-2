@@ -15,6 +15,7 @@ class Products extends Model
         'description',
         'image',
         'price',
+        'like_count',
         'Category_id',
         'Manufacture_id',
         'Combo_id',
@@ -22,5 +23,17 @@ class Products extends Model
     public function categories()
     {
         return $this->hasMany(Categories::class);
+    }
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'id_product');
+    }
+
+    // Method to get the like count
+    public function getLikeCount()
+    {
+        // Ensure there are likes associated with the product
+        return $this->likes->count();
     }
 }

@@ -10,6 +10,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
 </head>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+.likeIcon.liked {
+    color: #0566ff;
+}
+</style>
+
 <body>
 
 @include('component.Header')
@@ -298,32 +309,15 @@ function addToMiniCart() {
 
 
 
-
-  // JavaScript
- 
-
-
-
-
-  
-
-</script>
-
-
-
-
-        
-</div>
-
-</section>
-
-
-
-
-
-
-
-@include('component.Footer')
-
-
-    
+    function calculateToppingPrice() {
+        let toppingPrice = 0;
+        toppingCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                toppingPrice += parseFloat(checkbox.getAttribute(
+                    'data-topping'));
+            }
+        });
+        return toppingPrice;
+    }
+    </script>
+    @include('component.Footer')

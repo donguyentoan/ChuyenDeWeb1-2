@@ -39,6 +39,7 @@ Route::get('/', [HomeController::class , 'index']);
 
 Route::get('/auth/login', function () { return view('Login.login');});
 
+
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});
@@ -55,6 +56,7 @@ Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswor
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
+
 
 
 

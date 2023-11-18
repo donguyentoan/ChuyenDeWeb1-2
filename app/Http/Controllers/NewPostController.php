@@ -16,9 +16,16 @@ class NewPostController extends Controller
         return view('Post.newpost', compact('newPost'));
     }
     public function detailPost($id){
+        
+        
+        if($detailPost = NewPost::find($id)){
+            return view('Post.detailPost', compact('detailPost'));
+        }
+        else{
+            return view('pages.404');
 
-        $detailPost = NewPost::find($id);
+        }
 
-        return view('Post.detailPost', compact('detailPost'));
+        
     }
 }

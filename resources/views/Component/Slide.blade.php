@@ -1,6 +1,14 @@
+<style>
+    @media screen and (min-width: 768px) {
+        .banner-size{
+            height: 30rem;
+        }
+    }
+</style>
+
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative h-56 overflow-hidden rounded-lg banner-size">
         <!-- vòng lặp banner -->
         @for ($i = 0; $i < 5; $i++) <!-- Item {{ $i + 1 }} -->
             @php

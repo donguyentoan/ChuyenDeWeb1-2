@@ -13,11 +13,8 @@
         <!-- vòng lặp banner -->
         @for ($i = 0; $i < 5; $i++) <!-- Item {{ $i + 1 }} -->
             @php
-            <!-- Tính chỉ số banner bằng cách lấy phần dư của $i khi chia cho số lượng banner -->
-            $index = $i % count($banners);
-
-            <!-- Lấy banner tương ứng với chỉ số -->
-            $banner = $banners[$index];
+                $index = $i % count($banners); 
+                $banner = $banners[$index];
             @endphp
 
             <div class="hidden duration-700 ease-in-out" data-carousel-item>

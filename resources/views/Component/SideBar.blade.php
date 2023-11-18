@@ -2,7 +2,7 @@
     class=" h-[100%] min-h-screen flex-shrink-0 hidden w-64 bg-[#00613c] border-r dark:border-primary-darker dark:bg-darker md:block">
     <div class="flex flex-col h-full">
         <a class="border-b-[1px] border-white text-lg font-bold flex items-center  text-gray-800 dark:text-gray-200"
-            href="#">
+            href="/">
             <img class="w-16 h-16" src="/image/pizzaa.png" alt="">
             <P class="text-white font-[Nosifer]">PIZZA STORE</P>
         </a>

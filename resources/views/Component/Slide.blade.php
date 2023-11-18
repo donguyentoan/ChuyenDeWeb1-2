@@ -1,10 +1,19 @@
+<style>
+@media screen and (min-width: 768px) {
+    .banner-size {
+        height: 30rem;
+    }
+}
+</style>
+
+<!-- ảnh banner -->
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative h-56 overflow-hidden rounded-lg banner-size">
         <!-- vòng lặp banner -->
         @for ($i = 0; $i < 5; $i++) <!-- Item {{ $i + 1 }} -->
             @php
-                $index = $i % count($banners);
+                $index = $i % count($banners); 
                 $banner = $banners[$index];
             @endphp
 
@@ -12,20 +21,21 @@
                 <img src="/upload/{{ $banner->name_banner }}"
                     class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
-        @endfor
+            @endfor
+
 
     </div>
-    <!-- Slider indicators -->
+    <!-- Slider dot -->
     <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
         <!-- vòng lặp banner -->
         @for ($i = 0; $i < 5; $i++) <!-- Item {{ $i + 1 }} -->
             @php
-                $index = $i % count($banners);
-                $banner = $banners[$index];
+            $index = $i % count($banners);
+            $banner = $banners[$index];
             @endphp
             <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
                 data-carousel-slide-to="0"><button>
-        @endfor
+            @endfor
     </div>
     <!-- Slider controls -->
     <button type="button"

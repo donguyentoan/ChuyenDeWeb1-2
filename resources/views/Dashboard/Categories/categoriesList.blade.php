@@ -23,7 +23,7 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#0cb1d8] p-10">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-white p-10">
             <form action="/addCategories" method="post" enctype="multipart/form-data">
                 @csrf
 

@@ -55,7 +55,7 @@ Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswor
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
-Route::get('/like/{id}', [LikeController::class, 'like']);
+
 
 
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
@@ -121,6 +121,7 @@ Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
 //Route::get('/like/{id}', [LikeController::class, 'like']);
+
 Route::post('/like/{id}', [LikeController::class, 'like']);
 Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 

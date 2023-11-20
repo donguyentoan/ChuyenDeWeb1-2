@@ -83,11 +83,11 @@ class ProductController extends Controller
                 
 
                 if (!$categoryExists) {
-                    return redirect('/productList')->with('success', 'Product Already Exists');
+                    return redirect('/productList')->with('success', 'ID Categories is not Exists');
                 }
 
                 if (!$manufactureExists) {
-                    return redirect('/productList')->with('success', 'Product Already Exists');
+                    return redirect('/productList')->with('success', 'ID Manufactures is not Exists');
                 }
 
             } else {

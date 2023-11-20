@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Models\Products;
 
-use App\Models\Manufactures;
 use App\Models\Categories;
+use App\Models\Manufactures;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
 use App\Repositories\OrderRepositories;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\CategoriesRepositories;
 
 
@@ -64,110 +65,170 @@ class ProductController extends Controller
             'categorie' => 'required',
             'manufacture' => 'required',
         ]);
-    
-        $fileName = null; // Đặt giá trị mặc định cho biến $fileName
-    
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Xử lý tệp ở đây
-            $file = $request->file('image');
-            $fileName = time(). $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
-        }
+        
+            // Kiểm tra xem sản phẩm có tồn tại hay không
+            $existingProduct = Products::where('name', $request->input('name'))->first();
 
-        $product = new Products();
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->image = $fileName;
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
-        $product->save();
-    
-        return redirect('/productList')->with('success', 'Add successfully');
-    }
+            if ($existingProduct) {
+                return redirect('/productList')->with('success', 'Product Already Exists');
+            }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $categories = Categories::all();
+            $manufactures = Manufactures::all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $product = Products::find($id);
-        $categories = Categories::all();
-        $manufactures = Manufactures::all();
-        return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
-    }
+            $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+            $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $product = Products::find($id);
-
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'categorie' => 'required',
-            'manufacture' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
-
-        if ($request->hasFile('image')) {
-            // Delete the old photo if it exists
-            $oldPhoto = $product->image;
-            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-                $deleted = unlink('upload/' . $oldPhoto);
+            if (!$categoryExists || !$manufactureExists) {
                 
-                // Check if the delete was successful
-                if ($deleted) {
-                    // Upload the new image
+
+                if (!$categoryExists) {
+                    return redirect('/productList')->with('success', 'Product Already Exists');
+                }
+
+                if (!$manufactureExists) {
+                    return redirect('/productList')->with('success', 'Product Already Exists');
+                }
+
+            } else {
+            if (
+                !Session::has('adding_product')) {
+                // Set a key to prevent continuous adding of products
+                Session::put('adding_product', true);
+
+                $fileName = null;
+
+                if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                    // Handle file here
                     $file = $request->file('image');
-                    $fileName = time() . $file->getClientOriginalName();
+                    $fileName = time(). $file->getClientOriginalName();
                     $path = 'upload';
                     $file->move($path, $fileName);
-                    $product->image = $fileName;
                 }
-            } else {
-                // If there's no old photo or it doesn't exist, just upload the new image
-                $file = $request->file('image');
-                $fileName = time() . $file->getClientOriginalName();
-                $path = 'upload';
-                $file->move($path, $fileName);
+
+                $product = new Products();
+                $product->name = $request->input('name');
+                $product->description = $request->input('description');
                 $product->image = $fileName;
+                $product->price = $request->input('price');
+                $product->categories_id = $request->input('categorie');
+                $product->Manufacture_id = $request->input('manufacture');
+                $product->save();
+                Session::forget('adding_product');
             }
+
+            return redirect('/productList')->with('success', 'Add successfully');
         }
-        
 
-        // Update the product information
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
 
-        $product->save();
+                
+                                    
+                    
+                
+            
+            }
 
-        return redirect('/productList')->with('success', 'Updated successfully');
+
+            /**
+             * Display the specified resource.
+             *
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+            public function show($id)
+            {
+                //
+            }
+
+            /**
+             * Show the form for editing the specified resource.
+             *
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+            public function edit($id)
+            {
+                $product = Products::find($id);
+                $categories = Categories::all();
+                $manufactures = Manufactures::all();
+                return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
+            }
+
+            /**
+             * Update the specified resource in storage.
+             *
+             * @param  \Illuminate\Http\Request  $request
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+            public function update(Request $request, $id)
+            {
+                $product = Products::find($id);
+
+                $request->validate([
+                    'name' => 'required',
+                    'description' => 'required',
+                    'price' => 'required',
+                    'categorie' => 'required',
+                    'manufacture' => 'required',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
+                ]);
+
+                $categories = Categories::all();
+            $manufactures = Manufactures::all();
+
+            $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+            $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+
+            if (!$categoryExists || !$manufactureExists) {
+                
+
+                if (!$categoryExists) {
+                    return redirect('/productList')->with('success', 'Categories is not Exists');
+                }
+
+                if (!$manufactureExists) {
+                    return redirect('/productList')->with('success', 'Manufactures is not Exists');
+                }
+
+            } else {
+
+                    if ($request->hasFile('image')) {
+                        // Delete the old photo if it exists
+                        $oldPhoto = $product->image;
+                        if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                            $deleted = unlink('upload/' . $oldPhoto);
+                            
+                            // Check if the delete was successful
+                            if ($deleted) {
+                                // Upload the new image
+                                $file = $request->file('image');
+                                $fileName = time() . $file->getClientOriginalName();
+                                $path = 'upload';
+                                $file->move($path, $fileName);
+                                $product->image = $fileName;
+                            }
+                        } else {
+                            // If there's no old photo or it doesn't exist, just upload the new image
+                            $file = $request->file('image');
+                            $fileName = time() . $file->getClientOriginalName();
+                            $path = 'upload';
+                            $file->move($path, $fileName);
+                            $product->image = $fileName;
+                        }
+                    }
+
+                    // Update the product information
+                    $product->name = $request->input('name');
+                    $product->description = $request->input('description');
+                    $product->price = $request->input('price');
+                    $product->categories_id = $request->input('categorie');
+                    $product->Manufacture_id = $request->input('manufacture');
+
+                    $product->save();
+                }   
+
+                return redirect('/productList')->with('success', 'Updated successfully');
     }
 
 

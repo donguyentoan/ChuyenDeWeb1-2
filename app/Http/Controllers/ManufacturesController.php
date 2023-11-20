@@ -18,48 +18,28 @@ class ManufacturesController extends Controller
         return view('Dashboard..Manufactures.ManufacturesList' , compact('manufactures'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        $manufacture = new Manufactures();
-        $manufacture->name = $request->input('name');
-        $manufacture->save();
+        $existingProduct = Manufactures::where('name', $request->input('name'))->first();
+
+        if ($existingProduct) {
+            return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
+        }
+
+        if (!Session::has('adding_product')) {
+            
+            Session::put('adding_product', true);
+            $manufacture = new Manufactures();
+            $manufacture->name = $request->input('name');
+            $manufacture->save();
+            Session::forget('adding_product');
+        }
 
         return redirect('/showManufactures')->with('success', 'Add successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
         $manufactures = Manufactures::latest('updated_at')->paginate(5);
@@ -76,6 +56,11 @@ class ManufacturesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $existingProduct = Manufactures::where('name', $request->input('name'))->first();
+
+        if ($existingProduct) {
+            return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
+        }
         $manufacture = Manufactures::find($id);
         $manufacture->name = $request->input('name');
         $manufacture->save();

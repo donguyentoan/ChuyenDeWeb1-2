@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoriesController extends Controller
 {
@@ -19,48 +20,29 @@ class CategoriesController extends Controller
         return view('Dashboard..Categories.categoriesList' , compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        $category = new Categories();
-        $category->name = $request->input('name');
-        $category->save();
+        $existingProduct = Categories::where('name', $request->input('name'))->first();
+
+        if ($existingProduct) {
+            return redirect('/showCategories')->with('success', 'Categories Already Exists');
+        }
+
+        if (!Session::has('adding_product')) {
+            // Đặt khoá để ngăn chặn thêm sản phẩm liên tục
+            Session::put('adding_product', true);
+
+            $category = new Categories();
+            $category->name = $request->input('name');
+            $category->save();
+            Session::forget('adding_product');
+         }
 
         return redirect('/showCategories')->with('success', 'Add successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $categorie = Categories::find($id);
@@ -68,15 +50,15 @@ class CategoriesController extends Controller
         return view('Dashboard.Categories.EditCategories', ['categorie' => $categorie, 'categories' => $categories]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
+        $existingProduct = Categories::where('name', $request->input('name'))->first();
+
+        if ($existingProduct) {
+            return redirect('/showCategories')->with('success', 'Categories Already Exists');
+        }
+
         $categories = Categories::find($id);
         $categories->name = $request->input('name');
         $categories->save();

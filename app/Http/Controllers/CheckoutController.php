@@ -231,9 +231,7 @@ class CheckoutController extends Controller
 
                     $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
-                     DB::insert($sql);
-
-                    
+                     DB::insert($sql); 
                 }
 
                

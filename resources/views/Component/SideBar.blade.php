@@ -80,6 +80,10 @@
                         class=" flex block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
                         All User
                     </a>
+                    <a href="/ShowPayment" role="menuitem"
+                    class=" flex block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
+                    All  Information Payment
+                </a>
                 </div>
             </div>
             

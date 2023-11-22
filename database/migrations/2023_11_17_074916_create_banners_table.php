@@ -15,8 +15,13 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table ->string('name_banner');
+            $table->string('name_banner');
             $table->timestamps();
+        });
+
+        // Thêm khóa chính (primary key) cho cột `id`
+        Schema::table('banners', function (Blueprint $table) {
+            $table->primary('id');
         });
     }
 
@@ -30,3 +35,4 @@ class CreateBannersTable extends Migration
         Schema::dropIfExists('banners');
     }
 }
+

@@ -12,7 +12,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.10",
         "laravel/tinker": "^2.5",
-        "nesbot/carbon": "^2.71"
+        "nesbot/carbon": "^2.71",
+        "spatie/laravel-permission": "^6.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

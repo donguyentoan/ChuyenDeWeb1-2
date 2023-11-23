@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Socialite;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Socialite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -25,13 +26,24 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8'
         ]);
+        $roles = Role::all();
         $remember = $request->filled('remember');
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $remember)) {
+            $role = Auth::user()->role;
+            foreach($roles as $rl){
+                if($role == $rl->id){
+
+
+                }
+
+            }
+           
             return redirect('/');
         }
         

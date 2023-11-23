@@ -40,6 +40,11 @@ Route::get('/', [HomeController::class , 'index']);
 Route::get('/auth/login', function () { return view('Login.login');});
 
 
+
+Route::middleware(['auth', 'checkRole:admin'])->group(function () {
+    Route::get('/dashboard', [SaleController::class , 'index'] );
+});
+
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});

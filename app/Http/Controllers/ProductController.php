@@ -121,53 +121,56 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Check if the product with the given ID exists in the database.
         $product = Products::find($id);
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'categorie' => 'required',
-            'manufacture' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        if ($product) {
+            // Validation rules
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'categorie' => 'required',
+                'manufacture' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
+            ]);
 
-        if ($request->hasFile('image')) {
-            // Delete the old photo if it exists
-            $oldPhoto = $product->image;
-            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-                $deleted = unlink('upload/' . $oldPhoto);
-                
-                // Check if the delete was successful
-                if ($deleted) {
-                    // Upload the new image
-                    $file = $request->file('image');
-                    $fileName = time() . $file->getClientOriginalName();
-                    $path = 'upload';
-                    $file->move($path, $fileName);
-                    $product->image = $fileName;
+            if ($request->hasFile('image')) {
+                // Delete the old photo if it exists
+                $oldPhoto = $product->image;
+                if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                    $deleted = unlink('upload/' . $oldPhoto);
+
+                    // Check if the delete was successful
+                    if (!$deleted) {
+                        return redirect('/productList')->with('error', 'Failed to delete old image');
+                    }
                 }
-            } else {
-                // If there's no old photo or it doesn't exist, just upload the new image
+
+                // Upload the new image
                 $file = $request->file('image');
                 $fileName = time() . $file->getClientOriginalName();
                 $path = 'upload';
                 $file->move($path, $fileName);
                 $product->image = $fileName;
             }
+
+            // Update the product information
+            $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
+            $product->categories_id = $request->input('categorie');
+            $product->Manufacture_id = $request->input('manufacture');
+
+            // Save the updated product
+            $product->save();
+
+            return redirect('/productList')->with('success', 'Updated successfully');
+        } else {
+            // If the product with the specified ID doesn't exist, redirect with an error message.
+            return redirect('/productList')->with('success', 'Error! Product not found');
         }
-        
 
-        // Update the product information
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
-
-        $product->save();
-
-        return redirect('/productList')->with('success', 'Updated successfully');
     }
 
 
@@ -179,18 +182,25 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+
+        // Check if the product with the given ID exists in the database.
         $product = Products::find($id);
 
-        // Xóa tệp hình ảnh nếu tồn tại
-        $oldPhoto = $product->image;
-        if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-            unlink('upload/' . $oldPhoto);
+        if ($product) {
+            // Xóa tệp hình ảnh nếu tồn tại
+            $oldPhoto = $product->image;
+            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                unlink('upload/' . $oldPhoto);
+            }
+
+            $product->delete();
+
+            // Chuyển hướng quay lại trang hiện tại sau khi xóa
+            return redirect("/productList")->with('success', 'Delete successfully');
+        } else {
+            // If the product with the specified ID doesn't exist, redirect with an error message.
+            return redirect('/productList')->with('success', 'Error! Product not found');
         }
-
-        $product->delete();
-
-        // Chuyển hướng quay lại trang hiện tại sau khi xóa
-        return redirect("/productList")->with('success', 'Delete successfully');
     }
 
     //like product

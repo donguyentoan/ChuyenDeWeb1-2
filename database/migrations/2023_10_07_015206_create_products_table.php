@@ -11,21 +11,24 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->String('name');
-            $table->String('description');
-            $table->String('image');
-            $table->double('price');
-            $table->Integer('Category_id');
-            $table->Integer('Manufacture_id');
-            $table->Integer('Combo_id');
-            $table->timestamps();
-           
-        });
-    }
+        public function up()
+        {
+            Schema::create('products', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->text('description');
+                $table->string('image');
+                $table->float('price');
+                $table->integer('like_count')->nullable();
+                $table->bigInteger('categories_id')->unsigned();
+                $table->bigInteger('manufacture_id')->unsigned();
+                $table->timestamps();
+    
+                // $table->foreign('categories_id')->references('id')->on('categories');
+                // $table->foreign('manufacture_id')->references('id')->on('manufactures');
+            });
+        }
+    
 
     /**
      * Reverse the migrations.

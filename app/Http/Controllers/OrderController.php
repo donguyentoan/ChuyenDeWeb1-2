@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
+use App\Models\Products;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\DeliveryInformations;
 
 class OrderController extends Controller
 {
@@ -10,10 +15,14 @@ class OrderController extends Controller
     {
         return view('OrderDetails.orderDetails');
     }
-
-
-    public function saveOrder()
+    public function deleteOrder($orderId)
     {
-        $miniCartData = $request->input('miniCart');
+        // Xóa đơn hàng dựa trên ID
+        DB::table('orders')->where('id', $orderId)->delete();
+
+
+        // Chuyển hướng hoặc trả về một thông báo xác nhận xóa
+        return redirect()->route('order.list')->with('success', 'Đơn hàng đã được xóa thành công.');
     }
+
 }

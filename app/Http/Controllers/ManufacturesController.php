@@ -59,6 +59,9 @@ class ManufacturesController extends Controller
             return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
         }
         $manufacture = Manufactures::find($id);
+        if ($manufacture == null) {
+            return redirect('/showManufactures')->with('success', 'Manufactures Not Found');
+        }
         $manufacture->name = $request->input('name');
         $manufacture->save();
 
@@ -74,6 +77,9 @@ class ManufacturesController extends Controller
     public function destroy($id)
     {
         $manufacture = Manufactures::find($id);
+        if ($manufacture == null) {
+            return redirect('/showManufactures')->with('success', 'Manufactures Not Found');
+        }
         $manufacture->delete();
 
         // Chuyển hướng quay lại trang hiện tại sau khi xóa

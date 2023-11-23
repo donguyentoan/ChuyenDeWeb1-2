@@ -28,9 +28,6 @@ class CategoriesController extends Controller
         if ($existingProduct) {
             return redirect('/showCategories')->with('success', 'Categories Already Exists');
         }
-
-      
-
             $category = new Categories();
             $category->name = $request->input('name');
             $category->save();
@@ -57,6 +54,9 @@ class CategoriesController extends Controller
         }
 
         $categories = Categories::find($id);
+        if ($categories == null) {
+            return redirect('/showCategories')->with('success', 'Categories Not Found');
+        }
         $categories->name = $request->input('name');
         $categories->save();
 
@@ -72,6 +72,9 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $categories = Categories::find($id);
+        if ($categories == null) {
+            return redirect('/showCategories')->with('success', 'Categories Not Found');
+        }
         $categories->delete();
 
         // Chuyển hướng quay lại trang hiện tại sau khi xóa

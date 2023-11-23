@@ -91,10 +91,7 @@ class ProductController extends Controller
                 }
 
             } else {
-            if (
-                !Session::has('adding_product')) {
-                // Set a key to prevent continuous adding of products
-                Session::put('adding_product', true);
+           
 
                 $fileName = null;
 
@@ -114,8 +111,7 @@ class ProductController extends Controller
                 $product->categories_id = $request->input('categorie');
                 $product->Manufacture_id = $request->input('manufacture');
                 $product->save();
-                Session::forget('adding_product');
-            }
+             
 
             return redirect('/productList')->with('success', 'Add successfully');
         }

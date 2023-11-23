@@ -29,15 +29,12 @@ class CategoriesController extends Controller
             return redirect('/showCategories')->with('success', 'Categories Already Exists');
         }
 
-        if (!Session::has('adding_product')) {
-            // Đặt khoá để ngăn chặn thêm sản phẩm liên tục
-            Session::put('adding_product', true);
+      
 
             $category = new Categories();
             $category->name = $request->input('name');
             $category->save();
-            Session::forget('adding_product');
-         }
+
 
         return redirect('/showCategories')->with('success', 'Add successfully');
     }

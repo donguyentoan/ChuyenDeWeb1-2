@@ -27,14 +27,11 @@ class ManufacturesController extends Controller
             return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
         }
 
-        if (!Session::has('adding_product')) {
-            
-            Session::put('adding_product', true);
+       
             $manufacture = new Manufactures();
             $manufacture->name = $request->input('name');
             $manufacture->save();
-            Session::forget('adding_product');
-        }
+        
 
         return redirect('/showManufactures')->with('success', 'Add successfully');
     }

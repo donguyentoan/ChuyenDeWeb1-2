@@ -42,9 +42,7 @@ class BannersController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
     
-        // Đặt giá trị mặc định cho biến $fileName
-        if (!Session::has('adding_product')) {
-            Session::put('adding_product', true);
+       
     
                 $fileName = null;
     
@@ -72,8 +70,7 @@ class BannersController extends Controller
             $banner = new Banners();
             $banner->name_banner = $fileName;
             $banner->save();
-        }
-            Session::forget('adding_product');
+      
     
           
             return redirect('/bannerList')->with('success', 'Add successfully');

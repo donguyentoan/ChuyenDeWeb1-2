@@ -95,9 +95,9 @@
                 <h1 class="text-xl font-bold text-center text-white " >{{$category->name}}</h1>
               </div>
 
-              <div class="flex flex-wrap ">
+              <div class="flex flex-wrap items-end">
               @foreach($category->products as $product)
-              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
+              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md:mt-5 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
                     <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$product->image}}" alt="blog">

@@ -21,9 +21,6 @@ class CreateOrdersTable extends Migration
             $table->integer('status');
             $table->integer('payment_method');
             $table->timestamps();
-
-            // Thêm ràng buộc khóa ngoại cho cột `customer_id`
-            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

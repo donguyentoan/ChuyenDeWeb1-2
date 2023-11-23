@@ -129,17 +129,20 @@ html {
 
 
                                             <div
-                                                class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-                                                <input
-                                                    onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"
-                                                    type="button" value="Mua Ngay"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1 rounded-lg text-green-500">
+                                                <input onclick="showModal(this)" type="button" value="Mua Ngay"
+                                                    data-product-name="{{ $product->name }}"
+                                                    data-product-price="{{ $product->price }}"
+                                                    data-product-id="{{ $product->id }}"
+                                                    data-product-image="{{ $product->image }}"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 "
                                                     viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd"
                                                         d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                                 </svg>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -153,27 +156,44 @@ html {
 
 
             <script>
-
-
-            //likeProduct------------------------------------------------------------
-
-
             document.addEventListener('DOMContentLoaded', function() {
+                updateMiniCart();
+                let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
+                // const basePrice = parseFloat(document.getElementById('modal-product-price-hidden').value);
+                let totalPrice = basePrice;
+
+                // Lấy các phần tử HTML cần sử dụng
+                const toppingCheckboxes = document.querySelectorAll('.topping');
+                const sizeRadios = document.querySelectorAll('.size');
+                const totalPriceElement = document.getElementById('modal-product-price');
+
+
+                // Lắng nghe sự kiện khi có thay đổi kích thước hoặc topping
+                sizeRadios.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        updateTotalPrice();
+                    });
+                });
+
+                // Lắng nghe sự kiện khi có thay đổi kích thước hoặc topping
+                toppingCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        updateTotalPrice();
+                    });
+                });
+
+                //likeProduct------------------------------------------------------------
+
                 // Lặp qua tất cả các nút thích
                 document.querySelectorAll('.like-button').forEach(function(button) {
                     var productId = button.getAttribute('data-product-id');
-
-
                     // Gọi hàm để kiểm tra trạng thái like và cập nhật giao diện
                     checkLikeStatus(productId);
-
-
                     // Lắng nghe sự kiện click trên nút thích
                     button.addEventListener('click', function() {
                         toggleLike(productId);
                     });
                 });
-
 
                 // Hàm kiểm tra trạng thái like và cập nhật giao diện
                 function checkLikeStatus(productId) {
@@ -186,7 +206,6 @@ html {
                             console.error('Lỗi:', error);
                         });
                 }
-
 
                 // Hàm thực hiện thêm hoặc xóa like
                 function toggleLike(productId) {
@@ -210,209 +229,157 @@ html {
                             console.error('Lỗi:', error);
                         });
                 }
-
-
                 // Hàm cập nhật trạng thái like trên nút thích
                 function updateLikeButton(productId, isLiked) {
                     var likeButton = document.querySelector('.like-button[data-product-id="' + productId +
                         '"] .likeIcon');
                     likeButton.classList.toggle('liked', isLiked);
                 }
+                // Lấy các phần tử modal từ DOM
+                var modalProductName = document.getElementById('modal-product-name');
+                var modalProductId = document.getElementById('modal-product-id');
+                var modalProductImage = document.getElementById('modal-product-Image');
+                var modalProductPrice = document.getElementById('modal-product-price');
+
+                var productName = button.getAttribute('data-product-name');
+                    var productPrice = parseFloat(button.getAttribute('data-product-price'));
+                    var productId = parseInt(button.getAttribute('data-product-id'));
+                    var productImage = button.getAttribute('data-product-image');
             });
 
+                // ----------------------------------------------------------------------------------------
 
+                function showModal(button) {
 
+                    if (modalProductName && modalProductId && modalProductImage && modalProductPrice) {
+                        // Cập nhật thông tin sản phẩm trong modal
+                        modalProductName.textContent = productName;
+                        modalProductId.textContent = productId;
+                        modalProductImage.src = "/upload/" + productImage;
 
+                        // Cập nhật giá ban đầu cho sản phẩm mới
+                        basePrice = productPrice;
 
+                        // Hiển thị giá ban đầu trên modal
+                        const formattedInitialBasePrice = basePrice.toFixed(0).replace(
+                            /\d(?=(\d{3})+$)/g, '$&,');
+                        modalProductPrice.textContent = `${formattedInitialBasePrice}đ`;
 
-            // ----------------------------------------------------------------------------------------
+                        // Lưu thông tin sản phẩm vào biến ẩn để sử dụng khi thêm vào giỏ hàng
+                        document.getElementById('modal-product-name-hidden').value = productName;
+                        document.getElementById('modal-product-price-hidden').value = basePrice;
+                        document.getElementById('modal-product-id-hidden').value = productId;
+                        document.getElementById('modal-product-image-hidden').value = productImage;
 
-
-            updateMiniCart();
-            let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
-
-
-            // const basePrice = parseFloat(document.getElementById('modal-product-price-hidden').value);
-            let totalPrice = basePrice;
-
-
-
-
-            function showModal(productName, productPrice, productId, productImage) {
-                // Cập nhật thông tin sản phẩm trong modal
-                document.getElementById('modal-product-name').textContent = productName;
-                document.getElementById('modal-product-id').textContent = productId;
-                document.getElementById('modal-product-Image').src = "/upload/" +
-                    productImage;
-
-
-
-
-
-
-                // Cập nhật giá ban đầu cho sản phẩm mới
-                basePrice = productPrice;
-
-
-                // Hiển thị giá ban đầu trên modal
-                const formattedInitialBasePrice = basePrice.toFixed(0).replace(
-                    /\d(?=(\d{3})+$)/g, '$&,');
-                document.getElementById('modal-product-price').textContent =
-                    `${formattedInitialBasePrice}đ`;
-
-
-                // Lưu thông tin sản phẩm vào biến ẩn để sử dụng khi thêm vào giỏ hàng
-                document.getElementById('modal-product-name-hidden').value = productName;
-                document.getElementById('modal-product-price-hidden').value = basePrice;
-                document.getElementById('modal-product-id-hidden').value = productId;
-                document.getElementById('modal-product-image-hidden').value = productImage;
-
-
-                // Mở modal
-                firstModal.showModal();
-            }
-
-
-            // Lấy các phần tử HTML cần sử dụng
-            const toppingCheckboxes = document.querySelectorAll('.topping');
-            const sizeRadios = document.querySelectorAll('.size');
-            const totalPriceElement = document.getElementById('modal-product-price');
-
-
-            // Lắng nghe sự kiện khi có thay đổi kích thước hoặc topping
-            sizeRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    updateTotalPrice();
-                });
-            });
-
-
-            toppingCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    updateTotalPrice();
-                });
-            });
-
-
-            // JavaScript
-            function updateTotalPrice() {
-                const selectedSize = document.querySelector(
-                    'input[name="size"]:checked');
-                const sizePrice = selectedSize ? parseFloat(selectedSize.getAttribute(
-                    'data-price')) : 0;
-                const toppingPrice = calculateToppingPrice();
-                totalPrice = basePrice + sizePrice + toppingPrice;
-
-
-                // Sử dụng toFixed(2) để giới hạn số lẻ đến 2 chữ số thập phân
-                let formattedNumber = totalPrice.toLocaleString('en-US', {
-                    style: 'decimal',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                });
-
-
-                // Cập nhật nội dung của totalPriceElement với định dạng số đã sửa
-                totalPriceElement.textContent = `${formattedNumber}đ`;
-            }
-
-
-
-
-
-
-            function calculateToppingPrice() {
-                let toppingPrice = 0;
-                toppingCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        toppingPrice += parseFloat(checkbox.getAttribute(
-                            'data-topping'));
+                        // Mở modal
+                        firstModal.showModal();
+                    } else {
+                        console.error('Không tìm thấy một hoặc nhiều phần tử modal trong DOM.');
                     }
-                });
-                return toppingPrice;
-            }
-
-
-
-
-            function addToMiniCart() {
-                // Lấy thông tin sản phẩm từ các phần tử HTML
-                const productName = document.getElementById('modal-product-name-hidden')
-                    .value;
-                const productImage = document.getElementById(
-                    'modal-product-image-hidden').value;
-                const productPrice = totalPrice; // Lấy tổng giá
-                const productId = document.getElementById('modal-product-id-hidden')
-                    .value;
-                const size = document.querySelector('input[name="size"]:checked').value;
-                const crust = getSelectedToppings();
-                const notes = document.querySelector('textarea[name="ghichu"]').value;
-
-
-                // Tạo đối tượng sản phẩm
-                const product = {
-                    id: productId,
-                    name: productName,
-                    image: productImage,
-                    price: productPrice, // Sử dụng giá tính toán từ các lựa chọn
-                    size: size,
-                    crust: crust,
-                    notes: notes,
-                    quantity: 1
-                };
-
-
-                // Thêm sản phẩm vào giỏ hàng (sử dụng local storage hoặc nơi bạn lưu trữ giỏ hàng)
-                const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
-
-
-                // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-                const existingProductIndex = miniCart.findIndex(item => item.id ===
-                    productId);
-                if (existingProductIndex !== -1) {
-                    // Nếu sản phẩm đã tồn tại, tăng quantity lên
-                    miniCart[existingProductIndex].quantity += 1;
-                } else {
-                    // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
-                    miniCart.push(product);
                 }
 
 
-                localStorage.setItem('miniCartss', JSON.stringify(miniCart));
+                // JavaScript
+                function updateTotalPrice() {
+                    const selectedSize = document.querySelector(
+                        'input[name="size"]:checked');
+                    const sizePrice = selectedSize ? parseFloat(selectedSize.getAttribute(
+                        'data-price')) : 0;
+                    const toppingPrice = calculateToppingPrice();
+                    totalPrice = basePrice + sizePrice + toppingPrice;
+
+                    // Sử dụng toFixed(2) để giới hạn số lẻ đến 2 chữ số thập phân
+                    let formattedNumber = totalPrice.toLocaleString('en-US', {
+                        style: 'decimal',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    });
 
 
-                // Cập nhật số lượng sản phẩm trong mini cart
-                const itemCount = document.querySelector('.minicart--item-count');
-                itemCount.textContent = miniCart.length;
-                updateMiniCart();
-                // Đóng modal sau khi thêm sản phẩm thành công
-            }
+                    // Cập nhật nội dung của totalPriceElement với định dạng số đã sửa
+                    totalPriceElement.textContent = `${formattedNumber}đ`;
+                }
+
+                function calculateToppingPrice() {
+                    let toppingPrice = 0;
+                    toppingCheckboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            toppingPrice += parseFloat(checkbox.getAttribute(
+                                'data-topping'));
+                        }
+                    });
+                    return toppingPrice;
+                }
+
+                function addToMiniCart() {
+                    // Lấy thông tin sản phẩm từ các phần tử HTML
+                    const productName = document.getElementById('modal-product-name-hidden')
+                        .value;
+                    const productImage = document.getElementById(
+                        'modal-product-image-hidden').value;
+                    const productPrice = totalPrice; // Lấy tổng giá
+                    const productId = document.getElementById('modal-product-id-hidden')
+                        .value;
+                    const size = document.querySelector('input[name="size"]:checked').value;
+                    const crust = getSelectedToppings();
+                    const notes = document.querySelector('textarea[name="ghichu"]').value;
 
 
-            // Hàm lấy các topping đã chọn
-            function getSelectedToppings() {
-                const selectedToppings = [];
-                toppingCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        selectedToppings.push(checkbox.value);
+                    // Tạo đối tượng sản phẩm
+                    const product = {
+                        id: productId,
+                        name: productName,
+                        image: productImage,
+                        price: productPrice, // Sử dụng giá tính toán từ các lựa chọn
+                        size: size,
+                        crust: crust,
+                        notes: notes,
+                        quantity: 1
+                    };
+
+
+                    // Thêm sản phẩm vào giỏ hàng (sử dụng local storage hoặc nơi bạn lưu trữ giỏ hàng)
+                    const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
+
+
+                    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+                    const existingProductIndex = miniCart.findIndex(item => item.id ===
+                        productId);
+                    if (existingProductIndex !== -1) {
+                        // Nếu sản phẩm đã tồn tại, tăng quantity lên
+                        miniCart[existingProductIndex].quantity += 1;
+                    } else {
+                        // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+                        miniCart.push(product);
                     }
-                });
-                return selectedToppings;
-            }
+
+
+                    localStorage.setItem('miniCartss', JSON.stringify(miniCart));
+
+
+                    // Cập nhật số lượng sản phẩm trong mini cart
+                    const itemCount = document.querySelector('.minicart--item-count');
+                    itemCount.textContent = miniCart.length;
+                    updateMiniCart();
+                    // Đóng modal sau khi thêm sản phẩm thành công
+                }
+
+                // Hàm lấy các topping đã chọn
+                function getSelectedToppings() {
+                    const selectedToppings = [];
+                    toppingCheckboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            selectedToppings.push(checkbox.value);
+                        }
+                    });
+                    return selectedToppings;
+                }
+            
             </script>
-
-
-
-
         </div>
     </section>
-
-
     @include('component.Footer')
-
-
 </body>
 
 
 </html>
-

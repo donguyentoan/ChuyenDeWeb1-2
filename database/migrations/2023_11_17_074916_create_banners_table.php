@@ -18,11 +18,6 @@ class CreateBannersTable extends Migration
             $table->string('name_banner');
             $table->timestamps();
         });
-
-        // Thêm khóa chính (primary key) cho cột `id`
-        Schema::table('banners', function (Blueprint $table) {
-            $table->primary('id');
-        });
     }
 
     /**

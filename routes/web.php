@@ -35,7 +35,7 @@ use App\Http\Controllers\BannersController;
 |
 */
 
-Route::get('/', [HomeController::class , 'index']);
+Route::get('/', [HomeController::class , 'index'])->name('home');
 
 Route::get('/auth/login', function () { return view('Login.login');});
 
@@ -152,7 +152,8 @@ Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
 
 Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
 
-
+Route::get('/saveInForPay', [paymentController::class, 'save']);
+Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
 
 
 

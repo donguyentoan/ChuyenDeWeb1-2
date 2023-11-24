@@ -34,9 +34,7 @@ class ContactController extends Controller
                 ->from($request->email, $request->fullname);
         });
 
-        $announcement = 'Bạn đã gửi email thành công !!!';
-
-        return view('contact.contact', compact('announcement'));
+        return redirect('/contact')->with('success', 'Mail delivery success');
 
        
 

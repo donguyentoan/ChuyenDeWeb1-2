@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Models\Products;
 
-use App\Models\Manufactures;
 use App\Models\Categories;
+use App\Models\Manufactures;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
 use App\Repositories\OrderRepositories;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\CategoriesRepositories;
 
 
@@ -55,7 +56,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -64,28 +65,59 @@ class ProductController extends Controller
             'categorie' => 'required',
             'manufacture' => 'required',
         ]);
-    
-        $fileName = null; // Đặt giá trị mặc định cho biến $fileName
-    
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Xử lý tệp ở đây
-            $file = $request->file('image');
-            $fileName = time(). $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
-        }
+        
+            // Kiểm tra xem sản phẩm có tồn tại hay không
+            $existingProduct = Products::where('name', $request->input('name'))->first();
 
-        $product = new Products();
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->image = $fileName;
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
-        $product->save();
-    
-        return redirect('/productList')->with('success', 'Add successfully');
+            if ($existingProduct) {
+                return redirect('/productList')->with('success', 'Product Already Exists');
+            }
+
+            $categories = Categories::all();
+            $manufactures = Manufactures::all();
+
+            $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+            $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+
+            if (!$categoryExists || !$manufactureExists) {
+                
+
+                if (!$categoryExists) {
+                    return redirect('/productList')->with('success', 'ID Categories is not Exists');
+                }
+
+                if (!$manufactureExists) {
+                    return redirect('/productList')->with('success', 'ID Manufactures is not Exists');
+                }
+
+            } else {
+           
+
+                $fileName = null;
+
+                if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                    // Handle file here
+                    $file = $request->file('image');
+                    $fileName = time(). $file->getClientOriginalName();
+                    $path = 'upload';
+                    $file->move($path, $fileName);
+                }
+
+                $product = new Products();
+                $product->name = $request->input('name');
+                $product->description = $request->input('description');
+                $product->image = $fileName;
+                $product->price = $request->input('price');
+                $product->categories_id = $request->input('categorie');
+                $product->Manufacture_id = $request->input('manufacture');
+                $product->save();
+             
+
+            return redirect('/productList')->with('success', 'Add successfully');
+        }
+            
     }
+
 
     /**
      * Display the specified resource.
@@ -123,56 +155,74 @@ class ProductController extends Controller
     {
         // Check if the product with the given ID exists in the database.
         $product = Products::find($id);
-
         if ($product) {
-            // Validation rules
             $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'price' => 'required',
-                'categorie' => 'required',
-                'manufacture' => 'required',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
-            ]);
+                        'name' => 'required',
+                        'description' => 'required',
+                        'price' => 'required',
+                        'categorie' => 'required',
+                        'manufacture' => 'required',
+                        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
+                    ]);
 
-            if ($request->hasFile('image')) {
-                // Delete the old photo if it exists
-                $oldPhoto = $product->image;
-                if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-                    $deleted = unlink('upload/' . $oldPhoto);
+                    $categories = Categories::all();
+                    $manufactures = Manufactures::all();
 
-                    // Check if the delete was successful
-                    if (!$deleted) {
-                        return redirect('/productList')->with('error', 'Failed to delete old image');
-                    }
+                    $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+                    $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+
+                    if (!$categoryExists || !$manufactureExists) {
+                        if (!$categoryExists) {
+                            return redirect('/productList')->with('success', 'Categories is not Exists');
+                        }
+
+                        if (!$manufactureExists) {
+                            return redirect('/productList')->with('success', 'Manufactures is not Exists');
+                        }
+
+                    } else {
+
+                        if ($request->hasFile('image')) {
+                            // Delete the old photo if it exists
+                            $oldPhoto = $product->image;
+                            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                                $deleted = unlink('upload/' . $oldPhoto);
+                                
+                                // Check if the delete was successful
+                                if ($deleted) {
+                                    // Upload the new image
+                                    $file = $request->file('image');
+                                    $fileName = time() . $file->getClientOriginalName();
+                                    $path = 'upload';
+                                    $file->move($path, $fileName);
+                                    $product->image = $fileName;
+                                }
+                            } else {
+                                // If there's no old photo or it doesn't exist, just upload the new image
+                                $file = $request->file('image');
+                                $fileName = time() . $file->getClientOriginalName();
+                                $path = 'upload';
+                                $file->move($path, $fileName);
+                                $product->image = $fileName;
+                            }
+                        }
+
+                        // Update the product information
+                        $product->name = $request->input('name');
+                        $product->description = $request->input('description');
+                        $product->price = $request->input('price');
+                        $product->categories_id = $request->input('categorie');
+                        $product->Manufacture_id = $request->input('manufacture');
+
+                        $product->save();
+                    }   
+
+                    return redirect('/productList')->with('success', 'Updated successfully');
+                } else {
+                    // If the product with the specified ID doesn't exist, redirect with an error message.
+                    return redirect('/productList')->with('success', 'Error! Product not found');
                 }
-
-                // Upload the new image
-                $file = $request->file('image');
-                $fileName = time() . $file->getClientOriginalName();
-                $path = 'upload';
-                $file->move($path, $fileName);
-                $product->image = $fileName;
-            }
-
-            // Update the product information
-            $product->name = $request->input('name');
-            $product->description = $request->input('description');
-            $product->price = $request->input('price');
-            $product->categories_id = $request->input('categorie');
-            $product->Manufacture_id = $request->input('manufacture');
-
-            // Save the updated product
-            $product->save();
-
-            return redirect('/productList')->with('success', 'Updated successfully');
-        } else {
-            // If the product with the specified ID doesn't exist, redirect with an error message.
-            return redirect('/productList')->with('success', 'Error! Product not found');
-        }
-
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -182,10 +232,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-
-        // Check if the product with the given ID exists in the database.
         $product = Products::find($id);
-
         if ($product) {
             // Xóa tệp hình ảnh nếu tồn tại
             $oldPhoto = $product->image;
@@ -207,6 +254,9 @@ class ProductController extends Controller
     public function like($id)
     {
         $product = Products::find($id);
+        if (!$product) {
+            return redirect()->back();
+        }
         $product->like = $product->like + 1;
         $product->save();
         return redirect()->back();

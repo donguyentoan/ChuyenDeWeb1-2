@@ -51,54 +51,75 @@
                     <h3 class="text-xl text-center font-bold p-5 ">PIZZA STORE</h3>
                 </div>
                 <div class="table-responsive">
-                    <div class="form-group py-1">
-                        <label >Mã đơn hàng:</label>
+                    <form action="/saveInForPay" method="get">
+                                <div class="form-group py-1">
+                                    <label >Mã đơn hàng:</label>
 
-                        <label><?php echo $_GET['vnp_TxnRef'] ?></label>
-                    </div>    
-                    <div class="form-group py-1">
+                                    <label><?php echo $_GET['vnp_TxnRef'] ?></label>
+                                    <input type="hidden" name="madon" value="<?php echo $_GET['vnp_TxnRef'] ?>">
+                                </div>    
+                                <div class="form-group py-1">
 
-                        <label >Số tiền:</label>
-                        <label><?php echo $_GET['vnp_Amount'] ?></label>
-                    </div>  
-                    <div class="form-group py-1">
-                        <label >Nội dung thanh toán:</label>
-                        <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
-                    </div> 
-                    <div class="form-group py-1">
-                        <label >Mã phản hồi (vnp_ResponseCode):</label>
-                        <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
-                    </div> 
-                    <div class="form-group py-1">
-                        <label >Mã GD Tại VNPAY:</label>
-                        <label><?php echo $_GET['vnp_TransactionNo'] ?></label>
-                    </div> 
-                    <div class="form-group py-1">
-                        <label >Mã Ngân hàng:</label>
-                        <label><?php echo $_GET['vnp_BankCode'] ?></label>
-                    </div> 
-                    <div class="form-group py-1">
-                        <label >Thời gian thanh toán:</label>
-                        <label><?php echo $_GET['vnp_PayDate'] ?></label>
-                    </div> 
-                    <div class="form-group py-1">
-                        <label >Kết quả:</label>
-                        <label>
-                            <?php
-                        
-                                if ($_GET['vnp_ResponseCode'] == '00') {
-                                    echo "<span style='color:blue'>GD Thanh cong</span>";
-                                } else {
-                                    echo "<span style='color:red'>GD Khong thanh cong</span>";
-                                }
-                            
-                            ?>
+                                    <label >Số tiền:</label>
+                                    <label><?php echo $_GET['vnp_Amount'] ?></label>
+                                    <input type="hidden" name="sotien" value="<?php echo $_GET['vnp_Amount'] ?>">
+                                </div>  
+                                <div class="form-group py-1">
+                                    <label >Nội dung thanh toán:</label>
+                                    <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
+                                    <input type="hidden" name="noidung" value="<?php echo $_GET['vnp_OrderInfo'] ?>">
+                                    
+                                </div> 
+                                <div class="form-group py-1">
+                                    <label >Mã phản hồi (vnp_ResponseCode):</label>
+                                    <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
+                                    <input type="hidden" name="maphanhoi" value="<?php echo $_GET['vnp_ResponseCode'] ?>">
+                                </div> 
+                                <div class="form-group py-1">
+                                    <label >Mã GD Tại VNPAY:</label>
+                                    <label><?php echo $_GET['vnp_TransactionNo'] ?></label>
+                                    <input type="hidden" name="magiaodich" value="<?php echo $_GET['vnp_TransactionNo'] ?>">
+                                </div> 
+                                <div class="form-group py-1">
+                                    <label >Mã Ngân hàng:</label>
+                                    <label><?php echo $_GET['vnp_BankCode'] ?></label>
+                                    <input type="hidden" name="manganhang" value="<?php echo $_GET['vnp_BankCode'] ?>">
+                                    
+                                </div> 
+                                <div class="form-group py-1">
+                                    <label >Thời gian thanh toán:</label>
+                                    <label><?php echo $_GET['vnp_PayDate'] ?></label>
+                                    <input type="hidden" name="thoigian" value="<?php echo $_GET['vnp_PayDate'] ?>">
+                                    
+                                </div> 
+                                <div class="form-group py-1">
+                                    <label >Kết quả:</label>
+                                    <label>
+                                        <?php
+                                    
+                                            if ($_GET['vnp_ResponseCode'] == '00') {
+                                                echo "<span style='color:blue'>GD Thanh cong</span>";
+                                                ?>
+                                               <input type="hidden" name="kq" value="GD Thanh cong">
+                                               <?php
+                                                
+                                            } else {
+                                                echo "<span style='color:red'>GD Khong thanh cong</span>";
+                                                ?>
+                                                <input type="hidden" name="kq" value="GD Khong thanh cong">
+                                                <?php
+                                            }
+                                        
+                                        ?>
 
-                        </label>
-                    </div> 
-                    <div class="form-group py-1 text-center  mt-5">
-                        <a class="bg-white  p-2 rounded-md text-black font-medium " href="/">Thành Công</a>
-                    </div> 
+                                    </label>
+                         
+                                </div> 
+                                <div class="form-group py-1 text-center  mt-5">
+                                    <input class="bg-white  p-2 rounded-md text-black font-medium" type="submit" value="Thành Công">
+                                    
+                                </div> 
+                </form>
 
                 </div>
                 <p>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banners;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BannersController extends Controller
 {
@@ -41,22 +42,43 @@ class BannersController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
     
-        $fileName = null; // Đặt giá trị mặc định cho biến $fileName
+       
     
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Xử lý tệp ở đây
-            $file = $request->file('image');
-            $fileName = time(). $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
-        }
+                $fileName = null;
+    
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                // Xử lý tệp ở đây
+                $file = $request->file('image');
+                
+                // Lấy phần tên file gốc mà không thêm thời gian
+                $originalFileName = $file->getClientOriginalName();
+                
+                // Tạo tên file mới với thời gian được thêm vào
+                $fileName = time() . $originalFileName;
+    
+                $path = 'upload';
+                $file->move($path, $fileName);
+            }
+    
+            // Kiểm tra xem banner đã tồn tại hay chưa (bỏ qua phần thời gian)
+            $existingBanner = Banners::where('name_banner', 'LIKE', '%' . $originalFileName . '%')->first();
+            if($existingBanner){
+                return redirect('/bannerList')->with('success', 'Banners Already Exists');
 
-        $banner = new Banners();
-        $banner->name_banner = $fileName;
-        $banner->save();
+            }
     
-        return redirect('/bannerList')->with('success', 'Add successfully');
-    }
+            $banner = new Banners();
+            $banner->name_banner = $fileName;
+            $banner->save();
+      
+    
+          
+            return redirect('/bannerList')->with('success', 'Add successfully');
+        }
+    
+    
+    
+    
 
     /**
      * Display the specified resource.
@@ -77,6 +99,7 @@ class BannersController extends Controller
      */
     public function edit($id)
     {
+        
         $banner = Banners::find($id);
         $banners = Banners::latest('updated_at')->paginate(5);
 
@@ -108,7 +131,13 @@ class BannersController extends Controller
                 if ($deleted) {
                     // Upload the new image
                     $file = $request->file('image');
-                    $fileName = time() . $file->getClientOriginalName();
+                
+                    // Lấy phần tên file gốc mà không thêm thời gian
+                    $originalFileName = $file->getClientOriginalName();
+                    
+                    // Tạo tên file mới với thời gian được thêm vào
+                    $fileName = time() . $originalFileName;
+        
                     $path = 'upload';
                     $file->move($path, $fileName);
                     $banner->name_banner = $fileName;
@@ -116,14 +145,27 @@ class BannersController extends Controller
             } else {
                 // If there's no old photo or it doesn't exist, just upload the new image
                 $file = $request->file('image');
-                $fileName = time() . $file->getClientOriginalName();
+                
+                // Lấy phần tên file gốc mà không thêm thời gian
+                $originalFileName = $file->getClientOriginalName();
+                
+                // Tạo tên file mới với thời gian được thêm vào
+                $fileName = time() . $originalFileName;
+    
                 $path = 'upload';
                 $file->move($path, $fileName);
                 $banner->name_banner = $fileName;
             }
         }
+        $existingBanner = Banners::where('name_banner', 'LIKE', '%' . $originalFileName . '%')->first();
+        if($existingBanner){
+            return redirect('/bannerList')->with('success', 'Banners Already Exists');
+
+        }
 
         $banner->save();
+
+      
 
         return redirect('/bannerList')->with('success', 'Updated successfully');
     }

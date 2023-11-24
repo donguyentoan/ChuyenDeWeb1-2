@@ -45,6 +45,7 @@
 
                 <form action="/updateBanners/{{$banner->id}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="version" value='{{$banner->version }}'>
                     <div class="mb-6">
                         <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
                             Image</label>

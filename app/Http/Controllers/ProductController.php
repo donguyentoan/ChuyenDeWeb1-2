@@ -1,37 +1,47 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
 
 use App\Models\Orders;
 use App\Models\Products;
 
-use App\Models\Manufactures;
+
 use App\Models\Categories;
+use App\Models\Manufactures;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
 use App\Repositories\OrderRepositories;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\CategoriesRepositories;
+
+
 
 
 class ProductController extends Controller
 {
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
         $categories = Categories::all();
         $manufacture = Manufactures::all();
         $products = Products::latest('updated_at')->paginate(5);
 
-        return view('Dashboard.Products.ProductList' , compact('products' , 'categories', 'manufacture'));
+
+        return view('Dashboard.Products.ProductList', compact('products', 'categories', 'manufacture'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,6 +57,7 @@ class ProductController extends Controller
             "manufactures" => $manufactures,
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,28 +75,71 @@ class ProductController extends Controller
             'categorie' => 'required',
             'manufacture' => 'required',
         ]);
-    
-        $fileName = null; // Đặt giá trị mặc định cho biến $fileName
-    
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Xử lý tệp ở đây
-            $file = $request->file('image');
-            $fileName = time(). $file->getClientOriginalName();
-            $path = 'upload';
-            $file->move($path, $fileName);
+
+        // Kiểm tra xem sản phẩm có tồn tại hay không
+        $existingProduct = Products::where('name', $request->input('name'))->first();
+
+
+        if ($existingProduct) {
+            return redirect('/productList')->with('success', 'Product Already Exists');
         }
 
-        $product = new Products();
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->image = $fileName;
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
-        $product->save();
-    
-        return redirect('/productList')->with('success', 'Add successfully');
+
+        $categories = Categories::all();
+        $manufactures = Manufactures::all();
+
+
+        $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+        $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+
+
+        if (!$categoryExists || !$manufactureExists) {
+
+
+
+            if (!$categoryExists) {
+                return redirect('/productList')->with('success', 'ID Categories is not Exists');
+            }
+
+
+            if (!$manufactureExists) {
+                return redirect('/productList')->with('success', 'ID Manufactures is not Exists');
+            }
+        } else {
+
+
+
+            $fileName = null;
+
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                // Handle file here
+                $file = $request->file('image');
+                $fileName = time() . $file->getClientOriginalName();
+                $path = 'upload';
+                $file->move($path, $fileName);
+            }
+
+
+            $product = new Products();
+            $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->image = $fileName;
+            $product->price = $request->input('price');
+            $product->categories_id = $request->input('categorie');
+            $product->Manufacture_id = $request->input('manufacture');
+        $product->version ='0';
+            
+            $product->save();
+
+
+
+            return redirect('/productList')->with('success', 'Add successfully');
+        }
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -98,6 +152,7 @@ class ProductController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,8 +164,12 @@ class ProductController extends Controller
         $product = Products::find($id);
         $categories = Categories::all();
         $manufactures = Manufactures::all();
-        return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
+        if (empty($product)) {
+            return redirect("/productList")->with('success', 'product does not exist');
+        }
+        return view('Dashboard.Products.EditProduct', ['product' => $product, "manufactures" => $manufactures, "categories" => $categories]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -123,6 +182,13 @@ class ProductController extends Controller
     {
         $product = Products::find($id);
 
+        if (empty($product)) {
+            return redirect("/productList")->with('success', 'product does not exist');
+        }
+        if ($product->version != $request->version) {
+            return redirect("/productList")->with('success', 'The version is not latest');
+        }
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -132,43 +198,73 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
 
-        if ($request->hasFile('image')) {
-            // Delete the old photo if it exists
-            $oldPhoto = $product->image;
-            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-                $deleted = unlink('upload/' . $oldPhoto);
-                
-                // Check if the delete was successful
-                if ($deleted) {
-                    // Upload the new image
+
+        $categories = Categories::all();
+        $manufactures = Manufactures::all();
+
+
+        $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+        $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+
+
+        if (!$categoryExists || !$manufactureExists) {
+
+
+
+            if (!$categoryExists) {
+                return redirect('/productList')->with('success', 'Categories is not Exists');
+            }
+
+
+            if (!$manufactureExists) {
+                return redirect('/productList')->with('success', 'Manufactures is not Exists');
+            }
+        } else {
+
+
+            if ($request->hasFile('image')) {
+                // Delete the old photo if it exists
+                $oldPhoto = $product->image;
+                if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                    $deleted = unlink('upload/' . $oldPhoto);
+
+                    // Check if the delete was successful
+                    if ($deleted) {
+                        // Upload the new image
+                        $file = $request->file('image');
+                        $fileName = time() . $file->getClientOriginalName();
+                        $path = 'upload';
+                        $file->move($path, $fileName);
+                        $product->image = $fileName;
+                    }
+                } else {
+                    // If there's no old photo or it doesn't exist, just upload the new image
                     $file = $request->file('image');
                     $fileName = time() . $file->getClientOriginalName();
                     $path = 'upload';
                     $file->move($path, $fileName);
                     $product->image = $fileName;
                 }
-            } else {
-                // If there's no old photo or it doesn't exist, just upload the new image
-                $file = $request->file('image');
-                $fileName = time() . $file->getClientOriginalName();
-                $path = 'upload';
-                $file->move($path, $fileName);
-                $product->image = $fileName;
             }
+
+
+            // Update the product information
+            $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
+            $product->categories_id = $request->input('categorie');
+            $product->Manufacture_id = $request->input('manufacture');
+
+            $product->version++;
+
+            $product->save();
         }
-        
 
-        // Update the product information
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->categories_id = $request->input('categorie');
-        $product->Manufacture_id = $request->input('manufacture');
-
-        $product->save();
 
         return redirect('/productList')->with('success', 'Updated successfully');
     }
+
+
 
 
     /**
@@ -181,25 +277,29 @@ class ProductController extends Controller
     {
         $product = Products::find($id);
 
+
         // Xóa tệp hình ảnh nếu tồn tại
         $oldPhoto = $product->image;
         if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
             unlink('upload/' . $oldPhoto);
         }
 
+
         $product->delete();
+
 
         // Chuyển hướng quay lại trang hiện tại sau khi xóa
         return redirect("/productList")->with('success', 'Delete successfully');
     }
+
 
     //like product
     public function like($id)
     {
         $product = Products::find($id);
         $product->like = $product->like + 1;
+        $product->version++;
         $product->save();
         return redirect()->back();
     }
-
 }

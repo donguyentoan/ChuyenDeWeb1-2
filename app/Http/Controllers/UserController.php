@@ -22,27 +22,41 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        if(empty($user)){
+            return redirect("/showUser")->with('success', 'user does not exist');
+        }
+
         return view('Dashboard.User.EditUser', compact('user'));
     }
 
 
     public function update(Request $request, $id)
     {
+
         $user = User::find($id);
+
+        if(empty($user)){
+            return redirect("/showUser")->with('success', 'user does not exist');
+        }
 
         $request->validate([
             'name' => ['required', 'string'],
             'phone' => ['required', 'digits:10'],
             'email' => ['required', 'email', 'string'],
-            'password' => ['required', 'min:8'],
+           
         ]);
 
+        if($request->version != $user->version){
+            return redirect("/showUser")->with('success', 'The version is not latest');
+        }
+
+        
         if (User::where('email', $request->email)->where('id', '!=', $id)->first()) {
-            return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
+            return back()->withInput()->withErrors(['email' => 'Email already exists']);
         }
 
         if (User::where('phone', $request->phone)->where('id', '!=', $id)->first()) {
-            return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']);
+            return back()->withInput()->withErrors(['phone' => 'Phone number already exists']);
         }
        
         $user->name = $request->input('name');
@@ -53,6 +67,7 @@ class UserController extends Controller
             $user->email = $request->input('email');
         }
         $user->password = Hash::make($request->input('password'));
+        $user->version++; 
         $user->save();
 
         return redirect('/showUser')->with('success', 'Updated successfully');

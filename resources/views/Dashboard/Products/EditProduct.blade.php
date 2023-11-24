@@ -28,6 +28,7 @@
             <form action="/updateProduct/{{$product->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
+                <input type="hidden" name="version" value='{{ $product->version}}'>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>
                     <input type="text" id="name" name="name"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"

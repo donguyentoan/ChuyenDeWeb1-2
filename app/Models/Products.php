@@ -21,6 +21,7 @@ class Products extends Model
         'Category_id',
         'manufacture_id',
         'like_count',
+        'version'
     ];
     public function categories()
     {

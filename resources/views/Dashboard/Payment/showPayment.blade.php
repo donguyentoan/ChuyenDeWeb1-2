@@ -2,6 +2,8 @@
 <html lang="en">
 
 
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,6 +19,8 @@
 </head>
 
 
+
+
 <body>
     <div class="div flex">
         <div class="w-1/7">
@@ -25,12 +29,16 @@
         <div class="w-full overflow-hidden rounded-lg shadow-xs flex">
 
 
+
+
             <div class="w-full overflow-x-auto">
+
+
 
 
                 @if (session('success'))
                 <div id="success-message"
-                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md"
+                    class="bg-white border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md"
                     role="alert">
                     <div class="flex">
                         <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
@@ -48,25 +56,27 @@
                 <div class="button_add flex justify-between items-center mr-3">
                     <form action="/searchProductDashboard" method="get">
                         <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
-                                    <div class="space-y-10  ">
-                                        <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
-                                            <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                </svg>
-                                                <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
-                                            </div>
-                                            <div
-                                                class="bg-[#0cb0d8] py-1.5 px-5 text-white font-semibold rounded-lg  transition duration-3000 ">
-                                                <input class="text-sm" type="submit" value="Search">
-                                             
-                                            </div>
-                                        </div>
+                            <div class="space-y-10  ">
+                                <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
+                                    <div
+                                        class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg>
+                                        <input class="bg-gray-100 outline-none placeholder:text-sm" type="text"
+                                            name="name" placeholder="Article name or keyword..." />
+                                    </div>
+                                    <div
+                                        class="bg-[#0cb0d8] py-1.5 px-5 text-white font-semibold rounded-lg  transition duration-3000 ">
+                                        <input class="text-sm" type="submit" value="Search">
+
                                     </div>
                                 </div>
-                        </form>
+                            </div>
+                        </div>
+                    </form>
                     <a href="/AddProduct"><button
                             class="flex  mx-auto  text-white bg-gradient-to-r from-cyan-500 to-blue-500 border-0 py-2 px-9 m-5  rounded text-xs">Add
                             Product</button>
@@ -76,110 +86,67 @@
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="">ID_Order</th>
-                            <th class="">Mã Đơn Hàng</th>
-                            <th class="">Số Tiền </th>
-                            <th class="">Nội Dung Đơn Hàng</th>
-                            <th class=""> Phản Hồi</th>
-                            <th class="">Mã Giao Dịch</th>
-                            <th class="">Mã Ngân Hàng</th>
-                            <th class="">Thời Gian</th>
-                            <th class="">Kết Quả</th>
-                          
+                            <th class="px-4 py-3 text-center">ID_Order</th>
+                            <th class="px-4 py-3 text-center">Mã Đơn Hàng</th>
+                            <th class="px-4 py-3 text-center">Số Tiền </th>
+                            <th class="px-4 py-3 text-center">Nội Dung Đơn Hàng</th>
+                            <th class="px-4 py-3 text-center">Phản Hồi</th>
+                            <th class="px-4 py-3 text-center">Mã Giao Dịch</th>
+                            <th class="px-4 py-3 text-center">Mã Ngân Hàng</th>
+                            <th class="px-4 py-3 text-center">Thời Gian</th>
+                            <th class="px-4 py-3 text-center">Kết Quả</th>
+                            <th class="px-4 py-3 text-center">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         @foreach($payment as $payments)
-                           
-                        
                         <tr class="text-gray-700 dark:text-gray-400 items-center">
-                            <!-- sản phẩm -->
-                            <td class="px-3 py-3 w-1/12">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    
-                                    {{$payments->id_oder}}
-                                  
-                                    <!-- Name -->
-                                    
-                                </div>
+                            <!-- id order -->
+                            <td class="px-3 py-3 text-center text-sm w-1/12">
+                                {{$payments->id_oder}}
                             </td>
-                            <td class="px-3 py-3 w-2/12">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    
-                                    {{$payments->madonhang}}
-                                </div>
+                            <!-- ma don hang -->
+                            <td class="px-3 py-3 text-center w-1/12 text-sm">
+                                {{$payments->madonhang}}
                             </td>
-                            <td class="px-3 py-3 w-2/11">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    
-                                    {{$payments->sotien}}
-                                    <!-- Name -->
-                                   
-                                </div>
+                            <!-- So tien -->
+                            <td class="px-3 py-3 text-center w-1/12 text-sm">
+                                {{$payments->sotien}}
                             </td>
-                            <td class="px-3 py-3 w-3/12">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    {{$payments->noidung}}
-                                </div>
+                            <!-- Noi dung don hang -->
+                            <td class="px-3 py-3 text-center w-3/12 text-sm">
+                                {{$payments->noidung}}
                             </td>
-                            <td class="px-3 py-3 w-2/12">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    {{$payments->maphanhoi}}
-                                </div>
+                            <!-- Phan Hoi -->
+                            <td class="px-3 py-3 text-center w-1/12 text-sm">
+                                {{$payments->maphanhoi}}
                             </td>
-                            <!-- description -->
-                            <td class="px-4 py-3 text-sm w-2/12">
+                            <!-- Ma giao dich -->
+                            <td class="px-4 py-3 text-center text-sm w-1/12">
                                 {{$payments->magiaodich}}
                             </td>
-
-
-                            <!-- price -->
-                            <td class="px-4 py-3 text-xs w-2/12">
+                            <!-- Ma ngan hang -->
+                            <td class="px-4 py-3 text-center text-xs w-1/12">
                                 <span
                                     class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">
                                     {{$payments->manganhang}}
                                 </span>
                             </td>
-
-
-                            <!-- Categories  -->
-                            <td class="px-4 py-3 text-sm w-2/12">
-                               
-                               
+                            <!-- Thoi gian -->
+                            <td class="px-4 py-3 text-center text-sm w-1/12">
                                 {{$payments->thoigian}}
-                               
                             </td>
+                            <!-- Ket qua -->
+                            <td class="px-4 py-3 text-center text-sm w-1/12">
 
-
-
-
-                            <!-- Manufactures -->
-                            <td class="px-4 py-3 text-sm w-2/12">
-                              
                                 <p class="text-xs text-gray-600 dark:text-gray-400">
                                     {{$payments->ketqua}}
                                 </p>
-                                
+
                             </td>
-
-
-                        
-
-
                             <!-- button xóa sửa -->
-                            <td class="px-4 py-3 1/12">
+                            <td class="px-4 py-3 text-center 2/12">
                                 <div class="flex items-center space-x-4 text-sm">
-
-
-
-
-
-
                                     <a href="">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
@@ -191,8 +158,6 @@
                                             </svg>
                                         </button>
                                     </a>
-
-
                                     <form action="" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -206,8 +171,6 @@
                                             </svg>
                                         </button>
                                     </form>
-
-
                                 </div>
                             </td>
                         </tr>
@@ -215,7 +178,7 @@
                     </tbody>
                 </table>
                 <div class="panigation p-8 ">
-                   
+
                 </div>
             </div>
         </div>
@@ -227,6 +190,8 @@
         successMessage.style.display = "block";
 
 
+
+
         // Ẩn thông báo sau 5 giây
         setTimeout(function() {
             successMessage.style.display = "none";
@@ -234,6 +199,8 @@
     });
     </script>
 </body>
+
+
 
 
 </html>

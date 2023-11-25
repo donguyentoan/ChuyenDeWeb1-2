@@ -31,14 +31,21 @@ class LoginController extends Controller
         ]);
         $remember = $request->filled('remember');
         $credentials = $request->only('email', 'password');
+        //phân quyền
         if (Auth::attempt($credentials, $remember)) {
-            return redirect('/');
+            if (auth()->user()->role == 1) {
+                return redirect()->route('dashboard');
+            } else if (auth()->user()->role == 2) {
+                return redirect()->route('dashboard');
+            } else  if(auth()->user()->role == 0){
+                return redirect('/');
+            }
         }
-        
-        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu'])->withInput($request->only('email', 'remember')); // Đăng nhập thất bại
-
+        return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu']); // Đăng nhập thất bại
 
     }
+
+
 
 
     public function logout(){
@@ -55,11 +62,7 @@ class LoginController extends Controller
     
     public function handleGoogleCallback()
     {
-
-       
         $user = Socialite::driver('google')->stateless()->user();
-
-
         // Check if the user already exists in your application
         $existingUser = User::where('email', $user->email)->first();
 
@@ -78,4 +81,10 @@ class LoginController extends Controller
         // Redirect to the desired page after successful login
         return redirect('/');
     }
+
+    public function errorAccess() {
+        return abort(404);
+    }
+    
+    
 }

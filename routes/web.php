@@ -36,7 +36,6 @@ use App\Http\Controllers\BannersController;
 */
 
 Route::get('/', [HomeController::class , 'index'])->name('home');
-
 Route::get('/auth/login', function () { return view('Login.login');});
 
 
@@ -76,7 +75,7 @@ Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
-Route::get('/dashboard', [SaleController::class , 'index'] );
+Route::get('/dashboard', [SaleController::class , 'index'] )->name('dashboard');
 Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
 
 // Admin
@@ -102,11 +101,7 @@ Route::delete('/deleteManufacture/{id}', [ManufacturesController::class, 'destro
 Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
 Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
-    //user
-Route::get('/showUser', [UserController::class , 'index'] );
-Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
-Route::get('/editUser/{id}', [UserController::class , 'edit'] );
-Route::post('/updateUser/{id}', [UserController::class, 'update']);
+
 
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
@@ -122,8 +117,6 @@ Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
 
     //Like product
-//Route::get('/like/{id}', [LikeController::class, 'like']);
-
 Route::post('/like/{id}', [LikeController::class, 'like']);
 Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 
@@ -157,6 +150,22 @@ Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
 
 
 
+Route::group(['middleware' => 'role:1'], function () {
+    // Route::get('/dashboard', [SaleController::class, 'index'])->name('dashboard');
+
+
+
+
+//user
+Route::get('/showUser', [UserController::class, 'index']);
+Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
+Route::get('/editUser/{id}', [UserController::class, 'edit']);
+Route::post('/updateUser/{id}', [UserController::class, 'update']);
+
+//error
+
+
+});
 
 
 

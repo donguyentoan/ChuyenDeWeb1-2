@@ -24,9 +24,17 @@ class SaleController extends Controller
             nam DESC,
             thang DESC
     ");
-    
-    return view('Dashboard.Home', ['salesData' => $results]);
+    if (auth()->check()) {
+        if (auth()->user()->role == 0) {
+            return redirect('/');
+        }
+        return view('Dashboard.Home', ['salesData' => $results]);
         
     }
+    else {
+        return redirect('/errorAccess');
+    }
+    }   
+
     
 }

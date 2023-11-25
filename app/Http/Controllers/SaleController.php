@@ -32,7 +32,7 @@ class SaleController extends Controller
         
     }
     else {
-        return redirect('/errorAccess');
+        return abort(403);
     }
     }   
 

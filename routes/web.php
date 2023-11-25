@@ -36,10 +36,7 @@ use App\Http\Controllers\BannersController;
 */
 
 Route::get('/', [HomeController::class , 'index'])->name('home');
-
 Route::get('/auth/login', function () { return view('Login.login');});
-
-
 Route::post('/login',  [LoginController::class , 'login']);
 Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
 Route::get('/auth/register', function () { return view('Login.register');});
@@ -58,10 +55,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
 
 
-
-
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
-
 Route::get('/get-cart-data', 'CartController@getCartData')->name('cart.get-data');
 Route::get('/delete/{$id}' , [CartController::class , 'removeFromCart']);
 Route::get('/cart' , [CartController::class , 'index']);
@@ -70,7 +64,6 @@ Route::get('/checkout/orderForm' , [CheckoutController::class , 'index']);
 Route::get('/checkout/orderinfo' , [CheckoutController::class , 'infoOrder']);
 Route::get('/checkout/orderinfos' , [CheckoutController::class , 'saveinfoOrder']);
 Route::post('/checkout/receivingIformation' , [CheckoutController::class , 'receivingIformation']);
-
 
 Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);

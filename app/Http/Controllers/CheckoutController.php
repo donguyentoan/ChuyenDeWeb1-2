@@ -205,13 +205,7 @@ class CheckoutController extends Controller
             }
             else{
 
-               
-
                  $miniCart = json_decode(urldecode(request('miniCartData')), true);
-
-
-
-                
                 $order = new Orders();
                 $newDeliveryInfo =  DeliveryInformations::all();
                 
@@ -267,10 +261,9 @@ class CheckoutController extends Controller
                 $payment->ketqua = "Thành Công";
         
                 $payment->save();
-                return redirect()->route('home');
+              
 
                
-        
                 return view('OrderSuccess.orderSuccess');
 
 

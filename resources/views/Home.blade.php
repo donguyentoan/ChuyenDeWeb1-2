@@ -75,6 +75,7 @@ html {
     @include('component.Slide')
     @csrf
 
+    @include('component.LoadHomePage')
 
     <section class="text-gray-600 body-font">
         <div class="container pb-24 mx-auto">

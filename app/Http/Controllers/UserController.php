@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,13 +22,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $user    = User::find($id);
-        $userAll = User::all();
+        $roles = Role::all();
 
         if (!$user) {
             abort(404);
         }
 
-        return view('Dashboard.User.EditUser', ['user' => $user, 'userAll' => $userAll]);
+        return view('Dashboard.User.EditUser', ['user' => $user, 'roles' => $roles]);
     }
 
 
@@ -36,7 +37,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
+        
         $request->validate([
             'name' => ['required', 'string'],
             'role' => ['required', 'integer'], // 0: customer, 1: super admin, 2: admin
@@ -44,8 +45,6 @@ class UserController extends Controller
             'email' => ['required', 'email', 'string'],
             'password' => ['required'],
         ]);
-
-        // dd($request->all());
 
         if (User::where('email', $request->email)->where('id', '!=', $id)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
@@ -55,7 +54,7 @@ class UserController extends Controller
             return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']);
         }
 
-        $user->$roles = $request->input('role');
+        $user->roles = $request->input('role');
        
         $user->name = $request->input('name');
         if($user->phone != $request->phone){

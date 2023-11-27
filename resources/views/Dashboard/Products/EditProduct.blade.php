@@ -73,9 +73,10 @@
 
 
                         @foreach($categories as $item)
-                        <option value="{{ $item->id }}" @if($item->id == $product->categories_id)
+                        <option value="{{ $item->id }}"
+                         @if($item->id == $product->categories_id)
                             selected
-                            @endif
+                         @endif
                             >
                             {{ $item->name }}
                         </option>

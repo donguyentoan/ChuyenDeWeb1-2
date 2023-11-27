@@ -17,7 +17,8 @@ class OrderController extends Controller
    
    
         // Chuyển hướng hoặc trả về một thông báo xác nhận xóa
-        return redirect()->route('order.list')->with('success', 'Đơn hàng đã được xóa thành công.');    }
+        return redirect()->route('order.list')->with('success', 'Đơn hàng đã được xóa thành công.');  
+      }
    
 
 

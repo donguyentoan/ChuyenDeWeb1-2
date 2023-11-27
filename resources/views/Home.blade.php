@@ -15,8 +15,48 @@
 @include('component.Header')
 
 
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
 
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+
+    <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "155737337627217");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+
+    <!-- Your SDK code -->
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v18.0'
+        });
+    };
+
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+
+
+
+    @include('component.Header')
 
 
 @include('component.Slide')
@@ -91,46 +131,72 @@
             </div>
   </dialog>
 
-<section class="text-gray-600 body-font">
-    <div class="container pb-24  mx-auto">
-        @foreach($categories as $category)
-            <div class="mb-6">
-              <div class="bg-[#00603c] mt-10 mb-5 rounded-xl">
-                <h1 class="text-xl font-bold text-center text-white " >{{$category->name}}</h1>
-              </div>
 
-              <div class="flex flex-wrap ">
-              @foreach($category->products as $product)
-              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
-                <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
-                  <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload /{{$product->image}}" alt="blog">
-                  </div>
-                  <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
-                    <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
-                    <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
-                    <div class=" items-center flex justify-between ">
-                      <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
-                        <div class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
-                          <input  onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"  type="button" value="Mua Ngay"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 " viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                          </svg>
+            <section class="text-gray-600 body-font">
+                <div class="container pb-24  mx-auto">
+                    @foreach($categories as $category)
+                    <div class="mb-6">
+                        <div class="bg-[#00603c] mt-10 mb-5 rounded-xl">
+                            <h1 class="text-xl font-bold text-center text-white ">{{$category->name}}</h1>
+                        </div>
+
+
+                        <div class="flex flex-wrap ">
+                            @foreach($category->products as $product)
+                            <div
+                                class="mt-10 md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300">
+                                <div
+                                    class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
+                                    <div class="w-2/5 md:w-full md:p-0 ">
+                                        <img class="hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in w-80 h-80 object-contain z-0"
+                                            src="/upload/{{$product->image}}" alt="blog">
+                                    </div>
+                                    <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2 z-50">
+                                        <h1 class="title-font text-lg font-bold text-gray-900 mb-3">
+                                            {{$product->name}}
+                                        </h1>
+                                        <p class="leading-relaxed text-xs mb-3 my-5 line-clamp-1">
+                                            {{$product->description}}</p>
+                                        <div class=" items-center flex justify-between items-end">
+                                            <p class="text-sm">Giá Chỉ Từ <br> <span
+                                                    class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>
+                                            </p>
+                                            <div>
+                                                <!-- Thích sản phẩm -->
+                                                <button class="like-button" data-product-id="{{ $product->id }}">
+                                                    <i class="fa-solid fa-thumbs-up likeIcon"></i>
+                                                </button>
+
+
+                                                <!-- Hiển thị số lượng like của sản phẩm -->
+                                                <span id="likeCount{{ $product->id }}">
+                                                    {{ $product->like_count ?? 0 }}
+                                                </span>
+                                            </div>
+
+
+                                            <div
+                                                class="flex items-center border-green-500 border-[1px] md:px-2 px-2 py-1 mr-1  rounded-lg text-green-500">
+                                                <input
+                                                    onclick="showModal('{{ $product->name }}', {{ $product->price }} , {{ $product->id }} , '{{ $product->image }}' )"
+                                                    type="button" value="Mua Ngay"> <svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                    fill="currentColor" class="bi bi-arrow-right md:ml-2 ml-1 "
+                                                    viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
-                  </div>
+                    @endforeach
                 </div>
-              </div>
-            
-              @endforeach
-       
-       
-             </div>
-              
-                
-            </div>
-        @endforeach
-    </div>
-</section>
+            </section>
 
 <!-- Trong cùng trang HTML -->
 <script>
@@ -225,32 +291,37 @@ function addToMiniCart() {
     const crust = getSelectedToppings();
     const notes = document.querySelector('textarea[name="ghichu"]').value;
 
-    // Tạo đối tượng sản phẩm
-    const product = {
-        id: productId,
-        name: productName,
-        image: productImage,
-        price: productPrice, // Sử dụng giá tính toán từ các lựa chọn
-        size: size,
-        crust: crust,
-        notes: notes,
-        quantity: 1
-    };
+                // Tạo đối tượng sản phẩm
+                const product = {
+                    id: productId,
+                    name: productName,
+                    image: productImage,
+                    price: productPrice, // Sử dụng giá tính toán từ các lựa chọn
+                    size: size,
+                    crust: crust,
+                    notes: notes,
+                    quantity: 1
+                };
 
-    // Thêm sản phẩm vào giỏ hàng (sử dụng local storage hoặc nơi bạn lưu trữ giỏ hàng)
-    const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
-    
-    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-    const existingProductIndex = miniCart.findIndex(item => item.id === productId);
-    if (existingProductIndex !== -1) {
-        // Nếu sản phẩm đã tồn tại, tăng quantity lên
-        miniCart[existingProductIndex].quantity += 1;
-    } else {
-        // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
-        miniCart.push(product);
-    }
-    
-    localStorage.setItem('miniCartss', JSON.stringify(miniCart));
+
+                // Thêm sản phẩm vào giỏ hàng (sử dụng local storage hoặc nơi bạn lưu trữ giỏ hàng)
+                const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
+
+
+                // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+                const existingProductIndex = miniCart.findIndex(item => item.id ===
+                    productId);
+                if (existingProductIndex !== -1) {
+                    // Nếu sản phẩm đã tồn tại, tăng quantity lên
+                    miniCart[existingProductIndex].quantity += 1;
+                } else {
+                    // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+                    miniCart.push(product);
+                }
+
+
+                localStorage.setItem('miniCartss', JSON.stringify(miniCart));
+
 
     // Cập nhật số lượng sản phẩm trong mini cart
     const itemCount = document.querySelector('.minicart--item-count');

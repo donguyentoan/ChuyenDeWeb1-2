@@ -55,7 +55,7 @@ class UserController extends Controller
             return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']);
         }
 
-        $user->$roles = $request->input('role');
+        $user->roles = $request->input('role');
        
         $user->name = $request->input('name');
         if($user->phone != $request->phone){

@@ -38,10 +38,9 @@
                     <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Roles</label>
                     <select id="role" name="role"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="{{ $user->role }}" selected>{{ $user->role }}</option>
-                        <option value="0">Customer</option>
-                        <option value="1">Super Admin</option>
-                        <option value="2">Admin</option>
+                        <option value="0" @if ($user->roles == 0) selected @endif>Customer</option>
+                        <option value="1" @if ($user->roles == 1) selected @endif>Super Admin</option>
+                        <option value="2" @if ($user->roles == 2) selected @endif>Admin</option>
                     </select>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Banners;
+use App\Models\Like;
 
 use App\Models\Categories;
 use App\Models\Manufactures;
@@ -163,7 +164,7 @@ class ProductController extends Controller
             $request->validate([
                 'name' => 'required|max:255',
                 'description' => 'required|max:1000',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
                 'price' => 'required|numeric',
                 'categorie' => 'required',
                 'manufacture' => 'required',
@@ -241,29 +242,34 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Products::find($id);
+
         if ($product) {
-            // Xóa tệp hình ảnh nếu tồn tại
+            // Xóa likes liên quan trước
+            $product->likes()->delete();
+
+            // Xóa sản phẩm
+            $product->delete();
+
+            // Xóa tệp hình ảnh sản phẩm nếu tồn tại
             $oldPhoto = $product->image;
             if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
                 unlink('upload/' . $oldPhoto);
             }
 
-            $product->delete();
-
-            // Chuyển hướng quay lại trang hiện tại sau khi xóa
-            return redirect("/productList")->with('success', 'Delete successfully');
+            return redirect("/productList")->with('success', 'Xóa thành công');
         } else {
-            // If the product with the specified ID doesn't exist, redirect with an error message.
-            return redirect('/productList')->with('success', 'Error! Product not found');
+            // Nếu sản phẩm với ID cụ thể không tồn tại, chuyển hướng với thông báo lỗi.
+            return redirect('/productList')->with('error', 'Lỗi! Không tìm thấy sản phẩm');
         }
     }
+
 
     //like product
     public function like($id)
     {
         $product = Products::find($id);
         if (!$product) {
-            return redirect()->back();
+            return arlert('Product not found');
         }
         $product->like = $product->like + 1;
         $product->save();

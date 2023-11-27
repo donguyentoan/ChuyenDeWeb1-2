@@ -125,6 +125,20 @@ class LikeController extends Controller
             return response()->json(['isLiked' => $isLiked]);
         }
     }
+
+    //delete like
+    public function deleteLike($id)
+    {
+        $product = Products::find($id);
+        if (!$product) {
+            // Xử lý trường hợp sản phẩm không tồn tại
+            return response()->json(['error' => 'nofind product'], 404);
+        }
+        
+
+    }
+
+
 }
 
 

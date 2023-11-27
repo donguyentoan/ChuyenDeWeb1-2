@@ -23,6 +23,11 @@ class CategoriesController extends Controller
     
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
         $existingProduct = Categories::where('name', $request->input('name'))->first();
 
         if ($existingProduct) {
@@ -47,6 +52,10 @@ class CategoriesController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
         $existingProduct = Categories::where('name', $request->input('name'))->first();
 
         if ($existingProduct) {

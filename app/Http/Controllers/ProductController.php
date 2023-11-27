@@ -262,4 +262,13 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+
+    public function indexByCategory($id)
+    {
+       
+        
+        $category = Categories::findOrFail($id);
+        return view('Filter.showbycategory', [ "category" => $category] );
+    }
+
 }

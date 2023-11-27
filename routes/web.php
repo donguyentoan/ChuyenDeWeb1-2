@@ -150,6 +150,8 @@ Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
 
 
 
+Route::get('/categories/{id}', [ProductController::class, 'indexByCategory']);
+
 
 
 

@@ -20,10 +20,17 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user    = User::find($id);
+        $userAll = User::all();
 
-        return view('Dashboard.User.EditUser', compact('user'));
+        if (!$user) {
+            abort(404);
+        }
+
+        return view('Dashboard.User.EditUser', ['user' => $user, 'userAll' => $userAll]);
     }
+
+
 
 
     public function update(Request $request, $id)
@@ -32,10 +39,13 @@ class UserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string'],
+            'role' => ['required', 'integer'], // 0: customer, 1: super admin, 2: admin
             'phone' => ['required', 'digits:10'],
             'email' => ['required', 'email', 'string'],
-            'password' => ['required', 'min:8'],
+            'password' => ['required'],
         ]);
+
+        // dd($request->all());
 
         if (User::where('email', $request->email)->where('id', '!=', $id)->first()) {
             return back()->withInput()->withErrors(['email' => 'Email đã tồn tại']);
@@ -44,6 +54,8 @@ class UserController extends Controller
         if (User::where('phone', $request->phone)->where('id', '!=', $id)->first()) {
             return back()->withInput()->withErrors(['phone' => 'Số điện thoại đã tồn tại']);
         }
+
+        $user->$roles = $request->input('role');
        
         $user->name = $request->input('name');
         if($user->phone != $request->phone){
@@ -52,7 +64,10 @@ class UserController extends Controller
         if($user->email != $request->email){
             $user->email = $request->input('email');
         }
-        $user->password = Hash::make($request->input('password'));
+        if($user->password != $request->password){
+            $user->password = Hash::make($request->input('password'));
+        }
+
         $user->save();
 
         return redirect('/showUser')->with('success', 'Updated successfully');

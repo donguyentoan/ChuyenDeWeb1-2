@@ -33,11 +33,11 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         //phân quyền
         if (Auth::attempt($credentials, $remember)) {
-            if (auth()->user()->role == 1) {
+            if (auth()->user()->roles == 1) {
                 return redirect()->route('dashboard');
-            } else if (auth()->user()->role == 2) {
+            } else if (auth()->user()->roles == 2) {
                 return redirect()->route('dashboard');
-            } else  if(auth()->user()->role == 0){
+            } else  if(auth()->user()->roles == 0){
                 return redirect('/');
             }
         }

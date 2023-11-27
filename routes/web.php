@@ -34,108 +34,139 @@ use App\Http\Controllers\BannersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+    //Home
+    Route::get('/', [HomeController::class , 'index'])->name('home');
 
-Route::get('/', [HomeController::class , 'index'])->name('home');
-Route::get('/auth/login', function () { return view('Login.login');});
+    // login, register
+    Route::get('/auth/login', function () { return view('Login.login');});
+    Route::post('/login',  [LoginController::class , 'login']);
+    Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
+    Route::get('/auth/register', function () { return view('Login.register');});
+    Route::post('/register' , [RegisterController::class, 'register']);
+    Route::get('/newpost', [NewPostController::class , 'index']);
+    Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 
-
-Route::post('/login',  [LoginController::class , 'login']);
-Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
-Route::get('/auth/register', function () { return view('Login.register');});
-Route::post('/register' , [RegisterController::class, 'register']);
-Route::get('/newpost', [NewPostController::class , 'index']);
-Route::get('/detailPost/{id}', [NewPostController::class, 'detailPost']);
 // Login with gg
 Route::get('auth/google',  [LoginController::class ,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback',  [LoginController::class ,'handleGoogleCallback']);
 Route::get('forget-password', [ForgotController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
+//fotgot password
 Route::post('forget-password', [ForgotController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ForgotController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+//contact
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact_cus',  [ContactController::class , 'contact_cus']);
 
-
-
-
+// add to cart
 Route::post('/add-to-cart/{product}', 'CartController@addToCart')->name('cart.add');
-
 Route::get('/get-cart-data', 'CartController@getCartData')->name('cart.get-data');
 Route::get('/delete/{$id}' , [CartController::class , 'removeFromCart']);
 Route::get('/cart' , [CartController::class , 'index']);
-Route::get('/checkout/orderForm' , [CheckoutController::class , 'index']);
 
+//checkout
+Route::get('/checkout/orderForm' , [CheckoutController::class , 'index']);
 Route::get('/checkout/orderinfo' , [CheckoutController::class , 'infoOrder']);
 Route::get('/checkout/orderinfos' , [CheckoutController::class , 'saveinfoOrder']);
 Route::post('/checkout/receivingIformation' , [CheckoutController::class , 'receivingIformation']);
 
-
+//location
 Route::get('/get-provinces', [LocationController::class, 'getProvinces']);
 Route::get('/get-districts/{provinceId}', [LocationController::class, 'getDistrictsByProvince']);
 Route::get('/get-wards/{districtId}', [LocationController::class, 'getWardsByDistrict']);
 
+// Admin-------------------------------------------------------------------------------------
+
+//dashboard
 Route::get('/dashboard', [SaleController::class , 'index'] )->name('dashboard');
-Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
-
-// Admin
-    //product
-Route::get('/productList', [ProductController::class , 'index'] );
-Route::get('/AddProduct', [ProductController::class , 'create'] );
-Route::post('/uploads', [ProductController::class, 'store']);
-Route::get('/EditProduct/{id}', [ProductController::class , 'edit'] );
-Route::post('/updateProduct/{id}', [ProductController::class, 'update']);
-Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy']);
-    
-    //categories
-Route::get('/showCategories', [CategoriesController::class , 'index'] );
-Route::post('/addCategories', [CategoriesController::class, 'store']);
-Route::delete('/deleteCategorie/{id}', [CategoriesController::class, 'destroy']);
-Route::get('/editCategories/{id}', [CategoriesController::class , 'edit'] );
-Route::post('/updateCategories/{id}', [CategoriesController::class, 'update']);
-
-    //manufacture
-Route::get('/showManufactures', [ManufacturesController::class , 'index'] );
-Route::post('/addManufacture', [ManufacturesController::class, 'store']);
-Route::delete('/deleteManufacture/{id}', [ManufacturesController::class, 'destroy']);
-Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
-Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
 
 
 
+
+Route::group(['middleware' => 'role:1,2'], function () {
+        //product
+    Route::get('/products',  [ProductController::class , 'index']);
+    Route::get('/productList', [ProductController::class , 'index'] );
+    Route::get('/AddProduct', [ProductController::class , 'create'] );
+    Route::post('/uploads', [ProductController::class, 'store']);
+    Route::get('/EditProduct/{id}', [ProductController::class , 'edit'] );
+    Route::post('/updateProduct/{id}', [ProductController::class, 'update']);
+    Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy']);
+        
+        //categories
+    Route::get('/showCategories', [CategoriesController::class , 'index'] );
+    Route::post('/addCategories', [CategoriesController::class, 'store']);
+    Route::delete('/deleteCategorie/{id}', [CategoriesController::class, 'destroy']);
+    Route::get('/editCategories/{id}', [CategoriesController::class , 'edit'] );
+    Route::post('/updateCategories/{id}', [CategoriesController::class, 'update']);
+
+        //manufacture
+    Route::get('/showManufactures', [ManufacturesController::class , 'index'] );
+    Route::post('/addManufacture', [ManufacturesController::class, 'store']);
+    Route::delete('/deleteManufacture/{id}', [ManufacturesController::class, 'destroy']);
+    Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
+    Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
+
+        //order 
+    Route::get('/update-status', [AdminController::class, 'updateStatus']);
+    Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
+    Route::get('/orderCustomer', [AdminController::class , 'showOrder'] )->name('order.list');
+
+        //Banners
+    Route::get('/bannerList', [BannersController::class , 'index'] );
+    Route::post('/addBanners', [BannersController::class, 'store']);
+    Route::delete('/deleteBanners/{id}', [BannersController::class, 'destroy']);
+    Route::get('/editBanners/{id}', [BannersController::class , 'edit'] );
+    Route::post('/updateBanners/{id}', [BannersController::class, 'update']);
+
+});
+
+//super amdin role 1 truy cập all
+Route::group(['middleware' => 'role:1'], function () {
+    // Route::get('/dashboard', [SaleController::class, 'index'])->name('dashboard');
+
+    //user
+    Route::get('/showUser', [UserController::class, 'index']);
+    Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
+    Route::get('/editUser/{id}', [UserController::class, 'edit']);
+    Route::post('/updateUser/{id}', [UserController::class, 'update']);
+
+});
+
+// -----------------Thanh Toán---------------------
+    //thanh toan vn pay
 Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
 Route::get('/vnpay_return' , [paymentController::class , 'vnpay_return'] );
 
+    //payment
+Route::get('/saveInForPay', [paymentController::class, 'save']);
+Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
 
+// -----------------End Thanh Toán---------------------
+
+    //order
 Route::get('/OrderDetail', [OrderController::class, 'index']);
 
-
-Route::get('/update-status', [AdminController::class, 'updateStatus']);
-Route::get('/update-huy', [AdminController::class, 'updateStatushuy']);
-
+    //search product
+    //filter
 Route::get('/filter',  [FilterController::class , 'getManufacture']);
-
-    //Like product
-Route::post('/like/{id}', [LikeController::class, 'like']);
-Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
-
-    //Banners
-Route::get('/bannerList', [BannersController::class , 'index'] );
-Route::post('/addBanners', [BannersController::class, 'store']);
-Route::delete('/deleteBanners/{id}', [BannersController::class, 'destroy']);
-Route::get('/editBanners/{id}', [BannersController::class , 'edit'] );
-Route::post('/updateBanners/{id}', [BannersController::class, 'update']);
-
-Route::get('/products',  [ProductController::class , 'index']);
+Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
 Route::get('/products/filter', [ProductController::class , 'filter']);
 Route::get('/searchProduct', [SearchProductController::class , 'Result_Search']);
 Route::get('/searchProductDashboard', [SearchProductController::class , 'Result_Search_Dashboard']);
 Route::get('/searchOrder', [SearchProductController::class , 'Result_Search_OrderCustomer']);
 
-Route::get('/sale' , [SaleController::class , 'index'] );
+    //Like product
+Route::post('/like/{id}', [LikeController::class, 'like']);
+Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 
-Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+    
+
+
+Route::get('/sale' , [SaleController::class , 'index'] );
 
 
 Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
@@ -144,39 +175,6 @@ Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
 
 
 Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
-
-Route::get('/saveInForPay', [paymentController::class, 'save']);
-Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
-
-
-
-Route::group(['middleware' => 'role:1'], function () {
-    // Route::get('/dashboard', [SaleController::class, 'index'])->name('dashboard');
-
-
-
-
-//user
-Route::get('/showUser', [UserController::class, 'index']);
-Route::delete('/deleteUser/{id}', [UserController::class, 'destroy']);
-Route::get('/editUser/{id}', [UserController::class, 'edit']);
-Route::post('/updateUser/{id}', [UserController::class, 'update']);
-
-//error
-
-
-});
-
-
-
-
-
-
-
-
-
-
-
 
 
 

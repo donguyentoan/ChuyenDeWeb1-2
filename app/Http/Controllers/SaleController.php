@@ -25,16 +25,19 @@ class SaleController extends Controller
             thang DESC
     ");
     if (auth()->check()) {
-        if (auth()->user()->role == 0) {
-            return redirect('/');
-        }
-        return view('Dashboard.Home', ['salesData' => $results]);
-        
-    }
-    else {
-        return abort(403);
-    }
-    }   
-
+        $userRole = auth()->user()->roles;
     
+        switch ($userRole) {
+            case 0:
+                return abort(403);
+            case 1:
+                return view('Dashboard.Home', ['salesData' => $results]);
+            case 2:
+                return view('Dashboard.Home', ['salesData' => $results]);
+            default:
+                return abort(403);
+        }
+    }
+    return abort(403);
+    }
 }

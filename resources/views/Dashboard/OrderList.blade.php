@@ -21,20 +21,9 @@
 <div class="div flex">
 
 
-<div class="w-1/4">
+<div class="">
  @include('Component.SideBar')
  </div>
-
-
-
-
-
-
-
-
-
-
-
 
  <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">

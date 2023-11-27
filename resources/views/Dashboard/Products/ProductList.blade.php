@@ -41,6 +41,7 @@
                         <div>
                             <p class="font-bold">Message ^.^</p>
                             <p class="text-sm">{{ session('success') }}</p>
+                            
                         </div>
                     </div>
                 </div>

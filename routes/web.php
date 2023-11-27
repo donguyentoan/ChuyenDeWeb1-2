@@ -164,6 +164,7 @@ Route::post('/like/{id}', [LikeController::class, 'like']);
 Route::get('/check-like/{id}', [LikeController::class, 'checkLikeStatus']);
 
     
+Route::get('/categories/{id}', [ProductController::class, 'indexByCategory']);
 
 
 Route::get('/sale' , [SaleController::class , 'index'] );

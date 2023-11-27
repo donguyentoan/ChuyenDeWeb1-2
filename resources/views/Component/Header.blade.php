@@ -4,48 +4,55 @@
             <img class="w-14 h-14" src="/image/gt-removebg-preview.png" alt="">
             <span class="ml-3 text-lg font-mono">Pizza Store</span>
         </a>
-       
+
         <form action="/searchProduct" method="get">
-      <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
-                  <div class="space-y-10  ">
-                      <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
-                          <div class="flex bg-gray-100 border-[1px] border-gray-300 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
-                                  viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                              </svg>
-                              <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
-                          </div>
-                          <div
-                              class="bg-red-500 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-                              <input class="text-sm" type="submit" value="Search"> 
-                            
-                          </div>
-                      </div>
-                  </div>
-              </div>
-      </form>
+            <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
+                <div class="space-y-10  ">
+                    <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
+                        <div
+                            class="flex bg-gray-100 border-[1px] border-gray-300 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name"
+                                placeholder="Article name or keyword..." />
+                        </div>
+                        <div
+                            class="bg-red-500 py-1.5 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+                            <input class="text-sm" type="submit" value="Search">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <nav class="md:ml-auto flex pt-4 flex-wrap items-center text-base justify-center">
             <div class="right-wrap">
                 <div class="account flex items-center">
                     <div href="/customer/info" class="icon pr-2">
-                    <button id="Dropdown" class="flex items-center h-8 pl-3 pr-2  focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                              width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                              <path
-                                  d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                              <path fill-rule="evenodd"
-                                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                          </svg>
-                          <svg class="w-4 h-4 mt-px ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                      </svg>
-                          </button>
-                          @auth
-                            <div id="dropshow" class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông Tin Tài Khoản</a>
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng </a>
+                        <button id="Dropdown" class="flex items-center h-8 pl-3 pr-2  focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg>
+                            <svg class="w-4 h-4 mt-px ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        @auth
+                        <div id="dropshow"
+                            class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông
+                                Tin Tài Khoản</a>
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng
+                            </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
                                 <button class=" w-full flex items-center h-8 px-3 text-sm hover:bg-gray-200"
@@ -63,23 +70,19 @@
                         <a href="/auth/login" class="register">Đăng nhập</a>
                         <span>/</span>
                         <a href="/auth/register" class="login">Tạo tài khoản</a>
-                      </div>
-                      @endauth
-                      
+                    </div>
+                    @endauth
+
                 </div>
             </div>
         </nav>
     </div>
     <nav
         class="md:w-11/12 overflow-x-auto w-full mx-auto py-2 mb-3 bg-[#00603c] md:rounded-xl md:ml-auto flex items-center text-white flex-row flex md:text-base text-sm ">
-        
-        <a class="mr-5 hover:text-gray-900">Salad</a>
-        <a class="mr-5 hover:text-gray-900">Thức Uống</a>
-        <a class="mr-5 hover:text-gray-900">Mỳ Ý</a>
-        <a class="mr-5 ml-5 hover:text-gray-900">Pizza</a>
-        <a class="mr-5 hover:text-gray-900">Salad</a>
-        <a class="mr-5 hover:text-gray-900">Thức Uống</a>
-        <a class="mr-5 hover:text-gray-900">Mỳ Ý</a>
+
+        @foreach($categories as $ct)
+        <a href="/categories/{{$ct->id}}" class="mr-5 ml-5 hover:text-gray-900">{{$ct->name}}</a>
+        @endforeach
 
         <div class="icon_cart ml-auto mr-20 group">
             <div class="w-28 h-6 bg-white rounded-lg flex items-center justify-between">

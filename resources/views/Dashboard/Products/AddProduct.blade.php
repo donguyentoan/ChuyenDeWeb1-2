@@ -32,6 +32,10 @@
                     <input type="text" id="name" name="name"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập tên sản phẩm" required>
+                    @if ($errors->has('name'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('name') }}</p>
+                    @endif
+
                 </div>
                 <div class="mb-6">
                     <label for="description"
@@ -39,14 +43,20 @@
                     <input type="text" id="description" name="description"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập mô tả sản phẩm" required>
+
+                    @if ($errors->has('description'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('description') }}</p>
+                    @endif
                 </div>
+
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
                         Image</label>
                     <div class="flex items-center ">
                         <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
                             <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
-                                <img class="object-contain w-full h-full " alt="" loading="lazy" id="output" src="/image/imageDefault.png" />
+                                <img class="object-contain w-full h-full " alt="" loading="lazy" id="output"
+                                    src="/image/imageDefault.png" />
                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                 </div>
                             </div>
@@ -57,13 +67,22 @@
                     </div>
                     <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản
                         phẩm lên</div>
+
+                    @if ($errors->has('image'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('image') }}</p>
+                    @endif
                 </div>
+
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 text-black">Price</label>
                     <input type="text" id="price" name="price"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập giá sản phẩm" required>
+
+                    @if ($errors->has('price'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('price') }}</p>
+                    @endif
                 </div>
                 <!--  -->
                 <div class="mb-6">
@@ -78,6 +97,9 @@
                         @endforeach
 
                     </select>
+                    @if ($errors->has('categorie'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('categorie') }}</p>
+                    @endif  
                 </div>
                 <div class="mb-6">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
@@ -91,6 +113,11 @@
                         @endforeach
 
                     </select>
+
+                    @if ($errors->has('manufacture'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('manufacture') }}</p>
+                    @endif
+                    
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\Banners;
 
 use App\Models\Categories;
 use App\Models\Manufactures;
@@ -58,10 +59,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|max:255',
+            'description' => 'required|max:1000',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'categorie' => 'required',
             'manufacture' => 'required',
         ]);
@@ -139,6 +140,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Products::find($id);
+        if (!$product) {
+            return redirect('/productList')->with('success', 'Error! Product not found');
+        }
         $categories = Categories::all();
         $manufactures = Manufactures::all();
         return view('Dashboard.Products.EditProduct' , ['product' => $product , "manufactures" => $manufactures , "categories" => $categories] );
@@ -157,46 +161,46 @@ class ProductController extends Controller
         $product = Products::find($id);
         if ($product) {
             $request->validate([
-                        'name' => 'required',
-                        'description' => 'required',
-                        'price' => 'required',
-                        'categorie' => 'required',
-                        'manufacture' => 'required',
-                        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3072',
-                    ]);
+                'name' => 'required|max:255',
+                'description' => 'required|max:1000',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072',
+                'price' => 'required|numeric',
+                'categorie' => 'required',
+                'manufacture' => 'required',
+            ]);
 
-                    $categories = Categories::all();
-                    $manufactures = Manufactures::all();
+            $categories = Categories::all();
+            $manufactures = Manufactures::all();
 
-                    $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
-                    $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
+            $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
+            $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
 
-                    if (!$categoryExists || !$manufactureExists) {
-                        if (!$categoryExists) {
-                            return redirect('/productList')->with('success', 'Categories is not Exists');
-                        }
+            if (!$categoryExists || !$manufactureExists) {
+                if (!$categoryExists) {
+                    return redirect('/productList')->with('success', 'Categories is not Exists');
+                }
 
-                        if (!$manufactureExists) {
-                            return redirect('/productList')->with('success', 'Manufactures is not Exists');
-                        }
+                if (!$manufactureExists) {
+                    return redirect('/productList')->with('success', 'Manufactures is not Exists');
+                }
 
-                    } else {
+                } else {
 
-                        if ($request->hasFile('image')) {
-                            // Delete the old photo if it exists
-                            $oldPhoto = $product->image;
-                            if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
-                                $deleted = unlink('upload/' . $oldPhoto);
+                    if ($request->hasFile('image')) {
+                        // Delete the old photo if it exists
+                        $oldPhoto = $product->image;
+                        if ($oldPhoto != null && file_exists('upload/' . $oldPhoto)) {
+                            $deleted = unlink('upload/' . $oldPhoto);
                                 
-                                // Check if the delete was successful
-                                if ($deleted) {
-                                    // Upload the new image
-                                    $file = $request->file('image');
-                                    $fileName = time() . $file->getClientOriginalName();
-                                    $path = 'upload';
-                                    $file->move($path, $fileName);
-                                    $product->image = $fileName;
-                                }
+                            // Check if the delete was successful
+                            if ($deleted) {
+                                // Upload the new image
+                                $file = $request->file('image');
+                                $fileName = time() . $file->getClientOriginalName();
+                                $path = 'upload';
+                                $file->move($path, $fileName);
+                                $product->image = $fileName;
+                            }
                             } else {
                                 // If there's no old photo or it doesn't exist, just upload the new image
                                 $file = $request->file('image');
@@ -215,21 +219,25 @@ class ProductController extends Controller
                         $product->Manufacture_id = $request->input('manufacture');
 
                         $product->save();
-                    }   
+                }   
 
-                    return redirect('/productList')->with('success', 'Updated successfully');
-                } else {
-                    // If the product with the specified ID doesn't exist, redirect with an error message.
-                    return redirect('/productList')->with('success', 'Error! Product not found');
-                }
+                return redirect('/productList')->with('success', 'Updated successfully');
+
+        } else {
+            // If the product with the specified ID doesn't exist, redirect with an error message.
+            return redirect('/productList')->with('success', 'Error! Product not found');
+            }
+    
     }
-
+    
+        
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         $product = Products::find($id);
@@ -260,6 +268,14 @@ class ProductController extends Controller
         $product->like = $product->like + 1;
         $product->save();
         return redirect()->back();
+    }
+
+    public function indexByCategory($id)
+    {
+       $categories = Categories::all();
+       $banner =  Banners::all();
+       $category = Categories::findOrFail($id);
+       return view('Filter.showbycategory', ["categories" => $categories, "banners" => $banner , "category" => $category] );
     }
 
 }

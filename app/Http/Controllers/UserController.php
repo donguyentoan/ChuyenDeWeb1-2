@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user    = User::find($id);
+        $user  = User::find($id);
         $roles = Role::all();
 
         if (!$user) {

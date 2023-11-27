@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
-use App\Models\Products;
+use App\Models\Banners;
 
-use App\Models\Manufactures;
+use App\Models\Products;
 use App\Models\Categories;
 
+use App\Models\Manufactures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\HomeRepositories;
@@ -201,5 +202,17 @@ class ProductController extends Controller
         $product->save();
         return redirect()->back();
     }
+
+
+    public function indexByCategory($id)
+    {
+        $categories = Categories::all();
+        $banner =  Banners::all();
+        $category = Categories::findOrFail($id);
+        return view('Filter.showbycategory', ["categories" => $categories, "banners" => $banner , "category" => $category] );
+    }
+
+
+
 
 }

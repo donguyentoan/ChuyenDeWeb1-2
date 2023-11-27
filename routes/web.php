@@ -159,6 +159,8 @@ Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
 
 
 
+Route::get('/categories/{id}', [ProductController::class, 'indexByCategory']);
+
 
 
 

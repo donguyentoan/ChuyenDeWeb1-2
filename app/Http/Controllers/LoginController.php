@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Categories;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +21,8 @@ class LoginController extends Controller
     // Login
     public function index()
     {
-        return view('Login.login');
+        $categories = Categories::all();
+        return view('Login.login', ['categories' => $categories]);
     }
 
     public function login(Request $request)

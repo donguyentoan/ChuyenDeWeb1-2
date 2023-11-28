@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Orders;
-
+use App\Models\Categories;
 
 use Faker\Core\Number;
 use App\Models\Payment;
@@ -25,10 +25,13 @@ class CheckoutController extends Controller
     
     public function index()
     {
-        return view('CheckoutOrder.CheckoutOrder');
+        $categories = Categories::all();
+        return view('CheckoutOrder.CheckoutOrder', ['categories' => $categories]);
     }
     public function infoOrder()
     {
+        $categories = Categories::all();
+
         $filePath = public_path('json/provinces.json'); // Đường dẫn đến tệp JSON trong thư mục public
         $provinces = [];
 
@@ -87,11 +90,12 @@ class CheckoutController extends Controller
             return response()->json(['error' => 'File not found'], 404);
         }
 
-        return view('CheckoutOrder.CheckoutInfor' , ['provinces' => $provinces , "districts" => $districts , "wards" => $wards]);
+        return view('CheckoutOrder.CheckoutInfor' , ['provinces' => $provinces , "districts" => $districts , "wards" => $wards], ['categories' => $categories]);
     }
 
     public function saveinfoOrder(Request $request)
     {
+        $categories = Categories::all();
         $currentDateTime = Carbon::now();
         $futureDateTime = $currentDateTime->addMinutes(30);
        
@@ -125,7 +129,7 @@ class CheckoutController extends Controller
                     DB::insert($sql);
                     
                     
-                    return view('ReceivingInformation.receivingInformation');
+                    return view('ReceivingInformation.receivingInformation' , ['categories' => $categories]);
             }
     
           
@@ -136,6 +140,7 @@ class CheckoutController extends Controller
 
     public function receivingIformation(Request $request)
     {
+        $categories = Categories::all();
 
         $payment_method = $request->input('payment_method');
         $payment_total = $request->input('totalOrder');
@@ -199,7 +204,7 @@ class CheckoutController extends Controller
 
 
                 
-                return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total]);
+                return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total] , ['categories' => $categories]);
     
                 
             }
@@ -271,7 +276,7 @@ class CheckoutController extends Controller
 
                
         
-                return view('OrderSuccess.orderSuccess');
+                return view('OrderSuccess.orderSuccess' , ['categories' => $categories]);
 
 
             }

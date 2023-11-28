@@ -72,9 +72,7 @@
     </div>
     <nav
         class="md:w-11/12 overflow-x-auto w-full mx-auto py-2 mb-3 bg-[#00603c] md:rounded-xl md:ml-auto flex items-center text-white flex-row flex md:text-base text-sm ">
-        @forEach($categories as $ct)
-        <a class="mr-5 ml-5 hover:text-gray-900">{{$ct->name}}</a>
-        @endforeach
+       
         <a class="mr-5 hover:text-gray-900">Salad</a>
         <a class="mr-5 hover:text-gray-900">Thức Uống</a>
         <a class="mr-5 hover:text-gray-900">Mỳ Ý</a>

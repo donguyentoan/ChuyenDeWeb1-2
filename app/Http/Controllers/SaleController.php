@@ -26,6 +26,7 @@ class SaleController extends Controller
             thang DESC
     ");
     $activeUsersCount = ActiveUser::count();
+    session(['activeUsersCount' => $activeUsersCount]);
     if (auth()->check()) {
         $userRole = auth()->user()->roles;
     
@@ -33,9 +34,9 @@ class SaleController extends Controller
             case 0:
                 return abort(403);
             case 1:
-                return view('Dashboard.Home', ['salesData' => $results , "active" => $activeUsersCount]);
+                return view('Dashboard.Home', ['salesData' => $results ]);
             case 2:
-                return view('Dashboard.Home', ['salesData' => $results , "active" => $activeUsersCount]);
+                return view('Dashboard.Home', ['salesData' => $results ]);
             default:
                 return abort(403);
         }

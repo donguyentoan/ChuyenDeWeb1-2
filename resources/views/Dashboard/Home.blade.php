@@ -64,7 +64,7 @@
               <!-- Brand -->
               <a href="index.html" class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light">
                 Pizza Store
-                Số người online là : {{$active}}
+                Số người online là : {{ session('activeUsersCount') }}
               </a>
 
               <!-- Mobile sub menu button -->

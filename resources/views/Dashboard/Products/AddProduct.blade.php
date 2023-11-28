@@ -65,18 +65,17 @@
                             class=" p-2 block h-12 w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-white  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
                             aria-describedby="user_avatar_help">
                     </div>
-                    <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản
-                        phẩm lên</div>
+                    <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản phẩm lên</div>
 
-                    @if ($errors->has('image'))
-                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('image') }}</p>
-                    @endif
                 </div>
+                @if ($errors->has('image'))
+                <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('image') }}</p>
+                @endif
 
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 text-black">Price</label>
-                    <input type="text" id="price" name="price"
+                    <input type="number" id="price" name="price"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập giá sản phẩm" required>
 
@@ -99,7 +98,7 @@
                     </select>
                     @if ($errors->has('categorie'))
                     <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('categorie') }}</p>
-                    @endif  
+                    @endif
                 </div>
                 <div class="mb-6">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
@@ -117,7 +116,7 @@
                     @if ($errors->has('manufacture'))
                     <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('manufacture') }}</p>
                     @endif
-                    
+
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add

@@ -32,6 +32,9 @@
                     <input type="text" id="name" name="name"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập tên sản phẩm" required value="{{ $product->name }}">
+                    @if ($errors->has('name'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('name') }}</p>
+                    @endif
                 </div>
                 <div class="mb-6">
                     <label for="description"
@@ -39,6 +42,9 @@
                     <input type="text" id="description" name="description"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
                         placeholder="Nhập mô tả sản phẩm" required value="{{ $product->description }}">
+                    @if ($errors->has('description'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('description') }}</p>
+                    @endif
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
@@ -55,6 +61,9 @@
                         <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
                             class=" p-2 block h-12 w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
                             aria-describedby="user_avatar_help">
+                        @if ($errors->has('image'))
+                        <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('image') }}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="mb-6">
@@ -73,15 +82,17 @@
 
 
                         @foreach($categories as $item)
-                        <option value="{{ $item->id }}"
-                         @if($item->id == $product->categories_id)
+                        <option value="{{ $item->id }}" @if($item->id == $product->categories_id)
                             selected
-                         @endif
+                            @endif
                             >
                             {{ $item->name }}
                         </option>
                         @endforeach
                     </select>
+                    @if ($errors->has('categorie'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('categorie') }}</p>
+                    @endif
                 </div>
                 <!-- manufacture -->
                 <div class="mb-6">
@@ -99,6 +110,9 @@
                         </option>
                         @endforeach
                     </select>
+                    @if ($errors->has('manufacture'))
+                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('manufacture') }}</p>
+                    @endif
                 </div>
 
                 <button type="submit"

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Socialite;
 use App\Models\User;
+use App\Models\ActiveUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Socialite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -34,11 +35,18 @@ class LoginController extends Controller
         //phân quyền
         if (Auth::attempt($credentials, $remember)) {
             if (auth()->user()->roles == 1) {
+                ActiveUser::create(['user_id' => auth()->id()]);
+                $count = ActiveUser::count();
+                Session::put('count',  $count);
                 return redirect()->route('dashboard');
+                
             } else if (auth()->user()->roles == 2) {
+                ActiveUser::create(['user_id' => auth()->id()]);
                 return redirect()->route('dashboard');
             } else  if(auth()->user()->roles == 0){
+                ActiveUser::create(['user_id' => auth()->id()]);
                 return redirect('/');
+               
             }
         }
         return back()->withInput()->withErrors(['email' => 'Sai tên đăng nhập hoặc mật khẩu']); // Đăng nhập thất bại
@@ -49,6 +57,7 @@ class LoginController extends Controller
 
 
     public function logout(){
+        ActiveUser::where('user_id', Auth::id())->delete();
         Auth::logout();
         return redirect('/auth/login');
     }

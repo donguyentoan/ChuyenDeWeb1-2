@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActiveUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class SaleController extends Controller
             nam DESC,
             thang DESC
     ");
+    $activeUsersCount = ActiveUser::count();
     if (auth()->check()) {
         $userRole = auth()->user()->roles;
     
@@ -31,9 +33,9 @@ class SaleController extends Controller
             case 0:
                 return abort(403);
             case 1:
-                return view('Dashboard.Home', ['salesData' => $results]);
+                return view('Dashboard.Home', ['salesData' => $results , "active" => $activeUsersCount]);
             case 2:
-                return view('Dashboard.Home', ['salesData' => $results]);
+                return view('Dashboard.Home', ['salesData' => $results , "active" => $activeUsersCount]);
             default:
                 return abort(403);
         }

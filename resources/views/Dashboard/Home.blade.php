@@ -46,7 +46,7 @@
 
     <div class="">
       @include('Component.SideBar')
-      @include('Component.LoadHomePage')
+      @include('Component.FlashScreenDashBoard')
     </div>
     <div class="flex-1 h-full overflow-x-hidden  bg-[#f3f4f6] overflow-y-auto">
           <!-- Navbar -->

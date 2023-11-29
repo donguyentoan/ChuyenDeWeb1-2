@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Edit User</title>
+    <title>Edit User: {{ $user->name }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet" />
@@ -23,8 +23,9 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] p-10">
-            <form action="/updateUser/{{$user->id}}" method="post" enctype="multipart/form-data">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] ">
+            @include('component.NavBarDashBoard')
+            <form action="/updateUser/{{$user->id}}" method="post" enctype="multipart/form-data" class="m-10">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>
@@ -36,7 +37,7 @@
                 <!-- Thay đổi quyền -->
                 <div class="mb-6">
                     <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Roles</label>
-                    
+
                     <select id="role" name="role"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="0" @if ($user->roles == 0) selected @endif>Customer</option>

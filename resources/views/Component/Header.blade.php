@@ -51,6 +51,9 @@
                             class="absolute bg-white z-50 hidden  flex flex-col w-40 mt-1 border border-black shadow-lg">
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông
                                 Tin Tài Khoản</a>
+                            @if (auth()->user()->roles == 1 || auth()->user()->roles == 2)
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/dashboard">Quản trị admin</a>
+                            @endif
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng
                             </a>
                             <form method="post" action="{{ route('logout') }}">
@@ -58,7 +61,6 @@
                                 <button class=" w-full flex items-center h-8 px-3 text-sm hover:bg-gray-200"
                                     type="submit">Đăng Xuất</button>
                             </form>
-
                         </div>
                         @endauth
                     </div>

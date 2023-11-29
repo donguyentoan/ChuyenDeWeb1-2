@@ -27,6 +27,13 @@ class LoginController extends Controller
         return view('Login.login', ['categories' => $categories]);
     }
 
+    //register
+    public function indexRegister()
+    {
+        $categories = Categories::all();
+        return view('Login.register', ['categories' => $categories]);
+    }
+
     public function login(Request $request)
     {
         $request->validate([

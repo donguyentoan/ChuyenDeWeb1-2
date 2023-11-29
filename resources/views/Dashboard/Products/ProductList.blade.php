@@ -30,8 +30,7 @@
                 @include('component.NavBarDashBoard')
                 @if (session('success'))
                 <div id="success-message"
-                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 shadow-md"
-                    role="alert">
+                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 shadow-md" role="alert">
                     <div class="flex">
                         <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -41,7 +40,7 @@
                         <div>
                             <p class="font-bold">Message ^.^</p>
                             <p class="text-sm">{{ session('success') }}</p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -49,25 +48,27 @@
                 <div class="button_add flex justify-between items-center mr-3">
                     <form action="/searchProductDashboard" method="get">
                         <div class="flex justify-center items-center md:w-[400px] w-[90%]  md:pl-8">
-                                    <div class="space-y-10  ">
-                                        <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
-                                            <div class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                </svg>
-                                                <input class="bg-gray-100 outline-none placeholder:text-sm" type="text" name="name" placeholder="Article name or keyword..." />
-                                            </div>
-                                            <div
-                                                class="bg-[#0cb0d8] py-1.5 px-5 text-white font-semibold rounded-lg  transition duration-3000 ">
-                                                <input class="text-sm" type="submit" value="Search">
-                                             
-                                            </div>
-                                        </div>
+                            <div class="space-y-10  ">
+                                <div class="flex items-center p-1 space-x-6 h-[40px] bg-white rounded-xl  ">
+                                    <div
+                                        class="flex bg-gray-100 flex items-center px-2 h-[35px] md:w-72 w-52 space-x-4 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-30" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg>
+                                        <input class="bg-gray-100 outline-none placeholder:text-sm" type="text"
+                                            name="name" placeholder="Article name or keyword..." />
+                                    </div>
+                                    <div
+                                        class="bg-[#0cb0d8] py-1.5 px-5 text-white font-semibold rounded-lg  transition duration-3000 ">
+                                        <input class="text-sm" type="submit" value="Search">
+
                                     </div>
                                 </div>
-                        </form>
+                            </div>
+                        </div>
+                    </form>
                     <a href="/AddProduct"><button
                             class="flex  mx-auto  text-white bg-gradient-to-r from-cyan-500 to-blue-500 border-0 py-2 px-9 m-5  rounded text-xs">Add
                             Product</button>
@@ -80,6 +81,7 @@
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Price</th>
+                            <th class="px-4 py-3">Like</th>
                             <th class="px-4 py-3">Categories</th>
                             <th class="px-4 py-3">Manufactures</th>
                             <th class="px-4 py-3">Last Update</th>
@@ -116,6 +118,18 @@
                                 <span
                                     class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">
                                     {{ number_format($product->price, 0, ',', ',') }}đ
+                                </span>
+                            </td>
+
+                            <!-- Like -->
+                            <td class="px-4 py-3 text-sm w-1/12">
+                                <span
+                                        class="px-3 py-2 font-semibold leading-tight text-white bg-[#0dafd9] rounded-md">
+                                    @if ($product->like_count == null)
+                                    0
+                                    @else
+                                    {{$product->like_count}}
+                                    @endif
                                 </span>
                             </td>
 

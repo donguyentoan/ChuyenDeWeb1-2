@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActiveUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,8 @@ class SaleController extends Controller
             nam DESC,
             thang DESC
     ");
+    $activeUsersCount = ActiveUser::count();
+    session(['activeUsersCount' => $activeUsersCount]);
     if (auth()->check()) {
         $userRole = auth()->user()->roles;
     

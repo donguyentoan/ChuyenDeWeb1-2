@@ -20,12 +20,12 @@ class SearchProductController extends Controller
         $result->appends(['name' => $key]);
      
        
-
+            $categories = Categories::all();
 
           $manufacture = Manufactures::all();
 
 
-     return view('Search', ['search' => $result , "manufacture" => $manufacture]);
+     return view('Search', ['search' => $result , "manufacture" => $manufacture , "categories" => $categories ]);
     }
     public function Result_Search_Dashboard(Request $request){
         $key = $request->input('name');

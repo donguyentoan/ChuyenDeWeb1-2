@@ -64,7 +64,7 @@
 
               <!-- Brand -->
               <a href="index.html" class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light">
-                Pizza Store
+                Pizza Store 
               </a>
 
               <!-- Mobile sub menu button -->
@@ -436,7 +436,7 @@
                     <h6 class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                       Users
                     </h6>
-                    <span class="text-xl font-semibold">50,021</span>
+                    <span class="text-xl font-semibold">{{session('activeUsersCount')}}</span>
                     <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
                       +2.6%
                     </span>
@@ -534,20 +534,7 @@
               <!-- Two grid columns -->
               <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
                 <!-- Active users chart -->
-                <div class="col-span-1 bg-white rounded-md dark:bg-darker">
-                  <!-- Card header -->
-                  <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right now</h4>
-                  </div>
-                  <p class="p-4">
-                    <span class="text-2xl font-medium text-gray-500 dark:text-light" id="usersCount">90</span>
-                    <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
-                  </p>
-                  <!-- Chart -->
-                  <div class="relative p-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="activeUsersChart" width="544" height="300" style="display: block; height: 150px; width: 272px;" class="chartjs-render-monitor"></canvas>
-                  </div>
-                </div>
+                
 
                 <!-- Line chart card -->
                 <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
@@ -579,18 +566,17 @@
           </footer>
           
         </div>
-        <script>
-    // Access specific property in JavaScript
-    
-   
-</script>
+      
 
     
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
-        <script src="./builds/js/script.js"></script>
-        
+      
+      
 
         <script>
+
+
+
 
 
 const salesDataInJs = @json($salesData);
@@ -671,6 +657,90 @@ const barChart = new Chart(document.getElementById('barChart'), {
     },
   },
 })
+
+const lineChart = new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        data: monthlySalesData,
+        fill: false,
+        borderColor: colors.primary,
+        borderWidth: 2,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          gridLines: false,
+          ticks: {
+            beginAtZero: false,
+            stepSize: 50,
+            fontSize: 12,
+            fontColor: '#97a4af',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: 20,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          gridLines: false,
+        },
+      ],
+    },
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+    tooltips: {
+      hasIndicator: true,
+      intersect: false,
+    },
+  },
+})
+
+const doughnutChart = new Chart(document.getElementById('doughnutChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        data: monthlySalesData,
+        backgroundColor: [colors.primary, colors.primaryLighter, colors.primaryLight],
+        hoverBackgroundColor: colors.primaryDark,
+        borderWidth: 0,
+        weight: 0.5,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      position: 'bottom',
+    },
+
+    title: {
+      display: false,
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+    },
+  },
+})
+
+
+
+
+
      
 
 const setup = () => {

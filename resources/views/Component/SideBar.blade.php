@@ -3,7 +3,7 @@
     <div class="flex flex-col h-full">
         <a class="border-b-[1px] border-white text-lg font-bold flex items-center  text-gray-800 dark:text-gray-200"
             href="/">
-            <img class="w-16 h-16" src="/image/pizzaa.png" alt="">
+            <img class="w-16 h-16" src="/image/gt-removebg-preview.png" alt="">
             <P class="text-white font-[Nosifer]">PIZZA STORE</P>
         </a>
         <!-- Sidebar links -->

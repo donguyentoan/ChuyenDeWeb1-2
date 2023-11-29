@@ -66,7 +66,7 @@ div.load_home_page .mask {
 
 .load_home_page svg path.str1 {
     animation-name: Signature;
-    animation-duration: 7s;
+    animation-duration: 30s;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(2, .25, .43, .96);
 }
@@ -157,6 +157,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         load_home_page.style.top = '-100vh';
         body.style.overflow = 'auto';
-    }, 1300)
+    }, 2000)
 })
 </script>

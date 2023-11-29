@@ -1,9 +1,12 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
 
 use Illuminate\Http\Request;
 use App\Models\Manufactures;
+
 
 class ManufacturesController extends Controller
 {
@@ -18,14 +21,17 @@ class ManufacturesController extends Controller
         return view('Dashboard..Manufactures.ManufacturesList' , compact('manufactures'));
     }
 
-    
+
+   
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',
         ]);
 
+
         $existingProduct = Manufactures::where('name', $request->input('name'))->first();
+
 
         if ($existingProduct) {
             return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
@@ -33,23 +39,28 @@ class ManufacturesController extends Controller
             $manufacture = new Manufactures();
             $manufacture->name = $request->input('name');
             $manufacture->save();
-        
+       
+
 
         return redirect('/showManufactures')->with('success', 'Add successfully');
     }
 
-  
+
+ 
     public function edit($id)
     {
         $manufactures = Manufactures::latest('updated_at')->paginate(5);
         $manufacture = Manufactures::find($id);
 
+
         if ($manufacture == null) {
             return redirect('/showManufactures')->with('success', 'Manufactures Not Found');
         }
 
+
         return view('Dashboard.Manufactures.EditManufactures' , ['manufacture' => $manufacture , "manufactures" => $manufactures]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -64,22 +75,28 @@ class ManufacturesController extends Controller
             "name" => "required|max:255",
         ]);
 
+
         $existingProduct = Manufactures::where('name', $request->input('name'))->first();
+
 
         if ($existingProduct) {
             return redirect('/showManufactures')->with('success', 'Manufactures Already Exists');
         }
+
 
         $manufacture = Manufactures::find($id);
         if ($manufacture == null) {
             return redirect('/showManufactures')->with('success', 'Manufactures Not Found');
         }
 
+
         $manufacture->name = $request->input('name');
         $manufacture->save();
 
+
         return redirect('/showManufactures')->with('success', 'Updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,13 +108,18 @@ class ManufacturesController extends Controller
     {
         $manufacture = Manufactures::find($id);
 
+
         if ($manufacture == null) {
             return redirect('/showManufactures')->with('success', 'Manufactures Not Found');
         }
-        
+       
         $manufacture->delete();
+
 
         // Chuyển hướng quay lại trang hiện tại sau khi xóa
         return redirect("/showManufactures")->with('success', 'Delete successfully');
     }
 }
+
+
+

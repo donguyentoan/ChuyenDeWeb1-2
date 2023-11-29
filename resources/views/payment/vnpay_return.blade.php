@@ -128,6 +128,18 @@
             </div>
            
         </div>  
+
+        <script>
+            // Lấy mảng miniCart từ localStorage
+            const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
+
+            // Xóa tất cả phần tử trong miniCart
+            miniCart.splice(0, miniCart.length);
+
+            // Lưu lại miniCart vào localStorage sau khi đã xóa
+            localStorage.setItem('miniCartss', JSON.stringify(miniCart));
+
+        </script>
         @include('Component.Footer')
     </body>
 </html>

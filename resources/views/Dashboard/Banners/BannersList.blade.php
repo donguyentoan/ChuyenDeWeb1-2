@@ -62,6 +62,9 @@
                         <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản phẩm lên</div>
                     </div>
                 </form>
+                @if ($errors->has('image'))
+                <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('image') }}</p>
+                @endif
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr

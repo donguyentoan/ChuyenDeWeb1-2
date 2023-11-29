@@ -128,8 +128,12 @@ class CheckoutController extends Controller
                   
                     DB::insert($sql);
                     
-                    
-                    return view('ReceivingInformation.receivingInformation' , ['categories' => $categories]);
+                    $address = $request->all();
+                    // dd($address);
+                    return view('ReceivingInformation.receivingInformation', ['categories' => $categories , "address" => $address]);
+
+
+                
             }
     
           
@@ -214,9 +218,6 @@ class CheckoutController extends Controller
 
                  $miniCart = json_decode(urldecode(request('miniCartData')), true);
 
-
-
-                
                 $order = new Orders();
                 $newDeliveryInfo =  DeliveryInformations::all();
                 
@@ -272,10 +273,6 @@ class CheckoutController extends Controller
                 $payment->ketqua = "Thành Công";
         
                 $payment->save();
-                return redirect()->route('home');
-
-               
-        
                 return view('OrderSuccess.orderSuccess' , ['categories' => $categories]);
 
 

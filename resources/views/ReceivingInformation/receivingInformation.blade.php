@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <style>
-    .alert 
+    .alert
     {
         animation: bouncess 4s;
     }
@@ -18,18 +18,19 @@
     }
     50% {
         transform: translateX(0%);
-        
-    }   
+       
+    }  
     100%
     {
         transform: translateX(-100%);
     }
     }
 
+
 </style>
 <body>
     @include('Component.Header')
-    
+   
     <section >
         @if(Session::has('error'))
         <div class="alert transition ease-in-out   alert-danger h-20 w-3/12 items-center bg-red-500 rounded-xl -translate-x-full p-5 ">
@@ -38,16 +39,17 @@
         @endif
         <div class="container mx-auto">
             <div class="md:flex">
-                <div>
+                <div class="w-4/5" >
                     <div>
                         <div class=" m-3  shadow-2xl rounded-xl  ">
                             <div class="box1 bg-white w-full  rounded-xl">
                                 <h1 class="p-3 text-xl font-bold border-b-[1px] border-black-500">Thông Tin Nhận Hàng</h1>
-                                <h1 class="px-3 pt-3 pb-2 text-[#006a32] font-bold" >Giao hàng tới <span class="text-red-500 font-bold"> - Donguyentoan - 0344842232</span></h1>
-                                <p class="px-3 pb-2">Tổ Dân Phố 12 Thị Trấn Pongdrang krongbuk DakLak Tổ Dân Phố 12 Thị Trấn Pongdrang krongbuk DakLak</p>
+                                <h1 class="px-3 pt-3 pb-2 text-[#006a32] font-bold" >Giao hàng tới <span class="text-red-500 font-bold"> - {{ $address['name'] }} - {{ $address['phone'] }}</span></h1>
+                                <p class="px-3 pb-2">{{ $address['apartmentNumber'].$address['streetNames'].$address['details'] }}</p>
                                 <p class="px-3 font-bold">Hướng dẫn cho nhân viên giao hàng</p>
                                 <textarea class="mx-3 border-[1px] border-black-500 w-11/12" name="" id="" cols="50" rows="5" placeholder="Nội dung....."></textarea>
                                 <h1 class="px-3 pt-3 pb-2 text-[#006a32] font-bold" >Thời gian nhận hàng dữ kiến <span class="text-red-500 font-bold">- 5/10/2023 17:05</span></h1>
+
 
                             </div>
                         </div>
@@ -61,8 +63,8 @@
                                 <div class="box-item">
                                     <div class="p-4 flex items-center justify-between border border-black-500 ">
                                         <div class="flex items-center ">
-                                        
-                                        
+                                       
+                                       
                                             <input
                                             class=" relative float-left  mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                             type="radio"
@@ -70,16 +72,16 @@
                                             value="cod"
                                             id="radioDefault01" />
                                             <img class="w-28" src="/image/cod.jpeg" alt="">
-                
-                                        
+               
+                                       
                                         </div>
                                     <h1>Thanh Toán Khi Nhận Hàng  </h1>
-                                    
+                                   
                                     </div>
                                     <div class="p-4 flex items-center justify-between  border border-black-500">
                                         <div class="flex items-center ">
-                                        
-                                        
+                                       
+                                       
                                             <input
                                             class="relative float-left  mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                             type="radio"
@@ -87,25 +89,27 @@
                                             value="vnpay"
                                             id="radioDefault01" />
                                             <img class="w-28" src="/image/vnpay.png" alt="">  
-                                            
+                                           
                                         </div>
                                     <h1>Thanh Toán VN Pay </h1>
-                                    
+                                   
                                     </div>
-                                
+                               
                                 </div>
-                                
-                                
+                               
+                               
                                 </div>  
-                            
-                                
+                           
+                               
                        
+
 
                         </div>
                     </div>
 
-                        
-                  
+
+                       
+                 
                     <div class="md:w-1/3  w-11/12 ">
                         <div class="m-3  w-full shadow-2xl rounded-xl  ">
                             <div class="box1 bg-white w-full rounded-xl p-3 ">
@@ -115,13 +119,15 @@
                                     <p class="text-lg font-medium">Pizza Hải Sản Cao Cấp</p>
                                     <span class="text-sm">x1</span>
 
+
                                     </div>
-                              
+                             
                                     <p> <span class="text-lg font-medium">Kích thước :</span> nhỏ</p>
                                     <p> <span class="text-lg font-medium">Đế :</span> Dày</p>
                                     <div class="flex pb-4 justify-end border-b-[1px] border-black-500">
                                         <p class="text-lg font-medium ">149.000đ</p>
                                     </div>
+
 
                                 </div>
                          
@@ -150,13 +156,14 @@
                                         <p class="text-lg font-medium ">25.000đ</p>
                                     </div>
 
+
                                 </div>
                                 <div class="flex justify-between pt-3">
                                     <p class="text-lg font-medium">Tổng Tiền</p>
                                     <p id="total_price" class="text-lg font-medium  ">25.000đ</p>
                                 </div>
-                                
-                                
+                               
+                               
                             </div>
                         </div>
                     </div>
@@ -167,7 +174,7 @@
                     <input type="hidden" id="miniCartData"  name="miniCartData" value="">
                     <input type="submit" class="md:w-full  w-11/12 bg-gradient-to-r from-cyan-500 to-blue-500 px-20 py-2 rounded-lg md:ml-2 mt-2   " value="Quay Về">
                     <input type="submit" class="md:w-full w-11/12 bg-gradient-to-r from-cyan-500 to-blue-500 px-20 py-2 rounded-lg md:ml-2 mt-2 " value="Thanh Toán">
-              
+             
             </div>
             </form>
            
@@ -175,14 +182,18 @@
     </section>
     <script>
           var mini = document.querySelector('.order');
-          
+         
           var total = document.querySelector('#total_price');
+
 
          
          
   const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];
 
+
  
+
+
 
 
   var cartHTML = '';
@@ -194,17 +205,19 @@
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
-    
+   
    
     total1 = total1 + (product.price * product.quantity);
+
 
     cartHTML += `
        <div class="flex justify-between pt-3">
          <p class="text-lg font-medium">${product.name}</p>
        <span class="text-sm">x${product.quantity}</span>
 
+
       </div>
-                              
+                             
       <p> <span class="text-lg font-medium">Kích thước :</span> nhỏ</p>
      <p> <span class="text-lg font-medium">Đế :</span> Dày</p>
     <div class="flex pb-4 justify-end border-b-[1px] border-black-500">
@@ -223,13 +236,17 @@
   total.innerHTML = formattedNumber;
   document.getElementById('totalOrder').value = total1;
 
+
 document.getElementById('miniCartData').value = JSON.stringify(miniCart);
 
 
+
+
   mini.innerHTML = cartHTML;
-  
+ 
     </script>
-    
+   
     @include('Component.Footer')
 </body>
 </html>
+

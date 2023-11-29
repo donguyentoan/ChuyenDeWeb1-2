@@ -23,10 +23,10 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-white p-10">
-            <form action="/addManufacture" method="post" enctype="multipart/form-data">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-white">
+            @include('component.NavBarDashBoard')
+            <form action="/addManufacture" method="post" enctype="multipart/form-data" class="m-10">
                 @csrf
-
                 @if (session('success'))
                 <div id="success-message"
                     class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md"

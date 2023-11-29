@@ -157,6 +157,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         load_home_page.style.top = '-100vh';
         body.style.overflow = 'auto';
-    }, 2000)
+    }, 1800)
 })
 </script>

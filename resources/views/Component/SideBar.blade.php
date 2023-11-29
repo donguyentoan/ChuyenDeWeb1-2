@@ -4,7 +4,7 @@
         <a class="border-b-[1px] border-white text-lg font-bold flex items-center  text-gray-800 dark:text-gray-200"
             href="/">
             <img class="w-16 h-16" src="/image/gt-removebg-preview.png" alt="">
-            <P class="text-white font-[Nosifer]">PIZZA STORE</P>
+            <P class="pl-2 text-white font-[Nosifer]">PIZZA STORE</P>
         </a>
         <!-- Sidebar links -->
         <nav aria-label="Main" class="flex-1  py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">

@@ -24,8 +24,9 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] p-10">
-            <form action="/uploads" method="post" enctype="multipart/form-data">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff]">
+            @include('component.NavBarDashBoard')
+            <form action="/uploads" method="post" enctype="multipart/form-data" class="m-10">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>

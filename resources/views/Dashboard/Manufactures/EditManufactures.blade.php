@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Edit Manufactures</title>
+    <title>Edit Manufactures: {{$manufacture->name}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet" />
@@ -22,8 +22,9 @@
         </div>
         <!-- EndSideBar -->
 
-        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff] p-10">
-            <form action="/updateManufacture/{{$manufacture->id}}" method="post" enctype="multipart/form-data">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs bg-[#fff]">
+            @include('component.NavBarDashBoard')
+            <form action="/updateManufacture/{{$manufacture->id}}" method="post" enctype="multipart/form-data" class="m-10">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>

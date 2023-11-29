@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Edit Banner $banner->name_banner</title>
+    <title>Edit Banner {{$banner->name_banner}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet" />
@@ -22,10 +22,10 @@
         <div class="w-1/7">
             @include('component.SideBar')
         </div>
-        <div class="w-full overflow-hidden rounded-lg shadow-xs flex mx-10 mt-3">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs flex">
             <div class="w-full overflow-x-auto">
-                
-            @if (session('success'))
+                @include('component.NavBarDashBoard')
+                @if (session('success'))
                 <div id="success-message"
                     class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5 shadow-md"
                     role="alert">
@@ -42,29 +42,32 @@
                     </div>
                 </div>
                 @endif
-
-                <form action="/updateBanners/{{$banner->id}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-6">
-                        <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
-                            Image</label>
-                        <div class="flex items-center ">
-                            <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
-                                <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
-                                    <img class="object-contain w-full h-full " alt="" loading="lazy" id="output" src="/upload/{{$banner->name_banner}}">
-                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                <div class="m-5">
+                    <form action="/updateBanners/{{$banner->id}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-6">
+                            <label class="block mb-2 text-sm font-medium text-gray-900" for="img-product">Upload
+                                Image</label>
+                            <div class="flex items-center ">
+                                <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
+                                    <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
+                                        <img class="object-contain w-full h-full " alt="" loading="lazy" id="output"
+                                            src="/upload/{{$banner->name_banner}}">
+                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                        </div>
                                     </div>
                                 </div>
+                                <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
+                                    class=" p-2 block h-12 w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+                                    aria-describedby="user_avatar_help">
+                                <button type="submit"
+                                    class="whitespace-nowrap text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-3.5 ml-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Edit
+                                    Banner</button>
                             </div>
-                            <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
-                                class=" p-2 block h-12 w-full text-sm text-gray-400 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
-                                aria-describedby="user_avatar_help">
-                            <button type="submit"
-                                class="whitespace-nowrap text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-3.5 ml-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Edit Banner</button>
+                            <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản phẩm lên</div>
                         </div>
-                        <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản phẩm lên</div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr
@@ -128,6 +131,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
 

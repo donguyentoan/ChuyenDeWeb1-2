@@ -63,8 +63,17 @@
                         @endauth
                     </div>
                     @auth
-
-                    <p>Welcome, {{ auth()->user()->name }}!</p>
+                    <p>
+                        Welcome
+                        @if (auth()->user()->roles == 1)
+                        Super Admin
+                        @elseif (auth()->user()->roles == 2)
+                        Admin
+                        @else
+                        Customer
+                        @endif
+                        , {{ auth()->user()->name }}!
+                    </p>
                     @else
                     <div class="login-and-register">
                         <a href="/auth/login" class="register">Đăng nhập</a>

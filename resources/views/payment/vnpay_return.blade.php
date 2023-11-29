@@ -42,7 +42,7 @@
         // $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret ?? '');
         ?>
         <!--Begin display -->
-        @include('Component.Header')
+       
         <div class="container mx-auto flex justify-center">
             <div class="bg-[#67b869] w-80 p-10 m-5 rounded-xl">
 

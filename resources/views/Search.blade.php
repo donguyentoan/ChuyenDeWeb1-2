@@ -103,9 +103,9 @@
               <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$key->image}}" alt="blog">
+                    <img class="z-0 object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$key->image}}" alt="blog">
                   </div>
-                  <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
+                  <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2 z-50">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$key -> name}}</h1>
                     <p class="leading-relaxed text-xs mb-3">{{$key->description}}</p>
                     <div class=" items-center flex justify-between ">

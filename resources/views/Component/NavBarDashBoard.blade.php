@@ -14,10 +14,21 @@
             </span>
         </button>
 
-        <!-- Brand -->
-        <a href="/" class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light">
+        <a href="#" class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
+            id="pageTitleLink">
             Pizza Store
         </a>
+
+        <script>
+        // Kiểm tra xem có thẻ title trong phần head không
+        if (document.querySelector('head title')) {
+            // Lấy giá trị của thẻ title
+            var pageTitle = document.querySelector('head title').innerText;
+            // Đặt giá trị của thẻ a là giá trị của title
+            document.getElementById('pageTitleLink').innerText = pageTitle;
+        }
+        </script>
+
 
         <!-- Mobile sub menu button -->
         <button @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
@@ -77,15 +88,15 @@
             <p>
                 Welcome
                 @if (auth()->user()->roles == 1)
-                    Super Admin
-                    @elseif (auth()->user()->roles == 2)
-                        Admin
-                    @else
-                        Customer
+                Super Admin
+                @elseif (auth()->user()->roles == 2)
+                Admin
+                @else
+                Customer
                 @endif
                 , {{ auth()->user()->name }}!
             </p>
-
+            @else
             <div class="login-and-register">
                 <a href="/auth/login" class="register">Đăng nhập</a>
                 <span>/</span>
@@ -99,7 +110,7 @@
                     class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
                     aria-expanded="false">
                     <span class="sr-only">User menu</span>
-                    <img class="w-10 h-10 rounded-full" src="build/images/avatar.jpg" alt="Ahmed Kamel">
+                    <img class="w-10 h-10 rounded-full" src="/build/images/avatar.jpg" alt="Ahmed Kamel">
                 </button>
 
                 <!-- User dropdown menu -->

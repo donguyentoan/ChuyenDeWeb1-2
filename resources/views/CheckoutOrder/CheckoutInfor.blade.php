@@ -192,7 +192,9 @@ radioSelectTime.addEventListener('click', function() {
                     option.text = province.Name;
                     option.name = "provinces" ;                            // Thay 'Name' bằng trường dữ liệu tương ứng trong JSON
                     provinceSelect.appendChild(option);
+                    
                 });
+                
             })
             .catch(error => {
                 console.error('Lỗi khi lấy danh sách tỉnh: ', error);

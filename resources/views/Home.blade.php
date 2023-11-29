@@ -163,7 +163,6 @@ html {
 
             //likeProduct------------------------------------------------------------
 
-
             document.addEventListener('DOMContentLoaded', function() {
                 // Lặp qua tất cả các nút thích
                 document.querySelectorAll('.like-button').forEach(function(button) {
@@ -224,17 +223,8 @@ html {
                         '"] .likeIcon');
                     likeButton.classList.toggle('liked', isLiked);
                 }
-            });
 
-
-
-
-
-
-            // ----------------------------------------------------------------------------------------
-
-
-            updateMiniCart();
+                          updateMiniCart();
             let basePrice = 0; // Biến toàn cục để lưu giá ban đầu
 
 
@@ -405,6 +395,14 @@ html {
                 });
                 return selectedToppings;
             }
+
+            });
+
+
+
+
+
+
             </script>
 
 

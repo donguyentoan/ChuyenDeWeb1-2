@@ -197,7 +197,7 @@ class CheckoutController extends Controller
                     $quantity = $item['quantity'];
                     $price = $item['price'];
 
-                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$price )";
                      DB::insert($sql);
 
@@ -249,7 +249,7 @@ class CheckoutController extends Controller
 
                     $formattedNumber = number_format($price, 0, ',', '.');
 
-                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
                      DB::insert($sql); 
                 }

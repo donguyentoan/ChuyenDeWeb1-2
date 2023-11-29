@@ -79,4 +79,53 @@ class UserController extends Controller
         // Chuyển hướng quay lại trang hiện tại sau khi xóa
         return redirect("/showUser")->with('success', 'Delete successfully');
     }
+    public function customerChangepassword(Request $request)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            return redirect("/auth/login");
+        }
+        $request->validate([
+            'password' => ['required', 'min:8'],
+            'password_new' => ['required', 'min:8'],
+            'password_new_confirmation' => ['required', 'min:8'],
+        ]);
+
+
+        if ($request->password_new != $request->password_new_confirmation) {
+            return back()->withInput()->withErrors(['password_new_confirmation' => 'Password confirmation Không trùng khớp']);
+        }
+
+
+        if (Hash::check($request->password, $user->password)) {
+            $usernew =  User::find($user->id);
+            $usernew->password = Hash::make($request->input('password_new'));
+
+
+            $usernew->version++;
+            $usernew->save();
+
+
+            $recipientEmail = $user->email;
+
+
+            $content = 'Đổi mật khẩu tài khoản thành công';
+
+
+            Mail::raw($content, function ($email) use ($recipientEmail, $user) {
+                $email->to($recipientEmail)
+                    ->subject("Pizza Store")
+                    ->from($user->email, $user->name);
+            });
+
+
+            return redirect('/customerChangepassword')->with('success', 'Successfully change password');
+        } else {
+            return back()->withInput()->withErrors(['password' => 'Password sai']);
+        }
+    }
+
+
+
+
 }

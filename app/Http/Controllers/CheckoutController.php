@@ -1,19 +1,28 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+
 
 use App\Models\Orders;
-use App\Models\OrderDetails;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+
+use Faker\Core\Number;
+use App\Models\Payment;
+
+use Illuminate\Support\Str;
+use App\Models\OrderDetails;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Models\DeliveryInformations;
 use Illuminate\Support\Facades\Session;
 
 
 class CheckoutController extends Controller
 {
+    
     public function index()
     {
         return view('CheckoutOrder.CheckoutOrder');
@@ -38,6 +47,8 @@ class CheckoutController extends Controller
             // Xử lý tệp không tồn tại
             return response()->json(['error' => 'File not found'], 404);
         }
+
+
         $filePath = public_path('json/districts.json'); // Đường dẫn đến tệp JSON trong thư mục public
         $districts = [];
 
@@ -121,6 +132,7 @@ class CheckoutController extends Controller
         
 
     }
+    
 
     public function receivingIformation(Request $request)
     {
@@ -138,10 +150,11 @@ class CheckoutController extends Controller
         {
             if($payment_method == "vnpay")
             {
-
                 $miniCart = json_decode(urldecode(request('miniCartData')), true);
 
-                //  dd($miniCart);
+                
+
+               
                 $order = new Orders();
                 $newDeliveryInfo =  DeliveryInformations::all();
                 
@@ -159,8 +172,14 @@ class CheckoutController extends Controller
                    
                 }
                 $order->status = 0;
+
                 $order->payment_method = 1;
                 $order->save();
+                
+                $orderID = $order->id;
+                // Lưu ID vào session hoặc thực hiện các thao tác khác cần thiết
+                session(['orderID' => $orderID]);
+                
                 foreach($miniCart as $item)
                 {
                     $orderdetail = new OrderDetails(); 
@@ -169,16 +188,30 @@ class CheckoutController extends Controller
                     $quantity = $item['quantity'];
                     $price = $item['price'];
 
-                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity, price)
                     VALUES ('$order->id'  , $id , $quantity ,$price )";
                      DB::insert($sql);
+
+                    
                 }
-                return view('payment.payment' , ["total" => $payment_total]);
+                $number = $payment_total;
+                $formattedNumber = number_format($number, 0, '.', ',');
+
+
+                
+                return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total]);
+    
+                
             }
             else{
 
+               
+
                  $miniCart = json_decode(urldecode(request('miniCartData')), true);
-                //  dd($miniCart);
+
+
+
+                
                 $order = new Orders();
                 $newDeliveryInfo =  DeliveryInformations::all();
                 
@@ -188,9 +221,12 @@ class CheckoutController extends Controller
                     $order->deliveryInformation_date = $value['date_order'];
 
                 }
+
                 foreach($miniCart as $item)
                 {
+
                     $order->total_amount = ($item['quantity'] * $item['price']);
+                   
                 }
                 $order->status = 0;
 
@@ -199,19 +235,42 @@ class CheckoutController extends Controller
                 foreach($miniCart as $item)
                 {
                     $orderdetail = new OrderDetails(); 
+
                     $id = $item['id'];
                     $quantity = $item['quantity'];
+                    
                     $price = $item['price'];
-                    $sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price)
-                    VALUES ('$order->id'  , $id , $quantity ,$price )";
-                     DB::insert($sql);
+
+                    $formattedNumber = number_format($price, 0, ',', '.');
+
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity, price)
+                    VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
+                     DB::insert($sql); 
                 }
 
+                $payment = new  Payment();
+                $orderID = session('orderID');
+                $payment->id_oder =  $order->id;
+                $payment->madonhang =  Str::random(5);
+                foreach($miniCart as $item)
+                {
+
+                
+                    $payment->sotien = ($item['quantity'] * $item['price']);
+                }
                
-                
+                $payment->noidung = "Thanh toan GD:" . Str::random(5);
+                $payment->maphanhoi = "00";
+                $payment->magiaodich =  Str::random(5);
+                $payment->manganhang = "COD";
+                $payment->thoigian = Carbon::now();
+                $payment->ketqua = "Thành Công";
+        
+                $payment->save();
+          
 
-
-                
+               
+        
                 return view('OrderSuccess.orderSuccess');
 
 

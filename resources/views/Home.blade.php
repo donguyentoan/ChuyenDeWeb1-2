@@ -6,6 +6,8 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./build/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
@@ -93,12 +95,12 @@
                 <h1 class="text-xl font-bold text-center text-white " >{{$category->name}}</h1>
               </div>
 
-              <div class="flex flex-wrap ">
+              <div class="flex flex-wrap items-end">
               @foreach($category->products as $product)
-              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
+              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md:mt-5 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$product->image}}" alt="blog">
+                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$product->image}}" alt="blog">
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
@@ -139,7 +141,7 @@
     // Cập nhật thông tin sản phẩm trong modal
     document.getElementById('modal-product-name').textContent = productName;
     document.getElementById('modal-product-id').textContent = productId;
-    document.getElementById('modal-product-Image').src = "/image/"+productImage;
+    document.getElementById('modal-product-Image').src = "/upload/"+productImage;
   
     
 

@@ -83,28 +83,27 @@
    
     <div class="w-1/4 p-6 border-2  border-black-500  mr-2  rounded-r-xl ">
     <h3 class="text-xl font-bold border-b-2 border-black-500">Categories</h3>
-    <form action="/searchProduct">
-          <div class="list-group">
-    
-
-            @foreach($manufacture as $ct)
-                    <div class="list-group-item checkbox pt-3">
-                        
-                        <label class="" ><input name="manu" type="checkbox" class="common_selector ram  mr-2 w-3" value="{{ $ct->id}}" > {{ $ct->name}} </label>
-                    </div>
-                    @endforeach            
-                </div>
-                <input type="submit" class="bg-blue-500 px-5 py-1" value="Search" >
-         </div>
-    </form>
-  
+    <form action="{{ route('filter') }}" method="get">
+      <div class="list-group">
+          @foreach($manufacture as $ct)
+          <div class="list-group-item checkbox pt-3">
+              <label class="font-medium"><input name="manu[]" type="checkbox" class="common_selector manu mr-2 w-3 " value="{{ $ct->id }}"> {{ $ct->name }} </label>
+          </div>
+          @endforeach
+      </div>
+      <div class="flex justify-end">
+      <input type="submit" class=" w-20  rounded-md mt-5 bg-blue-500 px-5 py-1" value="Filter">
+      </div>
+     
+  </form>
+</div>
     <div class="w-full">    
               <div class="flex flex-wrap ">
           @foreach($search as $key)
               <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0 ">
-                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/{{$key->image}}" alt="blog">
+                    <img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$key->image}}" alt="blog">
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$key -> name}}</h1>
@@ -127,7 +126,8 @@
              </div>
              <div class="panigation p-8 ">
             
-            {{ $search->links() }}
+             {{ $search->appends(request()->input())->links() }}
+
        </div>
               
                 

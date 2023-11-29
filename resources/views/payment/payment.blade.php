@@ -32,8 +32,9 @@
      
                         <div class="form-group">
                             <label class="text-lg font-bold" for="amount">Số Tiền Thanh Toán Đơn Hàng </label>
-                            <input class=" mt-2 mb-2  h-10 form-control border-[1px] border-black-500 w-full " data-val="true" data-val-number="The field Amount must be a number."  id="amount" max="100000000" min="1" name="amount" type="text" value="{{$total}}" />
-                            <p class=" mt-2 mb-2  h-10 form-control  w-full " data-val="true"  id="amount" name="amount" >{{$total}}</p>
+                            <input class=" mt-2 mb-2  h-10 form-control border-[1px] border-black-500 w-full " data-val="true" data-val-number="The field Amount must be a number."  id="amount" max="100000000" min="1" name="amount" type="hidden" value="{{$total}}" />
+                            <input class=" mt-2 mb-2  h-10 form-control border-[1px] border-black-500 w-full " data-val="true" data-val-number="The field Amount must be a number."  id="amount11" max="100000000" min="1"  name="toan" type="text" value="{{$totalfm}}" />
+
                         </div>
                     <div>
                         

@@ -54,7 +54,7 @@
                             @if (auth()->user()->roles == 1 || auth()->user()->roles == 2)
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/dashboard">Quản trị admin</a>
                             @endif
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="#">Thông Tin Đơn Hàng
+                            <a  class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/detailOrder">Thông Tin Đơn Hàng
                             </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf

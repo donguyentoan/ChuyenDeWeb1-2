@@ -9,6 +9,7 @@
     <title>Document</title>
 
 </head>
+@include('Component.Header')
 
 <body>
     <div class="p-10">
@@ -196,5 +197,6 @@
     </div>
 
 </body>
+@include('Component.Footer')
 
 </html>

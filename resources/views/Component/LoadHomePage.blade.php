@@ -108,6 +108,7 @@ div.load_home_page .mask {
 .load_home_page img {
     height: 250px;
     margin-left: 30%;
+    margin-right: 30%;
 }
 
 </style>

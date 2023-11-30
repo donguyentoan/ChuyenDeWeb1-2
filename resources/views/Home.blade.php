@@ -35,6 +35,7 @@ html {
 
     @include('component.Header')
 
+    @include('component.LoadHomePage')
 
 
     @include('component.Slide')

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\OrderDetails;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Orders extends Model
 {
@@ -16,4 +17,8 @@ class Orders extends Model
         'payment_method',
 
     ];
+    public function orderdetails()
+    {
+        return $this->hasMany(OrderDetails::class);
+    }
 }

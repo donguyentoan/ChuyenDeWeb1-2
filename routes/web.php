@@ -145,6 +145,12 @@ Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
 
 Route::get('/inforCustomer', [InforCustomerController::class, 'index']);
 Route::get('/customerAddress', [InforCustomerController::class, 'showaddress']);
+Route::get('/orderHistory', [InforCustomerController::class, 'orderHistory']);
+Route::get('/customerChangepassword', [InforCustomerController::class, 'customerChangepassword']);
+Route::post('/changepassword', [UserController::class, 'customerChangepassword']);
+Route::post('/saveAddress', [InforCustomerController::class, 'saveaddress']);
+
+Route::get('/detailOrder', function () { return view('InforCustomer.detailOrder');});
 
 
 

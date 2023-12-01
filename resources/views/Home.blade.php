@@ -18,7 +18,7 @@
 
 @include('component.Header')
 
-@include('Component.FlashScreenDashBoard')
+@include('Component.LoadHomePage')
 
 
 

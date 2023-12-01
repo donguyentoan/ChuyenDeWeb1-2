@@ -43,7 +43,7 @@
        </div>
        <div class="lg:w-1/2 w-full flex flex-wrap rounded bg-white-1 border border-black-100  ">
          <img alt="ecommerce" class="object-cover object-center rounded-md my-5 h-50  md:ml-5 "  style="width: 92%;"
-     src=" https://thepizzacompany.vn/images/thumbs/000/0003816_menu-the-moi-chat_500.jpeg">
+     src="\image\menu-the-moi-chat_500.jpeg">
        </div>
        <div class="h-1 w-20 bg-green-700 rounded"></div>
      </div>

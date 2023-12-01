@@ -76,7 +76,7 @@
     <div class="info-customer mt-10 mb-20">
         <div class="container mx-auto">
             <div class="">
-                <div class="md:flex w-full">
+                <div class="md:flex w-full mb-10">
                     <div class="md:w-1/3 mt-5 w-full menu p-15 box-border inset-y-0 left-0 static mr-20">
                         <div class="shadow">
                             <div class="headbox bg-neutral-300 rounded-t-lg pl-5 py-3 pr-20 w-full">

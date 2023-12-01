@@ -52,11 +52,13 @@
                             <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/inforCustomer">Thông
                                 Tin Tài Khoản</a>
                             @if (auth()->user()->roles == 1 || auth()->user()->roles == 2)
-                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/dashboard">Quản trị admin</a>
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/dashboard">Quản trị
+                                admin</a>
                             @endif
-                            <a  class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/detailOrder">Thông Tin Đơn Hàng
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/detailOrder">Thông
+                                Tin Đơn Hàng
                             </a>
-                            <a  class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/topup">Ví Mua Hàng
+                            <a class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/topup">Ví Mua Hàng
                             </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
@@ -110,7 +112,7 @@
             </div>
             <!-- Trong blade template -->
             <div
-                class="text-black minicart bg-white p-4 w-72 mx-auto mt-1 rounded-lg shadow-lg z-50 absolute right-[5%]  hidden group-hover:block">
+                class="text-black minicart bg-white p-4 w-72 mx-auto rounded-lg shadow-lg z-50 absolute right-[5%] hidden group-hover:block">
                 <div class="minicart--item-container text-xs text-center font-semibold mb-2 ">
                     <p class="text-xl font-bold">Mini Cart</p>
                 </div>
@@ -133,9 +135,6 @@
                 </div>
 
             </div>
-
-
-
         </div>
 
         </div>

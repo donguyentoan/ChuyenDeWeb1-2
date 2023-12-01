@@ -1,7 +1,7 @@
 <header class="text-gray-600 body-font w-full">
     <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
         <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <img class="w-14 h-14" src="./image/gt-removebg-preview.png" alt="">
+            <img class="w-14 h-14" src="/image/gt-removebg-preview.png" alt="">
             <span class="ml-3 text-lg font-mono">Pizza Store</span>
         </a>
 

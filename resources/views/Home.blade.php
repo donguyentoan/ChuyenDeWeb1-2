@@ -18,8 +18,10 @@
 
 @include('component.Header')
 
+@include('Component.FlashScreenDashBoard')
 
-@include('component.LoadHomePage')
+
+
 @include('component.Slide')
 
 <section class="text-gray-600 body-font">

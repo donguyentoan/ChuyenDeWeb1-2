@@ -111,7 +111,11 @@
                                 </tbody>
                                 <tbody>
 
+<<<<<<< HEAD
+                                    @if($orders)
+=======
                                   
+>>>>>>> ce014a9133939fd77d05abe3c1a02265cc77e108
                                         @for ($i = 0 ; $i < count($orders); $i++ ) <thead>
                                             <tr class="border-0">
                                                 
@@ -123,7 +127,11 @@
                                             </tr>
                                             </thead>
                                             @endfor
+<<<<<<< HEAD
+                                   
+=======
                                     
+>>>>>>> ce014a9133939fd77d05abe3c1a02265cc77e108
                                 </tbody>
                                 @else
                                 <div class="text-xl py-3 text-center text-[#006a31]"><strong> Chưa có đơn hàng nào</strong> </div>

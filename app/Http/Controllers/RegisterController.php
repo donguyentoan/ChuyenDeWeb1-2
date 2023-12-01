@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Wallets;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +44,7 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-
-
+            $this->createWallet($user);
             $recipientEmail = $request->email;
 
             $content = 'Tạo tài khoản thành công';
@@ -60,5 +61,34 @@ class RegisterController extends Controller
         } else {
             return back()->withInput()->withErrors(['password_confirmation' => 'Password confirmation Không trùng khớp']);
         }
+    }
+
+
+    public function createWallet($user = null)
+    {
+        if($user == null)
+        {
+            $user = session('user');
+        }
+
+
+        $walletTmp = Wallets::where('user_id', '=', $user->id)->get();
+        //dd($walletTmp->count());
+        if ($walletTmp->count() <= 0) {
+            $wallet = new Wallets();
+
+            $wallet->user_id = $user->id;
+            $wallet->address = Str::random(10);
+            $wallet->name = "wallet " . $user->id;
+            $wallet->balance = 0;
+            $wallet->save();
+            return redirect('/topup')->with('success', 'Create Wallet successfully');
+        } else {
+            return redirect('/topup')->with('success', '  Wallet is exit ');
+
+        }
+//
+
+
     }
 }

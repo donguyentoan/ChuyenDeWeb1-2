@@ -4,7 +4,7 @@ test('has title', async ({ page }) => {
   await page.goto('http://127.0.0.1:8000/');
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Document/);
+  await expect(page).toHaveTitle(/Home/);
 });
 
 // đăng nhập tk user
@@ -65,7 +65,7 @@ test('Leave all blank', async ({ page }) => {
 //  Để trống email 
 test('Leave email blank', async ({ page }) => {
   // Điều hướng đến trang đăng nhập user
-  await page.goto('http://127.0.0.1:8000/auth/login');
+  await page.goto('http://127.0.01:8000/auth/login');
  
   // Để trống không nhập thông tin đăng nhập và nhấn nút đăng nhập
   await page.fill('input[name=email]', '');

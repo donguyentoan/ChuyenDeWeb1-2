@@ -9,8 +9,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TopupController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\BannersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\paymentController;
@@ -22,7 +24,6 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ManufacturesController;
 use App\Http\Controllers\InforCustomerController;
 use App\Http\Controllers\SearchProductController;
-use App\Http\Controllers\BannersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +142,9 @@ Route::post('/filter-products', 'ProductController@filterProducts');
 Route::post('/vnpay_create_payment' , [paymentController::class , 'index'] );
 Route::get('/vnpay_return' , [paymentController::class , 'vnpay_return'] );
 
+Route::post('/vnpay_create_payment' , [TopupController::class , 'index1'] );
+Route::get('/vnpay_return' , [TopupController::class , 'vnpay_return'] );
+
     //payment
 Route::get('/saveInForPay', [paymentController::class, 'save']);
 Route::get('/ShowPayment', [paymentController::class, 'showpayment']);
@@ -180,6 +184,24 @@ Route::get('/detailOrder', [InforCustomerController::class, 'index1']);
 
 
 Route::post('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
+
+
+Route::get('/topup', [TopupController::class, 'index']);
+Route::get('/savetopup ', [TopupController::class, 'wallet_transaction']);
+
+
+
+    Route::get('/showManufactures', [ManufacturesController::class , 'index'] );
+    Route::get('/ManufactureAdd', [ManufacturesController::class , 'create'] );
+
+
+    Route::post('/uploads', [ManufacturesController::class, 'store']);
+    Route::delete('/deleteManufacture/{id}', [ManufacturesController::class, 'destroy']);
+    Route::get('/editManufacture/{id}', [ManufacturesController::class , 'edit'] );
+    Route::post('/updateManufacture/{id}', [ManufacturesController::class, 'update']);
+
+
+
 
 
 

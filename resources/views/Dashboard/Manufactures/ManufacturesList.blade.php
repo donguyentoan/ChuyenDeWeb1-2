@@ -25,7 +25,7 @@
 
         <div class="w-full overflow-hidden rounded-lg shadow-xs bg-white">
             @include('component.NavBarDashBoard')
-            <form action="/addManufacture" method="post" enctype="multipart/form-data" class="m-10">
+            <form action="/ManufactureAdd" method="get" enctype="multipart/form-data" class="m-10">
                 @csrf
                 @if (session('success'))
                 <div id="success-message"
@@ -45,15 +45,7 @@
                 </div>
                 @endif
 
-                <div class="mb-6">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 text-black">Name</label>
-                    <input type="text" id="name" name="name"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
-                        placeholder="Nhập tên sản phẩm" required>
-                    @if ($errors->has('name'))
-                    <p class="help is-danger text-red-500 font-semibold">{{ $errors->first('name') }}</p>
-                    @endif
-                </div>
+             
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Add
                     Manufacture</button>
@@ -63,6 +55,9 @@
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Phone</th>
+                        <th class="px-4 py-3">Address</th>
+                        <th class="px-4 py-3">Representative</th>
                         <th class="px-4 py-3">Last Update</th>
                         <th class="px-4 py-3">Actions</th>
                     </tr>
@@ -71,10 +66,33 @@
                     @foreach($manufactures as $manufacture)
                     <tr class="text-gray-700 dark:text-gray-400 items-center">
                         <!-- sản phẩm -->
-                        <td class="px-4 py-3 text-sm">
-                            {{$manufacture->name}}
-                        </td>
-
+                           <!-- sản phẩm -->
+                            <td class="px-3 py-3 w-3/12">
+                                <div class="flex items-center text-sm">
+                                    <!-- Avatar with inset shadow -->
+                                    <div class="relative hidden w-28  h-28 object-contain  mr-3 rounded-full md:block">
+                                        <img class="object-contain w-full h-full " src="./upload/{{$manufacture->Image}}"
+                                            alt="" loading="lazy">
+                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                        </div>
+                                    </div>
+                                    <!-- Name -->
+                                    <div>
+                                        <p class="font-semibold">                                
+                                            {{$manufacture->name}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td class="px-4 py-3 text-sm">
+                                {{$manufacture->Phone}}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{$manufacture->Address}}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{$manufacture->Representative}}
+                            </td>
                         <!-- Lần update cuối cùng -->
                         <td class="px-4 py-3 text-sm">
                             {{$manufacture->updated_at}}
@@ -84,7 +102,7 @@
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <!-- Edit -->
-                                <a href="/editManufacture/{{$manufacture->id}}">
+                                <a href="editManufacture/{{$manufacture->id}}">
                                     <button
                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                         aria-label="Edit">

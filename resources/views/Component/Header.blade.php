@@ -56,6 +56,8 @@
                             @endif
                             <a  class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/detailOrder">Thông Tin Đơn Hàng
                             </a>
+                            <a  class="flex items-center h-8 px-3 text-sm hover:bg-gray-200" href="/topup">Ví Mua Hàng
+                            </a>
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
                                 <button class=" w-full flex items-center h-8 px-3 text-sm hover:bg-gray-200"

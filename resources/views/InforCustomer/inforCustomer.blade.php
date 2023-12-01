@@ -4,10 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>info-customer</title>
+    <title>Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="./build/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+</head>
     <style>
         .center-2 .table {
             padding: 15px;
@@ -62,7 +73,7 @@
 @include('Component.Header')
 
 <body>
-    <div class="info-customer pt-5">
+    <div class="info-customer mt-10 mb-20">
         <div class="container mx-auto">
             <div class="">
                 <div class="md:flex w-full">
@@ -88,7 +99,7 @@
                     </div>
                     <div class="md:w-2/3 mt-5 w-full center-2 inset-y-0 right-0 static ">
                         <h2 class="text-3xl font-bold hover:text-[#006a31]">Thông tin chung</h2>
-                        <div class="table table-address shadow mt-8 rounded-lg ">
+                        <div class="table table-address shadow mt-8 rounded-lg w-full">
                             <table class="p-6 rounded-lg w-full">
                                 <tbody>
                                     <tr class="border-0">
@@ -111,7 +122,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table table-address shadow mt-8 rounded-lg ">
+                        <div class="table table-address shadow mt-8 rounded-lg w-full">
                             <table class="p-6 rounded-lg w-full">
                                 <tbody>
                                     <tr class="border-0">

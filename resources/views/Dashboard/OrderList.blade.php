@@ -87,15 +87,8 @@
                             <td class="px-4 py-3">
                                 <div class="flex items-center text-sm">
                                     <!-- Avatar with inset shadow -->
-
                                     <p class="font-semibold"> {{$value->customer_id}}</p>
-
-
                                     <div>
-
-
-
-
                                     </div>
                                 </div>
                             </td>
@@ -107,7 +100,7 @@
                       ?>
                             <td class="px-4 py-3 text-xs">
                                 <span
-                                    class="px-2 py-1 font-semibold leading-tight dark:bg-green-700 dark:text-green-100">
+                                    class="px-2 py-1 font-semibold">
                                     {{$adress}}
                                 </span>
                             </td>

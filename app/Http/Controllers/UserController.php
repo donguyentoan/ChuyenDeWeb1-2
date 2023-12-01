@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -102,11 +104,13 @@ class UserController extends Controller
         if (Hash::check($request->password, $user->password)) {
             $usernew =  User::find($user->id);
             $usernew->password = Hash::make($request->input('password_new'));
+<<<<<<< HEAD
 
 
          
+=======
+>>>>>>> ce014a9133939fd77d05abe3c1a02265cc77e108
             $usernew->save();
-
 
             $recipientEmail = $user->email;
 

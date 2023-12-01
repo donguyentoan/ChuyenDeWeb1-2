@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <input id="image" type="file" name="image" accept="image/*" onchange="loadFile(event)"
-                            class=" p-2 block h-12 w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-white  focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+                            class=" p-2 block h-12 w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-white  focus:outline-none border-gray-600 placeholder-gray-400"
                             aria-describedby="user_avatar_help">
                     </div>
                     <div class="mt-1 text-sm text-black" id="user_avatar_help">Tải hình ảnh sản phẩm lên</div>
@@ -89,7 +89,7 @@
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
                         product classification</label>
                     <select id="categorie" name="categorie"
-                        class="bg-white border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+                        class="bg-white border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
 
                         @foreach ($categories as $category)
                         <option class="text-black" name="categorie" value="{{ $category->id }}">{{ $category->name }}
@@ -105,7 +105,7 @@
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 text-black">Choose
                         manufacture classification</label>
                     <select id="manufacture" name="manufacture"
-                        class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500">
+                        class="bg-white border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-600 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500">
 
                         @foreach ($manufactures as $manufacture)
                         <option class="text-black" name="manufacture" value="{{ $manufacture->id }}">

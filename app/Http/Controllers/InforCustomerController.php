@@ -45,6 +45,11 @@ class InforCustomerController extends Controller
         return view('InforCustomer.customerAddress', compact('user' ,'categories' ));
     }
 
+    public function index1() {
+        $categories = Categories::all();
+        return view('InforCustomer.detailOrder' , compact( 'categories'));
+    }
+
 
     public function orderHistory()
     {

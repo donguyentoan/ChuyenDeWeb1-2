@@ -111,7 +111,7 @@
                                 </tbody>
                                 <tbody>
 
-                                    @if(isset($orders))
+                                    @if($orders)
                                         @for ($i = 0 ; $i < count($orders); $i++ ) <thead>
                                             <tr class="border-0">
                                                 @if($products)
@@ -123,7 +123,7 @@
                                             </tr>
                                             </thead>
                                             @endfor
-                                    @endif
+                                   
                                 </tbody>
                                 @else
                                 <div class="text-xl py-3 text-center text-[#006a31]"><strong> Chưa có đơn hàng nào</strong> </div>

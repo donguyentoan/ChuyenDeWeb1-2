@@ -112,17 +112,17 @@
 
               <div class="flex flex-wrap ">
               @foreach($category->products as $product)
-              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 ">
+              <div class="md:w-1/4 w-full md:p-3 md:border-0 md:py-0 md: my-0 py-3 my-4 border-b-[1px] border-gray-300 relative ">
                 <div class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                   <div class="w-2/5 md:w-full md:p-0  ">
                     <img class=" z-0 object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/upload/{{$product->image}}" alt="blog">
                   </div>
                   <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2 z-50">
                     <h1 class="title-font text-lg font-bold text-gray-900 mb-3">{{$product->name}}</h1>
-                    <p class="leading-relaxed text-xs mb-3">{{$product->description}}</p>
+                    <p class="leading-relaxed text-xs mb-3 line-clamp-1">{{$product->description}}</p>
                     <div class=" items-center flex justify-between ">
                       <p class="text-sm">Giá Chỉ Từ <br > <span class="md:text-xl text-base text-black font-extrabold">{{$product->price}}đ</span>  </p>
-                      <div>
+                      <div class="absolute top-0">
                         <!-- Thích sản phẩm -->
                         <button class="like-button" data-product-id="{{ $product->id }}">
                             <i class="fa-solid fa-thumbs-up likeIcon"></i>

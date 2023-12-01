@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Orders;
-use App\Models\Categories;
-
 use Faker\Core\Number;
+
 use App\Models\Payment;
+use App\Models\Wallets;
 
+use App\Models\Categories;
 use Illuminate\Support\Str;
-use App\Models\OrderDetails;
 
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\WalletTransactions;
 use Illuminate\Support\Facades\DB;
 use App\Models\DeliveryInformations;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -157,6 +160,7 @@ class CheckoutController extends Controller
         }
         else
         {
+           
             if($payment_method == "vnpay")
             {
                 $miniCart = json_decode(urldecode(request('miniCartData')), true);
@@ -211,6 +215,95 @@ class CheckoutController extends Controller
                 return view('payment.payment' , ["totalfm" => $formattedNumber , "total" => $payment_total] , ['categories' => $categories]);
     
                 
+            }
+            else if($payment_method == "vdt"){
+                $user = Auth::user();
+                $miniCart = json_decode(urldecode(request('miniCartData')), true);
+
+                $order = new Orders();
+                $newDeliveryInfo =  DeliveryInformations::all();
+                
+                foreach($newDeliveryInfo as $value)
+                {
+                    $order->customer_id = $value['id'];
+                    $order->deliveryInformation_date = $value['date_order'];
+
+                }
+
+                foreach($miniCart as $item)
+                {
+
+                    $order->total_amount = ($item['quantity'] * $item['price']);
+                   
+                }
+                $order->status = 0;
+
+                $order->payment_method = 3;
+                $order->save();
+                foreach($miniCart as $item)
+                {
+                    $orderdetail = new OrderDetails(); 
+
+                    $id = $item['id'];
+                    $quantity = $item['quantity'];
+                    
+                    $price = $item['price'];
+
+                    $formattedNumber = number_format($price, 0, ',', '.');
+
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity, price)
+                    VALUES ('$order->id'  , $id , $quantity ,$formattedNumber )";
+                     DB::insert($sql); 
+                }
+
+                $payment = new  Payment();
+                $orderID = session('orderID');
+                $payment->id_oder =  $order->id;
+                $payment->madonhang =  Str::random(5);
+                foreach($miniCart as $item)
+                {
+
+                
+                    $payment->sotien = ($item['quantity'] * $item['price']);
+                }
+               
+                $payment->noidung = "Thanh toan GD:" . Str::random(5);
+                $payment->maphanhoi = "00";
+                $payment->magiaodich =  Str::random(5);
+                $payment->manganhang = "VDT";
+                $payment->thoigian = Carbon::now();
+                $payment->ketqua = "Thành Công";
+        
+                $payment->save();
+                
+                $walletTmp = Wallets::where('user_id', '=', $user->id)->first();
+
+                
+                foreach($miniCart as $item)
+                {
+
+                   
+                    $balance =   ($item['quantity'] * $item['price']);
+                   
+                }
+               
+        
+                $walletTraction = new WalletTransactions();
+                $walletTraction->wallet_id = $walletTmp->id;
+                $walletTraction->action = WalletTransactions::$ACTION_DECREASE;
+                $walletTraction->type = WalletTransactions::$TYPE_CHANGE;
+                $walletTraction->message = "Đã Thanh Toán  :  " . $balance . "  Cho Đơn Hàng Đã Đặt";
+                $walletTraction->transaction_id = Str::random(10);
+                $walletTraction->balance = $balance;
+                $walletTraction->save();
+        
+        
+                $walletTmp->balance -= $balance;
+                $walletTmp->save();
+        
+                return view('OrderSuccess.orderSuccess' , ['categories' => $categories]);
+
+
             }
             else{
 
@@ -277,6 +370,7 @@ class CheckoutController extends Controller
 
 
             }
+            
 
         }
         

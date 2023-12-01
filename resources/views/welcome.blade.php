@@ -11,19 +11,19 @@
     <div class="slider">
         <div class="list relative">
             <div class="item active">
-                <img src="/image/h1.png" alt="">
+                <img src="./image/h1.png" alt="">
             </div>
             <div class="item">
-            <img src="/image/h1.png" alt="">
+            <img src="./image/h1.png" alt="">
             </div>
             <div class="item">
-            <img src="/image/h1.png" alt="">
+            <img src="./image/h1.png" alt="">
             </div>
             <div class="item">
-            <img src="/image/h1.png" alt="">
+            <img src="./image/h1.png" alt="">
             </div>
             <div class="item">
-            <img src="/image/h1.png" alt="">
+            <img src="./image/h1.png" alt="">
             </div>
         </div>
         <!-- Button prev and next -->

@@ -124,7 +124,7 @@ html {
                                    class="h-full border-gray-200 md:flex-col flex border-opacity-60 rounded-lg overflow-hidden">
                                    <div class="w-2/5 md:w-full md:p-0 ">
                                        <img class="hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in w-80 h-80 object-contain z-0"
-                                           src="/upload/{{$product->image}}" alt="blog">
+                                           src="./upload/{{$product->image}}" alt="blog">
                                    </div>
                                    <div class="w-3/5 md:w-full md:px-0 md:px-0 px-2 z-50">
                                        <h1 class="title-font text-lg font-bold text-gray-900 mb-3">

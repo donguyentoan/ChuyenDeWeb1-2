@@ -38,7 +38,7 @@ use App\Http\Controllers\BannersController;
     Route::get('/', [HomeController::class , 'index'])->name('home');
 
     // login, register
-    Route::get('/auth/login', [LoginController::class , 'index']);
+    Route::get('./auth/login', [LoginController::class , 'index']);
     Route::post('/login',  [LoginController::class , 'login']);
     Route::post('/logout' , [LoginController::class , 'logout'])->name('logout');
     Route::get('/auth/register', [LoginController::class , 'indexRegister']);

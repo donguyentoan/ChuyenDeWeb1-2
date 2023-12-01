@@ -113,7 +113,7 @@ div.load_home_page .mask {
 
 </style>
 <div class="load_home_page flex items-center">
-    <img src="/image/gt-removebg-preview.png" alt="">
+    <img src="./image/gt-removebg-preview.png" alt="">
     <svg viewBox="0 0 550 81.843" xmlns="http://www.w3.org/2000/svg">
         <g id="svgGroup" stroke-linecap="round" fill-rule="nonzero" font-size="9pt" stroke="#fff" stroke-width="0,2"
             fill="none" style="stroke:#000;stroke-width:1;fill:none">

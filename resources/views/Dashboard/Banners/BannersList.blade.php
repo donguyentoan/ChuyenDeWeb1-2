@@ -86,7 +86,7 @@
                                     <!-- Avatar with inset shadow -->
                                     <div class="relative hidden w-52  h-28 object-contain  mr-3 rounded-full md:block">
                                         <img class="object-contain w-full h-full "
-                                            src="/upload/{{$banner->name_banner}}" alt="" loading="lazy">
+                                            src="./upload/{{$banner->name_banner}}" alt="" loading="lazy">
                                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                         </div>
                                     </div>

@@ -21,7 +21,7 @@
                     <div class="md:flex container">
 
                         <div class="p-10 md:w-4/12 w-full">
-                            <img class="w-full h-full object-center" src="/image/{{$item->image}}" alt="blog">
+                            <img class="w-full h-full object-center" src="./image/{{$item->image}}" alt="blog">
                         </div>
 
                         <div class="p-10 md:w-8/12 w-full">

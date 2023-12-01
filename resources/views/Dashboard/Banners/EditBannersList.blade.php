@@ -52,7 +52,7 @@
                                 <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
                                     <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
                                         <img class="object-contain w-full h-full " alt="" loading="lazy" id="output"
-                                            src="/upload/{{$banner->name_banner}}">
+                                            src="./upload/{{$banner->name_banner}}">
                                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@
                                 <div class="flex items-center text-sm">
                                     <!-- Avatar with inset shadow -->
                                     <div class="relative hidden w-52  h-28 object-contain  mr-3 rounded-full md:block">
-                                        <img class="object-contain w-full h-full " src="/upload/{{$items->name_banner}}"
+                                        <img class="object-contain w-full h-full " src="./upload/{{$items->name_banner}}"
                                             alt="" loading="lazy">
                                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                         </div>

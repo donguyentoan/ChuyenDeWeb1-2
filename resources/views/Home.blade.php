@@ -107,7 +107,6 @@ html {
                             <h1 class="title-font text-lg font-bold text-[#007d43] mb-3">Ghi Chú</h1>
                             <textarea class="border-2 border-gray-200" name="ghichu" id="" cols="55" rows="5">
           </textarea>
-<<<<<<< HEAD
         </div>
        
         <!-- <button onclick="addItemToCart('Pizza Hải Sản', 190.000)"  class="bg-[#007d43] hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 w-full border border-gray-400 rounded-xl shadow"> -->
@@ -149,17 +148,6 @@ html {
                         <span id="likeCount{{ $product->id }}">
                             {{ $product->like_count ?? 0 }}
                         </span>
-=======
-                        </div>
-
-                        <!-- <button onclick="addItemToCart('Pizza Hải Sản', 190.000)"  class="bg-[#007d43] hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 w-full border border-gray-400 rounded-xl shadow"> -->
-
-                        <button onclick="addToMiniCart()"
-                            class="text-center text-white add-to-cart-btn bg-[#007d43] font-semibold py-2 px-4 w-full border border-gray-400 rounded-xl shadow">
-                            THÊM VÀO GIỎ HÀNG</button>
-                    </div>
-                    <div>
->>>>>>> ce014a9133939fd77d05abe3c1a02265cc77e108
                     </div>
             </dialog>
 

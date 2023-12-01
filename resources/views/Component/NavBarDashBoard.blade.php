@@ -110,7 +110,7 @@
                     class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
                     aria-expanded="false">
                     <span class="sr-only">User menu</span>
-                    <img class="w-10 h-10 rounded-full" src="/build/images/avatar.jpg" alt="Ahmed Kamel">
+                    <img class="w-10 h-10 rounded-full" src="./build/images/avatar.jpg" alt="Ahmed Kamel">
                 </button>
 
                 <!-- User dropdown menu -->

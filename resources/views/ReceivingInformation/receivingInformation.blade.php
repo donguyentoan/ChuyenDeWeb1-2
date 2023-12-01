@@ -71,7 +71,7 @@
                                             name="payment_method"
                                             value="cod"
                                             id="radioDefault01" />
-                                            <img class="w-28" src="/image/cod.jpeg" alt="">
+                                            <img class="w-28" src="./image/cod.jpeg" alt="">
                
                                        
                                         </div>
@@ -88,7 +88,7 @@
                                             name="payment_method"
                                             value="vnpay"
                                             id="radioDefault01" />
-                                            <img class="w-28" src="/image/vnpay.png" alt="">  
+                                            <img class="w-28" src="./image/vnpay.png" alt="">  
                                            
                                         </div>
                                     <h1>Thanh Toán VN Pay </h1>

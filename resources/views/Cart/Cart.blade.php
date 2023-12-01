@@ -205,7 +205,7 @@ function updateMiniCart() {
     });
     cartHTML += `
     <li class="minicart--item flex mb-5">
-      <div class="placeholder w-20 h-26 mr-4 "><img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="/image/pizza.png" alt="product"></div>
+      <div class="placeholder w-20 h-26 mr-4 "><img class="object-cover object-center hover:rotate-[10deg] transition duration-450 ease-out hover:ease-in" src="./image/pizza.png" alt="product"></div>
         <div class="content flex-1">
           <h1 class="text-sm font-bold mb-2">${product.name}</h1>
           <p class="text-sm"><span class="font-bold text-sm">Giá :</span>  ${formattedNumber}đ  <span> ${product.quantity}x</span></p>

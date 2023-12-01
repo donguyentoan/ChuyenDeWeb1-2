@@ -16,7 +16,7 @@
         </div>
         <div class="p-10">
             <div class="flex justify-center items-center">
-                <img class="pb-8" src="/image/{{$detailPost->image}}" alt="">
+                <img class="pb-8" src="./image/{{$detailPost->image}}" alt="">
             </div>
             {{$detailPost->content}}
         </div>

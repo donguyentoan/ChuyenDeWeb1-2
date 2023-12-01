@@ -57,7 +57,7 @@
                         <div class="mt-1 text-sm text-gray-500 text-gray-300" id="user_avatar_help">
                             <div class="relative hidden w-28  h-28 object-contain mr-3 rounded-full md:block">
                                 <img class="object-contain w-full h-full " alt="" loading="lazy" id="output"
-                                    src="/image/imageDefault.png" />
+                                    src="./image/imageDefault.png" />
                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 <aside class=" h-full flex-shrink-0 hidden w-64 bg-gradient-to-r from-cyan-500 to-blue-500 border-r dark:border-primary-darker dark:bg-darker md:block">
           <div class="flex flex-col h-full">
           <a class="border-b-[1px] border-white text-lg font-bold flex items-center  text-gray-800 dark:text-gray-200" href="#">
-            <img class="w-16 h-16" src="/image/pizzaa.png" alt="">
+            <img class="w-16 h-16" src="./image/pizzaa.png" alt="">
             <P class="text-white font-sans">PIZZA STORE</P> 
           </a>
             <!-- Sidebar links -->
@@ -218,7 +218,7 @@
                     role="menuitem"
                     class=" flex block p-2 font-bold text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700"
                   >
-                  <img class="w-5 h-5 " src="/image/pizza.png" alt="">
+                  <img class="w-5 h-5 " src="./image/pizza.png" alt="">
                    <p class="ml-3">Pizza</p> 
                   </a>
                   <a

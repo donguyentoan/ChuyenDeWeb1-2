@@ -185,12 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
-  
-
- 
-
 function updateMiniCart() {
   var mini = document.querySelector('ul');
   const miniCart = JSON.parse(localStorage.getItem('miniCartss')) || [];

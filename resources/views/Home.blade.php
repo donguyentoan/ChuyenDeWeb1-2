@@ -37,7 +37,6 @@ html {
 
     @include('component.LoadHomePage')
 
-
     @include('component.Slide')
 
     <section class="text-gray-600 body-font">

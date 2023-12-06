@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Categories;
 
 class CartController extends Controller
 {
@@ -10,8 +11,8 @@ class CartController extends Controller
 
     public  function index()
     {
-        return view('Cart.Cart');
-
+        $categories = Categories::all();
+        return view('Cart.Cart', ['categories' => $categories]);
     }
 
 

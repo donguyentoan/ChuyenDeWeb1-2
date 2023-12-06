@@ -15,11 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->Integer('customer_id');
+            $table->bigInteger('customer_id')->unsigned();
             $table->date('deliveryInformation_date');
             $table->double('total_amount');
-            $table->Integer('status');
-            $table->Integer('payment_method');
+            $table->integer('status');
+            $table->integer('payment_method');
             $table->timestamps();
         });
     }
@@ -34,3 +34,4 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+

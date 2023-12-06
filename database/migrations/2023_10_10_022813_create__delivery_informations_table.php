@@ -15,14 +15,14 @@ class CreateDeliveryInformationsTable extends Migration
     {
         Schema::create('delivery_informations', function (Blueprint $table) {
             $table->id();
-            $table->String('name'); 
-            $table->String('phone');
-            $table->String('provides');
-            $table->String('district');
-            $table->String('wards');
-            $table->String('apartmentNumber'); 
-            $table->String('StreetNames'); 
-            $table->String('details');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('provides');
+            $table->string('district');
+            $table->string('wards');
+            $table->string('apartmentNumber');
+            $table->string('StreetNames');
+            $table->string('details');
             $table->date('date_order');
             $table->timestamps();
         });
@@ -35,6 +35,7 @@ class CreateDeliveryInformationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_delivery_informations');
+        Schema::dropIfExists('delivery_informations');
     }
 }
+

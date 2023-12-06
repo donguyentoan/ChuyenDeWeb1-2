@@ -1,380 +1,374 @@
 [
     {
-      "Id": "VN101",
-      "Kind": 1,
-      "Name": "Hà Nội",
-      "SortOrder": 0
+        "Id": "VN701",
+        "Kind": 1,
+        "Name": "H\u1ed3 Ch\u00ed Minh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN701",
-      "Kind": 1,
-      "Name": "Hồ Chí Minh",
-      "SortOrder": 0
+        "Id": "VN805",
+        "Kind": 1,
+        "Name": "An Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN805",
-      "Kind": 1,
-      "Name": "An Giang",
-      "SortOrder": 0
+        "Id": "VN717",
+        "Kind": 1,
+        "Name": "B\u00e0 R\u1ecba - V\u0169ng T\u00e0u",
+        "SortOrder": 0
     },
     {
-      "Id": "VN717",
-      "Kind": 1,
-      "Name": "Bà Rịa - Vũng Tàu",
-      "SortOrder": 0
+        "Id": "VN221",
+        "Kind": 1,
+        "Name": "B\u1eafc Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN221",
-      "Kind": 1,
-      "Name": "Bắc Giang",
-      "SortOrder": 0
+        "Id": "VN207",
+        "Kind": 1,
+        "Name": "B\u1eafc K\u1ea1n",
+        "SortOrder": 0
     },
     {
-      "Id": "VN207",
-      "Kind": 1,
-      "Name": "Bắc Kạn",
-      "SortOrder": 0
+        "Id": "VN821",
+        "Kind": 1,
+        "Name": "B\u1ea1c Li\u00eau",
+        "SortOrder": 0
     },
     {
-      "Id": "VN821",
-      "Kind": 1,
-      "Name": "Bạc Liêu",
-      "SortOrder": 0
+        "Id": "VN223",
+        "Kind": 1,
+        "Name": "B\u1eafc Ninh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN223",
-      "Kind": 1,
-      "Name": "Bắc Ninh",
-      "SortOrder": 0
+        "Id": "VN811",
+        "Kind": 1,
+        "Name": "B\u1ebfn Tre",
+        "SortOrder": 0
     },
     {
-      "Id": "VN811",
-      "Kind": 1,
-      "Name": "Bến Tre",
-      "SortOrder": 0
+        "Id": "VN507",
+        "Kind": 1,
+        "Name": "B\u00ecnh \u0110\u1ecbnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN507",
-      "Kind": 1,
-      "Name": "Bình Định",
-      "SortOrder": 0
+        "Id": "VN711",
+        "Kind": 1,
+        "Name": "B\u00ecnh D\u01b0\u01a1ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN711",
-      "Kind": 1,
-      "Name": "Bình Dương",
-      "SortOrder": 0
+        "Id": "VN707",
+        "Kind": 1,
+        "Name": "B\u00ecnh Ph\u01b0\u1edbc",
+        "SortOrder": 0
     },
     {
-      "Id": "VN707",
-      "Kind": 1,
-      "Name": "Bình Phước",
-      "SortOrder": 0
+        "Id": "VN715",
+        "Kind": 1,
+        "Name": "B\u00ecnh Thu\u1eadn",
+        "SortOrder": 0
     },
     {
-      "Id": "VN715",
-      "Kind": 1,
-      "Name": "Bình Thuận",
-      "SortOrder": 0
+        "Id": "VN823",
+        "Kind": 1,
+        "Name": "C\u00e0 Mau",
+        "SortOrder": 0
     },
     {
-      "Id": "VN823",
-      "Kind": 1,
-      "Name": "Cà Mau",
-      "SortOrder": 0
+        "Id": "VN815",
+        "Kind": 1,
+        "Name": "C\u1ea7n Th\u01a1",
+        "SortOrder": 0
     },
     {
-      "Id": "VN815",
-      "Kind": 1,
-      "Name": "Cần Thơ",
-      "SortOrder": 0
+        "Id": "VN203",
+        "Kind": 1,
+        "Name": "Cao B\u1eb1ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN203",
-      "Kind": 1,
-      "Name": "Cao Bằng",
-      "SortOrder": 0
+        "Id": "VN501",
+        "Kind": 1,
+        "Name": "\u0110\u00e0 N\u1eb5ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN501",
-      "Kind": 1,
-      "Name": "Đà Nẵng",
-      "SortOrder": 0
+        "Id": "VN605",
+        "Kind": 1,
+        "Name": "\u0110\u1eafk L\u1eafk",
+        "SortOrder": 0
     },
     {
-      "Id": "VN605",
-      "Kind": 1,
-      "Name": "Đắk Lắk",
-      "SortOrder": 0
+        "Id": "VN606",
+        "Kind": 1,
+        "Name": "\u0110\u1eafk N\u00f4ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN606",
-      "Kind": 1,
-      "Name": "Đắk Nông",
-      "SortOrder": 0
+        "Id": "VN301",
+        "Kind": 1,
+        "Name": "\u0110i\u1ec7n Bi\u00ean",
+        "SortOrder": 0
     },
     {
-      "Id": "VN301",
-      "Kind": 1,
-      "Name": "Điện Biên",
-      "SortOrder": 0
+        "Id": "VN713",
+        "Kind": 1,
+        "Name": "\u0110\u1ed3ng Nai",
+        "SortOrder": 0
     },
     {
-      "Id": "VN713",
-      "Kind": 1,
-      "Name": "Đồng Nai",
-      "SortOrder": 0
+        "Id": "VN803",
+        "Kind": 1,
+        "Name": "\u0110\u1ed3ng Th\u00e1p",
+        "SortOrder": 0
     },
     {
-      "Id": "VN803",
-      "Kind": 1,
-      "Name": "Đồng Tháp",
-      "SortOrder": 0
+        "Id": "VN603",
+        "Kind": 1,
+        "Name": "Gia Lai",
+        "SortOrder": 0
     },
     {
-      "Id": "VN603",
-      "Kind": 1,
-      "Name": "Gia Lai",
-      "SortOrder": 0
+        "Id": "VN201",
+        "Kind": 1,
+        "Name": "H\u00e0 Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN201",
-      "Kind": 1,
-      "Name": "Hà Giang",
-      "SortOrder": 0
+        "Id": "VN111",
+        "Kind": 1,
+        "Name": "H\u00e0 Nam",
+        "SortOrder": 0
     },
     {
-      "Id": "VN111",
-      "Kind": 1,
-      "Name": "Hà Nam",
-      "SortOrder": 0
+        "Id": "VN405",
+        "Kind": 1,
+        "Name": "H\u00e0 T\u0129nh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN405",
-      "Kind": 1,
-      "Name": "Hà Tĩnh",
-      "SortOrder": 0
+        "Id": "VN107",
+        "Kind": 1,
+        "Name": "H\u1ea3i D\u01b0\u01a1ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN107",
-      "Kind": 1,
-      "Name": "Hải Dương",
-      "SortOrder": 0
+        "Id": "VN103",
+        "Kind": 1,
+        "Name": "H\u1ea3i Ph\u00f2ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN103",
-      "Kind": 1,
-      "Name": "Hải Phòng",
-      "SortOrder": 0
+        "Id": "VN816",
+        "Kind": 1,
+        "Name": "H\u1eadu Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN816",
-      "Kind": 1,
-      "Name": "Hậu Giang",
-      "SortOrder": 0
+        "Id": "VN305",
+        "Kind": 1,
+        "Name": "H\u00f2a B\u00ecnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN305",
-      "Kind": 1,
-      "Name": "Hòa Bình",
-      "SortOrder": 0
+        "Id": "VN109",
+        "Kind": 1,
+        "Name": "H\u01b0ng Y\u00ean",
+        "SortOrder": 0
     },
     {
-      "Id": "VN109",
-      "Kind": 1,
-      "Name": "Hưng Yên",
-      "SortOrder": 0
+        "Id": "VN511",
+        "Kind": 1,
+        "Name": "Kh\u00e1nh H\u00f2a",
+        "SortOrder": 0
     },
     {
-      "Id": "VN511",
-      "Kind": 1,
-      "Name": "Khánh Hòa",
-      "SortOrder": 0
+        "Id": "VN813",
+        "Kind": 1,
+        "Name": "Ki\u00ean Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN813",
-      "Kind": 1,
-      "Name": "Kiên Giang",
-      "SortOrder": 0
+        "Id": "VN601",
+        "Kind": 1,
+        "Name": "Kon Tum",
+        "SortOrder": 0
     },
     {
-      "Id": "VN601",
-      "Kind": 1,
-      "Name": "Kon Tum",
-      "SortOrder": 0
+        "Id": "VN302",
+        "Kind": 1,
+        "Name": "Lai Ch\u00e2u",
+        "SortOrder": 0
     },
     {
-      "Id": "VN302",
-      "Kind": 1,
-      "Name": "Lai Châu",
-      "SortOrder": 0
+        "Id": "VN703",
+        "Kind": 1,
+        "Name": "L\u00e2m \u0110\u1ed3ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN703",
-      "Kind": 1,
-      "Name": "Lâm Đồng",
-      "SortOrder": 0
+        "Id": "VN209",
+        "Kind": 1,
+        "Name": "L\u1ea1ng S\u01a1n",
+        "SortOrder": 0
     },
     {
-      "Id": "VN209",
-      "Kind": 1,
-      "Name": "Lạng Sơn",
-      "SortOrder": 0
+        "Id": "VN205",
+        "Kind": 1,
+        "Name": "L\u00e0o Cai",
+        "SortOrder": 0
     },
     {
-      "Id": "VN205",
-      "Kind": 1,
-      "Name": "Lào Cai",
-      "SortOrder": 0
+        "Id": "VN801",
+        "Kind": 1,
+        "Name": "Long An",
+        "SortOrder": 0
     },
     {
-      "Id": "VN801",
-      "Kind": 1,
-      "Name": "Long An",
-      "SortOrder": 0
+        "Id": "VN113",
+        "Kind": 1,
+        "Name": "Nam \u0110\u1ecbnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN113",
-      "Kind": 1,
-      "Name": "Nam Định",
-      "SortOrder": 0
+        "Id": "VN403",
+        "Kind": 1,
+        "Name": "Ngh\u1ec7 An",
+        "SortOrder": 0
     },
     {
-      "Id": "VN403",
-      "Kind": 1,
-      "Name": "Nghệ An",
-      "SortOrder": 0
+        "Id": "VN117",
+        "Kind": 1,
+        "Name": "Ninh B\u00ecnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN117",
-      "Kind": 1,
-      "Name": "Ninh Bình",
-      "SortOrder": 0
+        "Id": "VN705",
+        "Kind": 1,
+        "Name": "Ninh Thu\u1eadn",
+        "SortOrder": 0
     },
     {
-      "Id": "VN705",
-      "Kind": 1,
-      "Name": "Ninh Thuận",
-      "SortOrder": 0
+        "Id": "VN217",
+        "Kind": 1,
+        "Name": "Ph\u00fa Th\u1ecd",
+        "SortOrder": 0
     },
     {
-      "Id": "VN217",
-      "Kind": 1,
-      "Name": "Phú Thọ",
-      "SortOrder": 0
+        "Id": "VN509",
+        "Kind": 1,
+        "Name": "Ph\u00fa Y\u00ean",
+        "SortOrder": 0
     },
     {
-      "Id": "VN509",
-      "Kind": 1,
-      "Name": "Phú Yên",
-      "SortOrder": 0
+        "Id": "VN407",
+        "Kind": 1,
+        "Name": "Qu\u1ea3ng B\u00ecnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN407",
-      "Kind": 1,
-      "Name": "Quảng Bình",
-      "SortOrder": 0
+        "Id": "VN503",
+        "Kind": 1,
+        "Name": "Qu\u1ea3ng Nam",
+        "SortOrder": 0
     },
     {
-      "Id": "VN503",
-      "Kind": 1,
-      "Name": "Quảng Nam",
-      "SortOrder": 0
+        "Id": "VN505",
+        "Kind": 1,
+        "Name": "Qu\u1ea3ng Ng\u00e3i",
+        "SortOrder": 0
     },
     {
-      "Id": "VN505",
-      "Kind": 1,
-      "Name": "Quảng Ngãi",
-      "SortOrder": 0
+        "Id": "VN225",
+        "Kind": 1,
+        "Name": "Qu\u1ea3ng Ninh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN225",
-      "Kind": 1,
-      "Name": "Quảng Ninh",
-      "SortOrder": 0
+        "Id": "VN409",
+        "Kind": 1,
+        "Name": "Qu\u1ea3ng Tr\u1ecb",
+        "SortOrder": 0
     },
     {
-      "Id": "VN409",
-      "Kind": 1,
-      "Name": "Quảng Trị",
-      "SortOrder": 0
+        "Id": "VN819",
+        "Kind": 1,
+        "Name": "S\u00f3c Tr\u0103ng",
+        "SortOrder": 0
     },
     {
-      "Id": "VN819",
-      "Kind": 1,
-      "Name": "Sóc Trăng",
-      "SortOrder": 0
+        "Id": "VN303",
+        "Kind": 1,
+        "Name": "S\u01a1n La",
+        "SortOrder": 0
     },
     {
-      "Id": "VN303",
-      "Kind": 1,
-      "Name": "Sơn La",
-      "SortOrder": 0
+        "Id": "VN709",
+        "Kind": 1,
+        "Name": "T\u00e2y Ninh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN709",
-      "Kind": 1,
-      "Name": "Tây Ninh",
-      "SortOrder": 0
+        "Id": "VN115",
+        "Kind": 1,
+        "Name": "Th\u00e1i B\u00ecnh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN115",
-      "Kind": 1,
-      "Name": "Thái Bình",
-      "SortOrder": 0
+        "Id": "VN215",
+        "Kind": 1,
+        "Name": "Th\u00e1i Nguy\u00ean",
+        "SortOrder": 0
     },
     {
-      "Id": "VN215",
-      "Kind": 1,
-      "Name": "Thái Nguyên",
-      "SortOrder": 0
+        "Id": "VN401",
+        "Kind": 1,
+        "Name": "Thanh H\u00f3a",
+        "SortOrder": 0
     },
     {
-      "Id": "VN401",
-      "Kind": 1,
-      "Name": "Thanh Hóa",
-      "SortOrder": 0
+        "Id": "VN411",
+        "Kind": 1,
+        "Name": "Th\u1eeba Thi\u00ean Hu\u1ebf",
+        "SortOrder": 0
     },
     {
-      "Id": "VN411",
-      "Kind": 1,
-      "Name": "Thừa Thiên Huế",
-      "SortOrder": 0
+        "Id": "VN807",
+        "Kind": 1,
+        "Name": "Ti\u1ec1n Giang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN807",
-      "Kind": 1,
-      "Name": "Tiền Giang",
-      "SortOrder": 0
+        "Id": "VN817",
+        "Kind": 1,
+        "Name": "Tr\u00e0 Vinh",
+        "SortOrder": 0
     },
     {
-      "Id": "VN817",
-      "Kind": 1,
-      "Name": "Trà Vinh",
-      "SortOrder": 0
+        "Id": "VN211",
+        "Kind": 1,
+        "Name": "Tuy\u00ean Quang",
+        "SortOrder": 0
     },
     {
-      "Id": "VN211",
-      "Kind": 1,
-      "Name": "Tuyên Quang",
-      "SortOrder": 0
+        "Id": "VN809",
+        "Kind": 1,
+        "Name": "V\u0129nh Long",
+        "SortOrder": 0
     },
     {
-      "Id": "VN809",
-      "Kind": 1,
-      "Name": "Vĩnh Long",
-      "SortOrder": 0
+        "Id": "VN219",
+        "Kind": 1,
+        "Name": "V\u0129nh Ph\u00fac",
+        "SortOrder": 0
     },
     {
-      "Id": "VN219",
-      "Kind": 1,
-      "Name": "Vĩnh Phúc",
-      "SortOrder": 0
-    },
-    {
-      "Id": "VN213",
-      "Kind": 1,
-      "Name": "Yên Bái",
-      "SortOrder": 0
+        "Id": "VN213",
+        "Kind": 1,
+        "Name": "Y\u00ean B\u00e1i",
+        "SortOrder": 0
     }
-  ]
+]

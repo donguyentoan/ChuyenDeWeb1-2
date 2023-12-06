@@ -1,5 +1,5 @@
+import 'flowbite';
 require('./bootstrap');
-
 
 
     let list = document.querySelector('.slider .list');

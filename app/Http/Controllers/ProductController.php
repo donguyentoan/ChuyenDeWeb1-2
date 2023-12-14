@@ -93,26 +93,14 @@ class ProductController extends Controller
 
             $categoryExists = $categories->pluck('id')->contains($request->input('categorie'));
             $manufactureExists = $manufactures->pluck('id')->contains($request->input('manufacture'));
-
-
             if (!$categoryExists || !$manufactureExists) {
-               
-
-
                 if (!$categoryExists) {
                     return redirect('/productList')->with('success', 'ID Categories is not Exists');
                 }
-
-
                 if (!$manufactureExists) {
                     return redirect('/productList')->with('success', 'ID Manufactures is not Exists');
                 }
-
-
             } else {
-           
-
-
                 $fileName = null;
 
 
